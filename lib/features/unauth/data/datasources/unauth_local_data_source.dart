@@ -32,7 +32,6 @@ class UnauthLocalDataSourceImpl implements UnauthLocalDataSourceContract {
 
   @override
   Future<void> cacheMe(MeModel meToCache) {
-    print("cacheMe -- ${meToCache.toJson()}");
     return storage.write(
       key: UnauthLocalDataSourceContract.storageKey,
       value: json.encode(meToCache.toJson()),

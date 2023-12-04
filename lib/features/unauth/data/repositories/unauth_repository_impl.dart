@@ -1,3 +1,4 @@
+import 'package:crossworduel/features/profile/data/models/score_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crossworduel/core/exception/exception2either.dart';
 import 'package:crossworduel/core/exception/parent_exception.dart';
@@ -42,17 +43,17 @@ class UnauthRepositoryImpl implements UnauthRepositoryContract {
       GoogleSigninParams params) async {
     return exception2either(function: () async {
       // ! uncomment me
-      final MeModel meModel =
-          await remoteDataSource.signinWithGoogle(params.getBody());
+      // final MeModel meModel =
+      //     await remoteDataSource.signinWithGoogle(params.getBody());
 
       // ! Delete me
-      // MeModel meModel = MeModel(
-      //     id: "1",
-      //     token: "ssss",
-      //     username: "yerkbn",
-      //     email: "yerkbn@gmail.com",
-      //     avatar: "",
-      //     score: ScoreModel(point: 1000, heart: 5, strike: 12));
+      const MeModel meModel = MeModel(
+          id: "1",
+          token: "ssss",
+          username: "yerkbn",
+          email: "yerkbn@gmail.com",
+          avatar: "",
+          score: ScoreModel(point: 1000, heart: 5, strike: 12));
 
       await localDateSoursce.cacheMe(meModel);
       return meModel;

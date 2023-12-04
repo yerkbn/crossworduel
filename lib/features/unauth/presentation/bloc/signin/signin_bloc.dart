@@ -28,6 +28,7 @@ class SigninBloc extends Bloc<SigninEvent, SigninState> {
 
           emit(result.fold(
             (failure) {
+              print("FAILURE --- $failure");
               return FailureSigninState(message: failure.description);
             },
             (meEntity) {

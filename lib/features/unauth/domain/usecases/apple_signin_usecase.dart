@@ -29,8 +29,8 @@ class AppleSigninUsecase implements UseCase<MeEntity, NoParams> {
         isAndroid = false;
       }
 
-      String token = await getToken();
-      AppleSigninParams params = AppleSigninParams(
+      final String token = await getToken();
+      final AppleSigninParams params = AppleSigninParams(
           authorizationCode: credential.authorizationCode,
           isAndroid: isAndroid,
           pushToken: token);
@@ -41,7 +41,7 @@ class AppleSigninUsecase implements UseCase<MeEntity, NoParams> {
   }
 
   Future<String> getToken() async {
-    var settings = await FirebaseMessaging.instance.requestPermission();
+    final settings = await FirebaseMessaging.instance.requestPermission();
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {

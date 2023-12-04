@@ -6,6 +6,7 @@ import 'package:crossworduel/features/unauth/presentation/bloc/signin/signin_blo
 import 'package:crossworduel/features/unauth/presentation/widgets/apple_button.dart';
 import 'package:crossworduel/features/unauth/presentation/widgets/google_button.dart';
 import 'package:crossworduel/features/unauth/presentation/widgets/terms_text.dart';
+import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,12 +33,13 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //       image: AssetImage(Assets.image.duck.path),
-        //       fit: BoxFit.cover,
-        //       colorFilter: ColorFilter.mode(Colors.black54, BlendMode.darken)),
-        // ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(Assets.image.background.path),
+              fit: BoxFit.cover,
+              colorFilter:
+                  const ColorFilter.mode(Colors.black54, BlendMode.darken)),
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
