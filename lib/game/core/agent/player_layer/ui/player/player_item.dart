@@ -1,25 +1,31 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:flutter/material.dart';
 
-class UserItem extends StatelessWidget {
+class PlayerItem extends StatefulWidget {
   final bool isLeft;
-  const UserItem({super.key, required this.isLeft});
+  final PlayerEntity player;
+  const PlayerItem({super.key, required this.player, required this.isLeft});
 
+  @override
+  State<PlayerItem> createState() => PlayerItemState();
+}
+
+class PlayerItemState extends State<PlayerItem> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: Sizer().getHeight(44),
       width: Sizer().getWidth(162),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment:
-            isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
+            widget.isLeft ? MainAxisAlignment.start : MainAxisAlignment.end,
         children: [
-          isLeft ? _buildAvatar : _buildName(context),
+          if (widget.isLeft) _buildAvatar else _buildName(context),
           8.pw,
-          isLeft ? _buildName(context) : _buildAvatar,
+          if (widget.isLeft) _buildName(context) else _buildAvatar,
         ],
       ),
     );
@@ -30,10 +36,10 @@ class UserItem extends StatelessWidget {
       height: Sizer().getHeight(44),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(Sizer().getSp(4)),
-          image: const DecorationImage(
+          image: DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              "https://www.stylerave.com/wp-content/uploads/2022/11/1000-x-1000-5-2.png",
+              widget.player.avatar,
             ),
           )));
 
@@ -41,9 +47,9 @@ class UserItem extends StatelessWidget {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Column(
       crossAxisAlignment:
-          isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+          widget.isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       children: [
-        Text("@samaltman", style: theme.headline4),
+        Text(widget.player.username, style: theme.headline4),
         Text("424", style: theme.headline1),
       ],
     );

@@ -90,12 +90,12 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
           me: event.me ?? _gameAgent.currentPlayer, opponent: event.opponent));
     }
     if (event is FailureGameEvent) {
-      emit(FailureGameState(error: event.error.toString()));
+      emit(FailureGameState(error: event.error));
     }
 
     if (event is RunGameEvent) {
       emit(RunningGameState(gameAgent: _gameAgent));
-      await Future.delayed(Duration(milliseconds: 70));
+      await Future.delayed(const Duration(milliseconds: 70));
       _gameAgent.instructionToAction(event.instruction);
       emit(RunningGameState(gameAgent: _gameAgent));
     }
@@ -146,7 +146,7 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
 
   /// This will connect to servers
   Future<void> _socketConnect(String socketProtocol) async {
-    String url = '${globalSL<NetworkConfig>().globalBattleSocket}/room';
+    final String url = '${globalSL<NetworkConfig>().globalBattleSocket}/room';
     print("$url ---- $socketProtocol");
     _channel = await WebSocket.connect(url);
     _serverSubscription = _channel.listen(_onMessage, onError: _onError);
@@ -155,7 +155,7 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
 
   String _generateSocketProtocol(
       {String? roomId, String? subjectId, String? guestId}) {
-    Map protocol = {
+    final Map protocol = {
       "token": _currentUser.getToken,
       "deviceType": "m",
     };
@@ -187,7 +187,7 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
     }
   }
 
-  void _onError(message) async {
+  Future<void> _onError(message) async {
     // _serverSubscription.cancel();
     _shutDownConnection();
     add(FailureGameEvent(error: message.toString()));

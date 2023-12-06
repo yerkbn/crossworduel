@@ -11,7 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class LoadingController extends StatefulWidget {
   final PlayerEntity me;
 
-  LoadingController({
+  const LoadingController({
     required this.me,
     required Key key,
   }) : super(key: key);
@@ -113,7 +113,7 @@ class LoadingControllerState extends State<LoadingController>
           Container(
             width: w,
             height: h,
-            color: theme.primaryColor,
+            color: theme.backgroundColor2,
             child: _buildUser(null, Alignment.bottomRight),
           )
         else
@@ -127,19 +127,16 @@ class LoadingControllerState extends State<LoadingController>
                 angle: 0,
                 position: _hiddenRight,
                 size: const Vector(
-                  UiConfig.globalWidth * 1.1,
-                  UiConfig.globalHeight * 1.1,
-                )),
+                    UiConfig.globalWidth * 1.1, UiConfig.globalHeight * 1.1)),
             child2: 0.ph,
             child1: Container(
-              width: w * 1.1,
-              height: h * 1.1,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(Assets.icons.apple.toString()))),
-              child: _buildUser(_opponent, Alignment.bottomRight),
-            )),
+                width: w * 1.1,
+                height: h * 1.1,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(Assets.image.rightLoading.path))),
+                child: _buildUser(_opponent, Alignment.bottomRight))),
         AnimationItem(
 
             /// LEFT
@@ -149,19 +146,16 @@ class LoadingControllerState extends State<LoadingController>
                 position: _hiddenLeft,
                 positionDuration: _positionDuration,
                 size: const Vector(
-                  UiConfig.globalWidth * 1.1,
-                  UiConfig.globalHeight * 1.1,
-                )),
+                    UiConfig.globalWidth * 1.1, UiConfig.globalHeight * 1.1)),
             child2: 0.ph,
             child1: Container(
-              width: w * 1.1,
-              height: h * 1.1,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(Assets.icons.apple.path))),
-              child: _buildUser(widget.me, Alignment.topLeft),
-            )),
+                width: w * 1.1,
+                height: h * 1.1,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(Assets.image.leftLoading.path))),
+                child: _buildUser(widget.me, Alignment.topLeft))),
         AnimationItem(
             key: _readyKey,
             initialParameters: AnimationParameters(
@@ -178,7 +172,7 @@ class LoadingControllerState extends State<LoadingController>
               decoration: BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage(Assets.icons.apple.path))),
+                      image: AssetImage(Assets.image.go.path))),
             )),
       ],
     );
@@ -197,37 +191,29 @@ class LoadingControllerState extends State<LoadingController>
             SizedBox(
                 width: 92.w,
                 height: 92.w,
-                child: const CircleAvatar(
-                  backgroundImage: NetworkImage(""),
-                )),
-            Text(
-              "samaltman",
-              style: theme.headline1,
-            ),
+                child:
+                    CircleAvatar(backgroundImage: NetworkImage(player.avatar))),
+            8.ph,
+            Text(player.username,
+                style: theme.headline1.copyWith(color: Colors.white)),
             4.ph,
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Assets.icons.apple.image(width: 14.h),
               8.pw,
-              Text(
-                "999",
-                style: theme.headline2,
-              )
+              Text("1998", style: theme.headline2.copyWith(color: Colors.white))
             ])
           ],
         ),
       );
     } else {
-      result = Text(
-        'Looking for...',
-        style: theme.headline1,
-      );
+      result = Text('Looking for...', style: theme.headline1);
     }
 
     return Align(
       alignment: alignment,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 150.h, horizontal: 40.w),
-        child: result,
-      ),
+          padding: EdgeInsets.symmetric(vertical: 150.h, horizontal: 40.w),
+          child: result),
     );
   }
 }

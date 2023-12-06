@@ -51,7 +51,7 @@ class _MainNavigation extends State<MainNavigation> {
             debugShowCheckedModeBanner: false,
             theme: CustomThemeExtension.lightThemeData,
             darkTheme: CustomThemeExtension.darkThemeData,
-            themeMode: ThemeMode.dark,
+            themeMode: ThemeMode.light,
           );
         },
       ),

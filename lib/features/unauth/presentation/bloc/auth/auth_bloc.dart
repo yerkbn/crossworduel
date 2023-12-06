@@ -1,3 +1,4 @@
+import 'package:crossworduel/core/usecases/no_params.dart';
 import 'package:crossworduel/features/profile/domain/usecases/refresh_me_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/get_me_usecase.dart';
@@ -5,7 +6,6 @@ import 'package:crossworduel/features/unauth/domain/usecases/logout_usecase.dart
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:crossworduel/core/usecases/no_params.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -59,9 +59,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
 
       if (event is RefreshAuthEvent) {
-        print("START --- ");
-        final result = await refreshMe(NoParams());
-        print("RESULT --- $result");
+        final result = await refreshMe(const NoParams());
         emit(result.fold(
           (failure) => state,
           (meEntity) {

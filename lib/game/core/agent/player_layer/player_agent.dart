@@ -18,13 +18,20 @@ class PlayerAgent extends ParentAgent {
   @override
   Widget build() {
     return PlayersController(
-      key: _playersController,
-      currentPlayer: currentPlayer,
-    );
+        key: _playersController, currentPlayer: currentPlayer);
   }
 
   @override
-  void instructionToAction(InstructionData instruction) {}
+  void instructionToAction(InstructionData instruction) {
+    if (instruction is PlayerFoundInsD) {
+      _state.playerJoined(
+          instruction.getFirstOponent(currentPlayerId: currentPlayer.id));
+    }
+
+    if (instruction is RunningInsD) {
+      _state.setLeftSec(instruction.leftSec);
+    }
+  }
 
   @override
   Map<String, InstructionData Function(Map objectMap)> get instructions => {};

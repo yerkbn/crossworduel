@@ -52,7 +52,8 @@ class UnauthRepositoryImpl implements UnauthRepositoryContract {
           token: "ssss",
           username: "yerkbn",
           email: "yerkbn@gmail.com",
-          avatar: "",
+          avatar:
+              "https://cdn.punchng.com/wp-content/uploads/2023/11/17224117/Sam-Altman.jpg",
           score: ScoreModel(point: 1000, heart: 5, strike: 12));
 
       await localDateSoursce.cacheMe(meModel);

@@ -1,5 +1,7 @@
 import 'package:crossworduel/core/service-locator/service_locator.dart';
 import 'package:crossworduel/features/profile/presentation/pages/profile_page.dart';
+import 'package:crossworduel/game/domain/entities/room_entity.dart';
+import 'package:crossworduel/game/presentation/ui/page/game_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -7,14 +9,10 @@ import 'package:go_router/go_router.dart';
 class AuthNavigation implements ServiceLocator {
   static const String main = '/';
   static const String play = '/play';
-  static const String user = '/user';
-  static const String profileSettings = '/profile_settings';
-  static const String friends = '/friends';
-  static const String searchFriends = '/friends_search';
-  static const String inviteFriend = '/invite_friend';
-  static const String questionAnalysis = '/question_analysis';
 
   final RouteObserver<ModalRoute> routeObserver;
+  static final RouteObserver<PageRoute> _routeObserver =
+      RouteObserver<PageRoute>();
 
   final GoRouter globalRouter;
   final GoRouter mainRoutes;
@@ -31,6 +29,13 @@ class AuthNavigation implements ServiceLocator {
           path: main,
           builder: (BuildContext context, GoRouterState state) {
             return const ProfilePage();
+          },
+        ),
+        GoRoute(
+          path: play,
+          builder: (BuildContext context, GoRouterState state) {
+            final RoomEntity arg = state.extra! as RoomEntity;
+            return GamePage(routeObserver: _routeObserver, arg: arg);
           },
         ),
       ],

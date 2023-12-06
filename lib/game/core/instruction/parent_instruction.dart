@@ -43,9 +43,12 @@ class InstructionMapper {
   static final Map<String, InstructionData Function(Map objectMap)>
       _generalInstructions = {
     // CONFIG
-
+    RoomCreatedInsD.insStatus: RoomCreatedInsD.parseMap,
+    AFKInsD.insStatus: AFKInsD.parseMap,
     // PLAYERS
-    PlayerLeaveInsD.STATUS: PlayerLeaveInsD.parseMap,
+    PlayerLeaveInsD.insStatus: PlayerLeaveInsD.parseMap,
+    PlayerFoundInsD.insStatus: PlayerFoundInsD.parseMap,
+    RunningInsD.insStatus: RunningInsD.parseMap,
   };
 
   /// Instruction List which will be availible after merging

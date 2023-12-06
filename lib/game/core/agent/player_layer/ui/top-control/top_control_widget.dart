@@ -1,12 +1,15 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
+import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/agent/player_layer/ui/timer/game_timer.dart';
+import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopControlWidget extends StatefulWidget {
-  const TopControlWidget({super.key});
+  final GlobalKey<GameTimerState> timer;
+  const TopControlWidget({super.key, required this.timer});
 
   @override
   State<TopControlWidget> createState() => _TopControlWidgetState();
@@ -30,7 +33,9 @@ class _TopControlWidgetState extends State<TopControlWidget> {
               topMargin: 0,
               borderRadius: Sizer().getSp(4),
               color: theme.backgroundColor3,
-              onPressed: () {},
+              onPressed: () {
+                globalSL<AuthNavigation>().globalRouter.pop();
+              },
               child: Icon(
                 Icons.close,
                 color: theme.textColor1,
@@ -65,10 +70,7 @@ class _TopControlWidgetState extends State<TopControlWidget> {
                 size: Sizer().getSp(20),
               )),
           12.pw,
-          Text(
-            "24 sec",
-            style: theme.headline1.copyWith(fontSize: 18.sp),
-          ),
+          GameTimer(key: widget.timer)
         ],
       ),
     );

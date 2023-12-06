@@ -1,4 +1,3 @@
-import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/profile/presentation/bloc/refresh/refresh_bloc.dart';
 import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// This is bridge means that
-/// It will connect [jigi_core]
 /// package to clients
 /// here will be passed most neccesary
 /// parameters. In other word it acts like driver
@@ -43,7 +41,7 @@ class _GameBridge extends State<GameBridge> with RouteAware {
 
   @override
   void initState() {
-    _gameAgent = GameAgent.agentCreator(widget.me) as ParentAgent;
+    _gameAgent = GameAgent.agentCreator(widget.me);
     _gameBloc = GameBloc(
       authBloc: globalSL<AuthBloc>(),
       gameMockCreator: widget.mockCreator,
@@ -89,6 +87,7 @@ class _GameBridge extends State<GameBridge> with RouteAware {
         }
       },
       builder: (BuildContext context, GameState state) {
+        print("-------STATE $state");
         if (state is RunningGameState) {
           return BlocProvider<GameBloc>(
               create: (BuildContext context) => _gameBloc,
@@ -109,7 +108,10 @@ class _GameBridge extends State<GameBridge> with RouteAware {
           );
         }
         if (state is LoadingGameState) {
-          return 0.ph;
+          return const GameStatus(
+            message: 'Loading...',
+            icon: Icons.hourglass_empty,
+          );
         }
         return const GameStatus(
           message: 'Loading...',

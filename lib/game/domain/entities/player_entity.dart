@@ -26,10 +26,10 @@ class PlayerEntity with Normalizer {
     return PlayerEntity(id: me.id, username: me.username, avatar: me.avatar);
   }
 
-  static List<PlayerEntity> parseList(List<Map> items) {
+  static List<PlayerEntity> parseList(List items) {
     final List<PlayerEntity> result = [];
-    for (final Map item in items) {
-      result.add(PlayerEntity.parseMap(item));
+    for (final item in items) {
+      result.add(PlayerEntity.parseMap(item as Map<String, dynamic>));
     }
     return result;
   }

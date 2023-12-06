@@ -48,7 +48,7 @@ class CustomFailure extends StatelessWidget {
                   shape: BoxShape.circle, color: theme.backgroundColor3),
               width: getHeight,
               padding: EdgeInsets.all(12.h),
-              // child: Assets.icons.fire.svg(),
+              child: Icon(Icons.connect_without_contact, size: 24.h),
             ),
             SizedBox(
               height: getFontSize,
@@ -66,9 +66,8 @@ class CustomFailure extends StatelessWidget {
             Text(
               subtitle ?? "Check your internet connection or refresh the page.",
               textAlign: TextAlign.center,
-              style: theme.headline4.copyWith(
-                fontSize: getFontSize - 4,
-              ),
+              style: theme.headline3
+                  .copyWith(fontSize: getFontSize, color: Colors.black),
             ),
             SizedBox(
               height: 4.h,
@@ -79,8 +78,8 @@ class CustomFailure extends StatelessWidget {
               CustomButton.textBtn(
                 title: btnTitle,
                 onPressed: onTap!,
-                color: Colors.white,
-                fontSize: getFontSize,
+                color: theme.textColor2,
+                fontSize: 14.h,
               )
           ],
         ),

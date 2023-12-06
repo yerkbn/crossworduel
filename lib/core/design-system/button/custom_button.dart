@@ -36,7 +36,7 @@ class CustomButton extends StatelessWidget {
     this.isWidthOff = false,
     this.progresHeight = 24,
     this.fontSize = 17,
-    this.textColor = Colors.white,
+    this.textColor = Colors.black,
     this.borderRadius = 16,
     this.fullBorderRadius,
     this.child,
@@ -51,7 +51,7 @@ class CustomButton extends StatelessWidget {
       double height = 34,
       double fontSize = 17,
       Color? color,
-      Color? textColor = Colors.white,
+      Color? textColor = Colors.black,
       Widget? child}) {
     return CustomButton(
       title: title,
@@ -76,7 +76,7 @@ class CustomButton extends StatelessWidget {
     bool isLoading = false,
     bool isDisabled = false,
     bool isWidthOff = false,
-    Color? textColor = Colors.white,
+    Color? textColor = Colors.black,
     Color? color,
     Widget? child,
     double? borderRadius,
@@ -107,7 +107,7 @@ class CustomButton extends StatelessWidget {
       bool isLoading = false,
       bool isDisabled = false,
       bool isWidthOff = false,
-      Color? textColor = Colors.white,
+      Color? textColor = Colors.black,
       Color? color,
       Widget? child}) {
     return CustomButton(
@@ -135,7 +135,7 @@ class CustomButton extends StatelessWidget {
     bool isLoading = false,
     bool isDisabled = false,
     bool isWidthOff = false,
-    Color? textColor = Colors.white,
+    Color? textColor = Colors.black,
     Color? color,
     Widget? child,
   }) {
@@ -180,7 +180,7 @@ class CustomButton extends StatelessWidget {
         ),
         child: _buildChild(
             context: context,
-            primaryColor: textColor ?? Colors.white,
+            primaryColor: textColor ?? Colors.black,
             theme: theme));
 
     final Widget textBtn = CustomButtonWrapper(

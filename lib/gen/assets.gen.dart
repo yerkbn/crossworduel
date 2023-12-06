@@ -20,6 +20,8 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [apple, google];
+
+  get point => null;
 }
 
 class $AssetsImageGen {
@@ -29,8 +31,19 @@ class $AssetsImageGen {
   AssetGenImage get background =>
       const AssetGenImage('assets/image/background.png');
 
+  /// File path: assets/image/go.png
+  AssetGenImage get go => const AssetGenImage('assets/image/go.png');
+
+  /// File path: assets/image/left_loading.png
+  AssetGenImage get leftLoading =>
+      const AssetGenImage('assets/image/left_loading.png');
+
+  /// File path: assets/image/right_loading.png
+  AssetGenImage get rightLoading =>
+      const AssetGenImage('assets/image/right_loading.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [background];
+  List<AssetGenImage> get values => [background, go, leftLoading, rightLoading];
 }
 
 class Assets {

@@ -1,8 +1,8 @@
 import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/cell_item.dart';
+import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/static_grid.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/game/presentation/ui/widget/crossword/cell_item.dart';
-import 'package:crossworduel/game/presentation/ui/widget/crossword/static_grid.dart';
 import 'package:flutter/material.dart';
 
 class CrosswordWidget extends StatefulWidget {
@@ -15,7 +15,7 @@ class CrosswordWidget extends StatefulWidget {
 class _CrosswordWidgetState extends State<CrosswordWidget> {
   @override
   Widget build(BuildContext context) {
-    CrosswordEntity crossword = CrosswordEntity.generate;
+    final CrosswordEntity crossword = CrosswordEntity.generate;
     return Container(
         margin: EdgeInsets.only(top: Sizer().getHeight(184)),
         width: Sizer().getWidth(327),
@@ -32,7 +32,7 @@ class _CrosswordWidgetState extends State<CrosswordWidget> {
   }
 
   Widget _buildCell({required CrosswordEntity crossword, required int index}) {
-    CellEntity? cell = crossword.getCell(index);
+    final CellEntity? cell = crossword.getCell(index);
     return cell == null ? const EmptyCellItem() : CellItem(cell: cell);
   }
 }
