@@ -1,6 +1,6 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
-import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/player_event.dart';
 import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
@@ -21,8 +21,12 @@ class CellItem extends StatelessWidget {
     Color backgroundColor = theme.backgroundColor3;
     Color borderColor = theme.backgroundColor2;
     if (cell.isCurrent) {
-      backgroundColor = theme.primaryColor;
-      borderColor = const Color(0xFF219653);
+      backgroundColor = const Color(0xFFFFFBD7);
+      borderColor = const Color(0xFFF9E63E);
+    }
+    if (cell.isCursive) {
+      backgroundColor = const Color(0xFFC1E1FF);
+      borderColor = const Color(0xFF1F93FD);
     }
     return CustomContainer(
       width: Sizer().getWidth(28),
@@ -30,13 +34,13 @@ class CellItem extends StatelessWidget {
       topMargin: 0,
       onPressed: () {
         BlocProvider.of<GameBloc>(context)
-            .add(LetterTapGameEvent(index: cell.index));
+            .add(CrosswordTapGameEvent(index: cell.index));
       },
       borderRadius: 4.sp,
       color: backgroundColor,
       borderColor: borderColor,
       paddingSize: 0,
-      child: Text(cell.value.toUpperCase(),
+      child: Text(cell.currentValue.toUpperCase(),
           style: theme.headline2.copyWith(
             color: Colors.black,
             fontSize: 14.sp,

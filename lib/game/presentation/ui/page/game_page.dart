@@ -1,6 +1,6 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/game/core/bridge/game_bridge.dart';
 import 'package:crossworduel/game/core/mock/mock.dart';

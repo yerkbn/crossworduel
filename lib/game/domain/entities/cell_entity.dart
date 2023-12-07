@@ -6,20 +6,32 @@ class CellEntity extends Equatable {
   final String value;
   final bool isHide;
   final bool isCurrent;
+  final bool isCursive;
+  final String currentValue;
 
   const CellEntity({
     required this.index,
     required this.value,
     this.isHide = false,
     this.isCurrent = false,
+    this.isCursive = false,
+    this.currentValue = "",
   });
 
-  CellEntity copyWith({bool? isHide, bool? isCurrent}) {
+  CellEntity copyWith({
+    bool? isHide,
+    bool? isCurrent,
+    bool? isCursive,
+    String? currentValue,
+  }) {
     return CellEntity(
-        index: index,
-        value: value,
-        isHide: isHide ?? this.isHide,
-        isCurrent: isCurrent ?? this.isCurrent);
+      index: index,
+      value: value,
+      currentValue: currentValue ?? this.currentValue,
+      isHide: isHide ?? this.isHide,
+      isCurrent: isCurrent ?? this.isCurrent,
+      isCursive: isCursive ?? this.isCursive,
+    );
   }
 
   factory CellEntity.parseMap(Map objectMap) {

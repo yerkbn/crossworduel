@@ -2,8 +2,8 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/core/util/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/timer/game_timer.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 

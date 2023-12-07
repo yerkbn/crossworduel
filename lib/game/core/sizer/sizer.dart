@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 /// This will be used to costomize game table and it will make it
 /// look same in all devices decpite orientationn and other staff
 
-const double SIZER_WIDTH = 1170;
-const double SIZER_HEIGHT = 2532;
+const double SIZER_WIDTH = 375;
+const double SIZER_HEIGHT = 812;
 const double SIZER_RATIO = SIZER_WIDTH / SIZER_HEIGHT;
 
 class Sizer {

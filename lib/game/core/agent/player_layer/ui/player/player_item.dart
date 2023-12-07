@@ -1,6 +1,6 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
-import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:flutter/material.dart';
 

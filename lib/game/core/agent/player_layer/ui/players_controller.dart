@@ -1,10 +1,12 @@
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
-import 'package:crossworduel/core/util/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/crossword_widget.dart';
+import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/hint_widget.dart';
+import 'package:crossworduel/game/core/agent/player_layer/ui/keyboard/keyboard_widget.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/player/player_item.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/timer/game_timer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/top-control/top_control_widget.dart';
 import 'package:crossworduel/game/core/global_key/global_key.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +73,7 @@ class PlayersControllerState extends State<PlayersController>
     return Align(
       alignment: Alignment.topCenter,
       child: Stack(
+        alignment: Alignment.topCenter,
         children: [
           TopControlWidget(timer: _timer),
           Container(
@@ -85,6 +88,8 @@ class PlayersControllerState extends State<PlayersController>
             0.ph
           else
             CrosswordWidget(crossword: _crossword!),
+          const HintWidget(),
+          if (_crossword == null) 0.ph else const KeyboardWidget(),
         ],
       ),
     );

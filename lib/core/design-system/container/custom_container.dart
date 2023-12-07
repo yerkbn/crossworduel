@@ -14,6 +14,8 @@ class CustomContainer extends StatelessWidget {
   final double? height;
   final double minHeight;
   final double topMargin;
+  final double leftMargin;
+  final double rightMargin;
   final double borderRadius;
   final void Function()? onPressed;
   final BoxConstraints? constraints;
@@ -28,6 +30,8 @@ class CustomContainer extends StatelessWidget {
     this.height,
     this.minHeight = 0,
     this.topMargin = 8,
+    this.leftMargin = 0,
+    this.rightMargin = 0,
     this.paddingHorizantal,
     this.paddingSize,
     this.borderRadius = 12,
@@ -56,7 +60,8 @@ class CustomContainer extends StatelessWidget {
       width: width ?? double.infinity,
       height: height,
       constraints: constraints ?? BoxConstraints(minHeight: minHeight.h),
-      margin: EdgeInsets.only(top: topMargin.h),
+      margin: EdgeInsets.only(
+          top: topMargin.h, left: leftMargin.w, right: rightMargin.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius.h),
         color: color ?? theme.backgroundColor2,

@@ -49,18 +49,35 @@ class RunningInsD extends InstructionData {
   }
 }
 
-class LetterTapInsD extends InstructionData {
-  static const String insStatus = 'LETTER_TAP';
+class CrosswordTapInsD extends InstructionData {
+  static const String insStatus = 'CROSSWORD_TAP';
   final int index;
 
-  LetterTapInsD({
+  CrosswordTapInsD({
     required this.index,
     required Map objectMap,
   }) : super(insStatus, objectMap);
 
-  factory LetterTapInsD.parseMap(Map objectMap) {
-    return LetterTapInsD(
+  factory CrosswordTapInsD.parseMap(Map objectMap) {
+    return CrosswordTapInsD(
       index: objectMap.getValueSafely('index'),
+      objectMap: objectMap,
+    );
+  }
+}
+
+class KeyboardTapInsD extends InstructionData {
+  static const String insStatus = 'KEYBOARD_TAP';
+  final String letter;
+
+  KeyboardTapInsD({
+    required this.letter,
+    required Map objectMap,
+  }) : super(insStatus, objectMap);
+
+  factory KeyboardTapInsD.parseMap(Map objectMap) {
+    return KeyboardTapInsD(
+      letter: objectMap.getValueSafely('letter'),
       objectMap: objectMap,
     );
   }

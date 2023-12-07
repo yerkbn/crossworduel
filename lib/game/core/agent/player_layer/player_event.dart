@@ -1,11 +1,11 @@
 import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/core/instruction/parent_instruction.dart';
 
-class LetterTapGameEvent extends LocalGameEvent {
-  final String status = 'LETTER_TAP';
+class CrosswordTapGameEvent extends LocalGameEvent {
+  final String status = 'CROSSWORD_TAP';
   final int index;
 
-  const LetterTapGameEvent({
+  const CrosswordTapGameEvent({
     required this.index,
   });
 
@@ -14,7 +14,32 @@ class LetterTapGameEvent extends LocalGameEvent {
 
   @override
   InstructionData get generateInstruction =>
-      LetterTapInsD(index: index, objectMap: {});
+      CrosswordTapInsD(index: index, objectMap: {});
+
+  @override
+  Map get generateServerMap => {};
+
+  @override
+  int get getDuration => 0;
+
+  @override
+  String get getId => status;
+}
+
+class KeyboardTapGameEvent extends LocalGameEvent {
+  final String status = 'KEYBOARD_TAP';
+  final String letter;
+
+  const KeyboardTapGameEvent({
+    required this.letter,
+  });
+
+  @override
+  List<Object> get props => [letter];
+
+  @override
+  InstructionData get generateInstruction =>
+      KeyboardTapInsD(letter: letter, objectMap: {});
 
   @override
   Map get generateServerMap => {};
