@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -58,7 +59,7 @@ class GameTimerState extends State<GameTimer> {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Text(
       "$_start sec",
-      style: theme.headline1.copyWith(fontSize: 18.sp),
+      style: theme.headline1.copyWith(fontSize: Sizer().getSp(18)),
     );
   }
 }

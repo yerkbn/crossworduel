@@ -6,7 +6,6 @@ import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CellItem extends StatelessWidget {
   final CellEntity cell;
@@ -36,14 +35,14 @@ class CellItem extends StatelessWidget {
         BlocProvider.of<GameBloc>(context)
             .add(CrosswordTapGameEvent(index: cell.index));
       },
-      borderRadius: 4.sp,
+      borderRadius: Sizer().getWidth(4),
       color: backgroundColor,
       borderColor: borderColor,
       paddingSize: 0,
       child: Text(cell.currentValue.toUpperCase(),
           style: theme.headline2.copyWith(
             color: Colors.black,
-            fontSize: 14.sp,
+            fontSize: Sizer().getSp(14),
           )),
     );
   }
@@ -61,7 +60,7 @@ class EmptyCellItem extends StatelessWidget {
       decoration: BoxDecoration(
           color: theme.backgroundColor1,
           border: Border.all(color: theme.backgroundColor2.withOpacity(.6)),
-          borderRadius: BorderRadius.circular(4.sp)),
+          borderRadius: BorderRadius.circular(Sizer().getWidth(4))),
     );
   }
 }

@@ -14,9 +14,9 @@ class HintWidget extends StatelessWidget {
       margin: EdgeInsets.only(top: Sizer().getHeight(516)),
       width: Sizer().getWidth(327),
       height: Sizer().getHeight(50),
-      // color: Colors.white,
       child: Center(
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             CustomContainer(
               width: Sizer().getWidth(28),
@@ -34,11 +34,11 @@ class HintWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: 250.w,
+              width: Sizer().getWidth(250),
               child: Text(
-                "How to sort a list of objects by the alphabetical order of one of its properties",
+                "How to sort a list of objects by the alphabetical order of one of its properties sort a list of objects by the alphabetica",
                 textAlign: TextAlign.center,
-                style: theme.headline3.copyWith(fontSize: 12.h),
+                style: theme.headline3.copyWith(fontSize: Sizer().getSp(12)),
               ),
             ),
             CustomContainer(

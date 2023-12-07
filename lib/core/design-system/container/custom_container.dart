@@ -61,7 +61,7 @@ class CustomContainer extends StatelessWidget {
       height: height,
       constraints: constraints ?? BoxConstraints(minHeight: minHeight.h),
       margin: EdgeInsets.only(
-          top: topMargin.h, left: leftMargin.w, right: rightMargin.w),
+          top: topMargin.h, left: leftMargin, right: rightMargin),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius.h),
         color: color ?? theme.backgroundColor2,

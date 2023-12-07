@@ -6,7 +6,6 @@ import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyboardWidget extends StatelessWidget {
   const KeyboardWidget({super.key});
@@ -65,20 +64,20 @@ class KeyboardWidget extends StatelessWidget {
       width: Sizer().getWidth(33),
       height: Sizer().getHeight(54),
       topMargin: 0,
-      leftMargin: 2,
-      rightMargin: 2,
+      leftMargin: Sizer().getWidth(2),
+      rightMargin: Sizer().getWidth(2),
       onPressed: () {
         BlocProvider.of<GameBloc>(context)
             .add(KeyboardTapGameEvent(letter: letter));
       },
-      borderRadius: 4.sp,
+      borderRadius: Sizer().getWidth(4),
       color: theme.backgroundColor3,
       borderColor: theme.backgroundColor2,
       paddingSize: 0,
       child: Text(letter.toUpperCase(),
           style: theme.headline2.copyWith(
             color: Colors.black,
-            fontSize: 16.sp,
+            fontSize: Sizer().getSp(14),
           )),
     );
   }
