@@ -66,7 +66,28 @@ class MockGame extends MockParent {
       execute(duration: duration, input: {
         "status": "RUNING_INST",
         "data": {
-          "leftSec": 42,
+          "leftSec": 300,
+          "items": [
+            {"index": 0, "value": "A"},
+            {"index": 1, "value": "V"},
+            {"index": 2, "value": "A"},
+            {"index": 3, "value": "T"},
+            {"index": 4, "value": "A"},
+            {"index": 5, "value": "R"},
+            {"index": 15, "value": "A"},
+            {"index": 16, "value": "P"},
+            {"index": 17, "value": "P"},
+            {"index": 18, "value": "L"},
+            {"index": 19, "value": "E"},
+            //
+            {"index": 22, "value": "I"},
+            {"index": 23, "value": "P"},
+            {"index": 24, "value": "A"},
+            {"index": 25, "value": "D"},
+            //
+            {"index": 35, "value": "I"},
+            {"index": 45, "value": "O"}
+          ]
         }
       });
 }

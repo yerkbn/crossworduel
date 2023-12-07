@@ -77,7 +77,7 @@ class PlayerLeaveGameEvent extends LocalGameEvent {
   final String status = 'PLAYER_LEAVE';
   final String playerId;
 
-  PlayerLeaveGameEvent({required this.playerId});
+  const PlayerLeaveGameEvent({required this.playerId});
 
   @override
   Map get generateServerMap {

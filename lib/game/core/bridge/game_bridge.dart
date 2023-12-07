@@ -87,7 +87,6 @@ class _GameBridge extends State<GameBridge> with RouteAware {
         }
       },
       builder: (BuildContext context, GameState state) {
-        print("-------STATE $state");
         if (state is RunningGameState) {
           return BlocProvider<GameBloc>(
               create: (BuildContext context) => _gameBloc,

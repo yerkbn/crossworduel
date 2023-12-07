@@ -32,13 +32,35 @@ class PlayerFoundInsD extends InstructionData with PlayersDriver {
 class RunningInsD extends InstructionData {
   static const String insStatus = 'RUNING_INST';
   final int leftSec;
+  final CrosswordEntity crossword;
 
-  RunningInsD({required this.leftSec, required Map objectMap})
-      : super(insStatus, objectMap);
+  RunningInsD({
+    required this.leftSec,
+    required this.crossword,
+    required Map objectMap,
+  }) : super(insStatus, objectMap);
 
   factory RunningInsD.parseMap(Map objectMap) {
     return RunningInsD(
       leftSec: objectMap.getValueSafely('leftSec'),
+      crossword: CrosswordEntity.parseMap(objectMap),
+      objectMap: objectMap,
+    );
+  }
+}
+
+class LetterTapInsD extends InstructionData {
+  static const String insStatus = 'LETTER_TAP';
+  final int index;
+
+  LetterTapInsD({
+    required this.index,
+    required Map objectMap,
+  }) : super(insStatus, objectMap);
+
+  factory LetterTapInsD.parseMap(Map objectMap) {
+    return LetterTapInsD(
+      index: objectMap.getValueSafely('index'),
       objectMap: objectMap,
     );
   }

@@ -9,6 +9,7 @@ class CustomContainer extends StatelessWidget {
   final double? paddingHorizantal;
   final double? paddingSize;
   final Color? color;
+  final Color? borderColor;
   final double? width;
   final double? height;
   final double minHeight;
@@ -21,6 +22,7 @@ class CustomContainer extends StatelessWidget {
     super.key,
     required this.child,
     this.color,
+    this.borderColor,
     this.onPressed,
     this.width,
     this.height,
@@ -58,6 +60,7 @@ class CustomContainer extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius.h),
         color: color ?? theme.backgroundColor2,
+        border: borderColor == null ? null : Border.all(color: borderColor!),
       ),
       child: resultChild,
     );

@@ -1,3 +1,4 @@
+import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:equatable/equatable.dart';
 
 class CellEntity extends Equatable {
@@ -19,6 +20,21 @@ class CellEntity extends Equatable {
         value: value,
         isHide: isHide ?? this.isHide,
         isCurrent: isCurrent ?? this.isCurrent);
+  }
+
+  factory CellEntity.parseMap(Map objectMap) {
+    return CellEntity(
+      index: objectMap.getValueSafely("index"),
+      value: objectMap.getValueSafely("value"),
+    );
+  }
+
+  static List<CellEntity> parseList(List items) {
+    final List<CellEntity> result = [];
+    for (final item in items) {
+      result.add(CellEntity.parseMap(item as Map<String, dynamic>));
+    }
+    return result;
   }
 
   @override

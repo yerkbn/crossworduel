@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crossworduel/core/exception/config_exception.dart';
 import 'package:crossworduel/core/exception/parent_exception.dart';
 import 'package:crossworduel/core/extension/map_error_extension.dart';
+import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 part 'player_instruction.dart';
 part 'configuration_instruction.dart';
@@ -45,10 +46,6 @@ class InstructionMapper {
     // CONFIG
     RoomCreatedInsD.insStatus: RoomCreatedInsD.parseMap,
     AFKInsD.insStatus: AFKInsD.parseMap,
-    // PLAYERS
-    PlayerLeaveInsD.insStatus: PlayerLeaveInsD.parseMap,
-    PlayerFoundInsD.insStatus: PlayerFoundInsD.parseMap,
-    RunningInsD.insStatus: RunningInsD.parseMap,
   };
 
   /// Instruction List which will be availible after merging

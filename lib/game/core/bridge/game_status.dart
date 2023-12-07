@@ -1,7 +1,5 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
-import 'package:crossworduel/core/design-system/states/failure/custom_failure.dart';
-import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/navigation/auth_navigation.dart';
+import 'package:crossworduel/core/design-system/loading/custom_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,16 +20,12 @@ class GameStatus extends StatelessWidget {
     return ColoredBox(
       color: theme.backgroundColor1,
       child: Padding(
-        padding: EdgeInsets.only(top: 154.h),
-        child: CustomFailure(
-          onTap: () {
-            globalSL<AuthNavigation>().globalRouter.pop();
-          },
-          btnTitle: "Leave",
-          title: message,
-          subtitle: subtitle,
-        ),
-      ),
+          padding: EdgeInsets.only(top: 254.h),
+          child: Column(
+            children: [
+              CustomLoading(color: theme.textColor1),
+            ],
+          )),
     );
   }
 }

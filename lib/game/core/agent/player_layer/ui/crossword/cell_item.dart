@@ -1,7 +1,11 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
+import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/util/sizer/sizer.dart';
+import 'package:crossworduel/game/core/agent/player_layer/player_event.dart';
+import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CellItem extends StatelessWidget {
@@ -20,19 +24,23 @@ class CellItem extends StatelessWidget {
       backgroundColor = theme.primaryColor;
       borderColor = const Color(0xFF219653);
     }
-    return Container(
+    return CustomContainer(
       width: Sizer().getWidth(28),
       height: Sizer().getWidth(28),
-      decoration: BoxDecoration(
-          color: backgroundColor,
-          border: Border.all(color: borderColor),
-          borderRadius: BorderRadius.circular(4.sp)),
-      alignment: Alignment.center,
-      child: cell.isHide
-          ? null
-          : Text(cell.value.toUpperCase(),
-              style: theme.headline2
-                  .copyWith(color: Colors.black, fontSize: 14.sp)),
+      topMargin: 0,
+      onPressed: () {
+        BlocProvider.of<GameBloc>(context)
+            .add(LetterTapGameEvent(index: cell.index));
+      },
+      borderRadius: 4.sp,
+      color: backgroundColor,
+      borderColor: borderColor,
+      paddingSize: 0,
+      child: Text(cell.value.toUpperCase(),
+          style: theme.headline2.copyWith(
+            color: Colors.black,
+            fontSize: 14.sp,
+          )),
     );
   }
 }

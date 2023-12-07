@@ -6,7 +6,8 @@ import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:flutter/material.dart';
 
 class CrosswordWidget extends StatefulWidget {
-  const CrosswordWidget({super.key});
+  final CrosswordEntity crossword;
+  const CrosswordWidget({super.key, required this.crossword});
 
   @override
   State<CrosswordWidget> createState() => _CrosswordWidgetState();
@@ -15,7 +16,6 @@ class CrosswordWidget extends StatefulWidget {
 class _CrosswordWidgetState extends State<CrosswordWidget> {
   @override
   Widget build(BuildContext context) {
-    final CrosswordEntity crossword = CrosswordEntity.generate;
     return Container(
         margin: EdgeInsets.only(top: Sizer().getHeight(184)),
         width: Sizer().getWidth(327),
@@ -26,7 +26,7 @@ class _CrosswordWidgetState extends State<CrosswordWidget> {
           padding: EdgeInsets.all(Sizer().getWidth(4)),
           children: <Widget>[
             for (int i = 0; i < 100; i++)
-              _buildCell(crossword: crossword, index: i)
+              _buildCell(crossword: widget.crossword, index: i)
           ],
         ));
   }

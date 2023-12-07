@@ -1,9 +1,11 @@
+import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/util/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/crossword_widget.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/player/player_item.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/timer/game_timer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/top-control/top_control_widget.dart';
 import 'package:crossworduel/game/core/global_key/global_key.dart';
+import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -26,10 +28,18 @@ class PlayersControllerState extends State<PlayersController>
 
   final GlobalKey<GameTimerState> _timer = GlobalKey<GameTimerState>();
 
+  CrosswordEntity? _crossword;
+
   @override
   void initState() {
     super.initState();
     playerJoined(widget.currentPlayer);
+  }
+
+  void setCrossword(CrosswordEntity crossword) {
+    setState(() {
+      _crossword = crossword;
+    });
   }
 
   void setLeftSec(int sec) {
@@ -71,7 +81,10 @@ class PlayersControllerState extends State<PlayersController>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: _buildPlayers,
               )),
-          const CrosswordWidget(),
+          if (_crossword == null)
+            0.ph
+          else
+            CrosswordWidget(crossword: _crossword!),
         ],
       ),
     );
