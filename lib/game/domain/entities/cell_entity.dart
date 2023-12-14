@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class CellEntity extends Equatable {
   final int index;
   final String value;
-  final bool isHide;
+  final bool isValid;
   final bool isCurrent;
   final bool isCursive;
   final String currentValue;
@@ -12,14 +12,14 @@ class CellEntity extends Equatable {
   const CellEntity({
     required this.index,
     required this.value,
-    this.isHide = false,
+    this.isValid = false,
     this.isCurrent = false,
     this.isCursive = false,
     this.currentValue = "",
   });
 
   CellEntity copyWith({
-    bool? isHide,
+    bool? isValid,
     bool? isCurrent,
     bool? isCursive,
     String? currentValue,
@@ -28,7 +28,7 @@ class CellEntity extends Equatable {
       index: index,
       value: value,
       currentValue: currentValue ?? this.currentValue,
-      isHide: isHide ?? this.isHide,
+      isValid: isValid ?? this.isValid,
       isCurrent: isCurrent ?? this.isCurrent,
       isCursive: isCursive ?? this.isCursive,
     );
@@ -49,6 +49,8 @@ class CellEntity extends Equatable {
     return result;
   }
 
+  bool get isCorrect => currentValue.toUpperCase() == value.toUpperCase();
+
   @override
-  List<Object?> get props => [index, value, isHide, isCurrent];
+  List<Object?> get props => [index, value, isValid, isCurrent];
 }

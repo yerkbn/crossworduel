@@ -32,6 +32,7 @@ class PlayerAgent extends ParentAgent {
     if (instruction is RunningInsD) {
       _state.setLeftSec(instruction.leftSec);
       _crossword = instruction.crossword;
+      _crossword = _crossword.currentSequence(_crossword.items.first.index);
       _state.setCrossword(_crossword);
     }
     if (instruction is CrosswordTapInsD) {
@@ -40,6 +41,15 @@ class PlayerAgent extends ParentAgent {
     }
     if (instruction is KeyboardTapInsD) {
       _crossword = _crossword.setLetter(instruction.letter);
+      _crossword = _crossword.checkIsItCorrect();
+      _state.setCrossword(_crossword);
+    }
+    if (instruction is DeleteTapInsD) {
+      _crossword = _crossword.deleteLetter();
+      _state.setCrossword(_crossword);
+    }
+    if (instruction is NextPrevInsD) {
+      _crossword = _crossword.nextPrev();
       _state.setCrossword(_crossword);
     }
   }
@@ -52,5 +62,7 @@ class PlayerAgent extends ParentAgent {
         RunningInsD.insStatus: RunningInsD.parseMap,
         CrosswordTapInsD.insStatus: CrosswordTapInsD.parseMap,
         KeyboardTapInsD.insStatus: KeyboardTapInsD.parseMap,
+        DeleteTapInsD.insStatus: DeleteTapInsD.parseMap,
+        NextPrevInsD.insStatus: NextPrevInsD.parseMap,
       };
 }

@@ -1,11 +1,10 @@
+import 'package:crossworduel/game/core/crossword/crossword_generator.dart';
 import 'package:crossworduel/game/core/mock/mock.dart';
 
 class MockGame extends MockParent {
   final MockCore core;
 
-  MockGame(MockConfig config)
-      : core = MockCore(config),
-        super(config);
+  MockGame(super.config) : core = MockCore(config);
 
   @override
   void runTest() {
@@ -60,34 +59,101 @@ class MockGame extends MockParent {
       });
 
   // RUNNING
-  void running({
+  Future<void> running({
     required int duration,
-  }) =>
-      execute(duration: duration, input: {
-        "status": "RUNING_INST",
-        "data": {
-          "leftSec": 300,
-          "items": [
-            {"index": 0, "value": "A"},
-            {"index": 1, "value": "V"},
-            {"index": 2, "value": "A"},
-            {"index": 3, "value": "T"},
-            {"index": 4, "value": "A"},
-            {"index": 5, "value": "R"},
-            {"index": 15, "value": "A"},
-            {"index": 16, "value": "P"},
-            {"index": 17, "value": "P"},
-            {"index": 18, "value": "L"},
-            {"index": 19, "value": "E"},
-            //
-            {"index": 22, "value": "I"},
-            {"index": 23, "value": "P"},
-            {"index": 24, "value": "A"},
-            {"index": 25, "value": "D"},
-            //
-            {"index": 35, "value": "I"},
-            {"index": 45, "value": "O"}
-          ]
-        }
-      });
+  }) async {
+    await CrosswordGenerator.crosswordGenerate();
+    return execute(duration: duration, input: {
+      "status": "RUNING_INST",
+      "data": {
+        "leftSec": 300,
+        "spans": [
+          {
+            "point": {"x": 0, "y": 0},
+            "vert": false,
+            "length": 6,
+            "answer": "AVATAR",
+            "clue": "James Cameron movie",
+          },
+          {
+            "point": {"x": 5, "y": 0},
+            "vert": true,
+            "length": 5,
+            "answer": "RADIO",
+            "clue": "RADIO",
+          },
+        ]
+      }
+    });
+  }
 }
+
+
+
+
+
+  // RUNNING
+  // void running({
+  //   required int duration,
+  // }) async {
+  //   await Crossword.crosswordGenerate();
+  //   return execute(duration: duration, input: {
+  //     "status": "RUNING_INST",
+  //     "data": {
+  //       "leftSec": 300,
+  //       "items": [
+  //         {"index": 0, "value": "A"},
+  //         {"index": 1, "value": "V"},
+  //         {"index": 2, "value": "A"},
+  //         {"index": 3, "value": "T"},
+  //         {"index": 4, "value": "A"},
+  //         {"index": 5, "value": "R"},
+  //         {"index": 15, "value": "A"},
+  //         {"index": 16, "value": "P"},
+  //         {"index": 17, "value": "P"},
+  //         {"index": 18, "value": "L"},
+  //         {"index": 19, "value": "E"},
+  //         {"index": 22, "value": "I"},
+  //         {"index": 23, "value": "P"},
+  //         {"index": 24, "value": "A"},
+  //         {"index": 25, "value": "D"},
+  //         {"index": 35, "value": "I"},
+  //         {"index": 45, "value": "O"}
+  //       ],
+  //       "hints": [
+  //         {
+  //           "indexes": [0, 1, 2, 3, 4, 5],
+  //           "hint": "James Cameron movie",
+  //           "isRow": true,
+  //         },
+  //         {
+  //           "point": {"x": 0, "y": 0},
+  //           "vert": false,
+  //           "length": 6,
+  //           "answer": "AVATAR",
+  //           "clue": "James Cameron movie",
+  //         },
+  //         {
+  //           "indexes": [0, 1, 2, 3, 4, 5],
+  //           "hint": "James Cameron movie",
+  //           "isRow": true,
+  //         },
+  //         {
+  //           "indexes": [15, 16, 17, 18, 19],
+  //           "hint": "World largest company",
+  //           "isRow": true,
+  //         },
+  //         {
+  //           "indexes": [5, 15, 25, 35, 45],
+  //           "hint": "Previous to TV",
+  //           "isRow": false,
+  //         },
+  //         {
+  //           "indexes": [22, 23, 24, 25],
+  //           "hint": "Not phone not computer, from Apple company",
+  //           "isRow": true,
+  //         },
+  //       ]
+  //     }
+  //   });
+  // }

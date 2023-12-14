@@ -82,3 +82,29 @@ class KeyboardTapInsD extends InstructionData {
     );
   }
 }
+
+class DeleteTapInsD extends InstructionData {
+  static const String insStatus = 'DELETE_TAP';
+
+  DeleteTapInsD({
+    required Map objectMap,
+  }) : super(insStatus, objectMap);
+
+  factory DeleteTapInsD.parseMap(Map objectMap) {
+    return DeleteTapInsD(
+      objectMap: objectMap,
+    );
+  }
+}
+
+class NextPrevInsD extends InstructionData {
+  static const String insStatus = 'NEXT_PREV_TAP';
+
+  NextPrevInsD({
+    required Map objectMap,
+  }) : super(insStatus, objectMap);
+
+  factory NextPrevInsD.parseMap(Map objectMap) {
+    return NextPrevInsD(objectMap: objectMap);
+  }
+}

@@ -50,3 +50,46 @@ class KeyboardTapGameEvent extends LocalGameEvent {
   @override
   String get getId => status;
 }
+
+class DeleteTapGameEvent extends LocalGameEvent {
+  final String status = 'DELETE_TAP';
+
+  const DeleteTapGameEvent();
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  InstructionData get generateInstruction => DeleteTapInsD(objectMap: {});
+
+  @override
+  Map get generateServerMap => {};
+
+  @override
+  int get getDuration => 0;
+
+  @override
+  String get getId => status;
+}
+
+class NextPrevGameEvent extends LocalGameEvent {
+  final String status = 'NEXT_PREV_TAP';
+  final bool isNext;
+
+  const NextPrevGameEvent({required this.isNext});
+
+  @override
+  List<Object> get props => [];
+
+  @override
+  InstructionData get generateInstruction => NextPrevInsD(objectMap: {});
+
+  @override
+  Map get generateServerMap => {};
+
+  @override
+  int get getDuration => 0;
+
+  @override
+  String get getId => status;
+}

@@ -43,6 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     CustomButton.h2(
                       width: 184.w,
                       title: "Play",
+                      color: Colors.black,
                       textColor: Colors.white,
                       onPressed: () {
                         globalSL<AuthNavigation>().globalRouter.push(
@@ -55,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     CustomButton.h2(
                       width: 184.w,
                       title: "Leave",
+                      color: Colors.black,
                       textColor: Colors.white,
                       onPressed: () {
                         globalSL<AuthBloc>().add(LogOutAuthEvent());

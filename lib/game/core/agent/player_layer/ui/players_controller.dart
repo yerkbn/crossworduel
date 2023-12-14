@@ -1,4 +1,3 @@
-import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/crossword_widget.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/hint_widget.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/keyboard/keyboard_widget.dart';
@@ -84,12 +83,9 @@ class PlayersControllerState extends State<PlayersController>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: _buildPlayers,
               )),
-          if (_crossword == null)
-            0.ph
-          else
-            CrosswordWidget(crossword: _crossword!),
-          const HintWidget(),
-          if (_crossword == null) 0.ph else const KeyboardWidget(),
+          if (_crossword != null) CrosswordWidget(crossword: _crossword!),
+          if (_crossword != null) HintWidget(hint: _crossword!.getHint.hint),
+          if (_crossword != null) const KeyboardWidget(),
         ],
       ),
     );

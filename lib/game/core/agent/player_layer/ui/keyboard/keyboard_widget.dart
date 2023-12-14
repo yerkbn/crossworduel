@@ -52,13 +52,17 @@ class KeyboardWidget extends StatelessWidget {
               _buildLetter(context, "B"),
               _buildLetter(context, "N"),
               _buildLetter(context, "M"),
-              _buildLetter(context, "<="),
+              _buildLetter(context, "<=", onTap: () {
+                BlocProvider.of<GameBloc>(context)
+                    .add(const DeleteTapGameEvent());
+              }),
             ]),
           ],
         ));
   }
 
-  Widget _buildLetter(BuildContext context, String letter) {
+  Widget _buildLetter(BuildContext context, String letter,
+      {Function()? onTap}) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
       width: Sizer().getWidth(33),
@@ -66,10 +70,11 @@ class KeyboardWidget extends StatelessWidget {
       topMargin: 0,
       leftMargin: Sizer().getWidth(2),
       rightMargin: Sizer().getWidth(2),
-      onPressed: () {
-        BlocProvider.of<GameBloc>(context)
-            .add(KeyboardTapGameEvent(letter: letter));
-      },
+      onPressed: onTap ??
+          () {
+            BlocProvider.of<GameBloc>(context)
+                .add(KeyboardTapGameEvent(letter: letter));
+          },
       borderRadius: Sizer().getWidth(4),
       color: theme.backgroundColor3,
       borderColor: theme.backgroundColor2,

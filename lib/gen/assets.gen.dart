@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsDictGen {
+  const $AssetsDictGen();
+
+  /// File path: assets/dict/words.json
+  String get words => 'assets/dict/words.json';
+
+  /// List of all assets
+  List<String> get values => [words];
+}
+
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
@@ -20,8 +30,6 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [apple, google];
-
-  get point => null;
 }
 
 class $AssetsImageGen {
@@ -34,6 +42,9 @@ class $AssetsImageGen {
   /// File path: assets/image/go.png
   AssetGenImage get go => const AssetGenImage('assets/image/go.png');
 
+  /// File path: assets/image/icon.png
+  AssetGenImage get icon => const AssetGenImage('assets/image/icon.png');
+
   /// File path: assets/image/left_loading.png
   AssetGenImage get leftLoading =>
       const AssetGenImage('assets/image/left_loading.png');
@@ -43,12 +54,14 @@ class $AssetsImageGen {
       const AssetGenImage('assets/image/right_loading.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [background, go, leftLoading, rightLoading];
+  List<AssetGenImage> get values =>
+      [background, go, icon, leftLoading, rightLoading];
 }
 
 class Assets {
   Assets._();
 
+  static const $AssetsDictGen dict = $AssetsDictGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImageGen image = $AssetsImageGen();
 }

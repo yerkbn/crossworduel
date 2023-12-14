@@ -1,20 +1,23 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
-import 'package:collection/collection.dart';
+import 'package:crossworduel/game/domain/entities/hint_entity.dart';
 import 'package:equatable/equatable.dart';
+import 'package:collection/collection.dart';
 
 class CrosswordEntity extends Equatable {
   final List<CellEntity> items;
+  final List<HintEntity> hints;
   final bool isRow;
 
   const CrosswordEntity({
     required this.items,
+    required this.hints,
     this.isRow = true,
   });
 
   CrosswordEntity copyWith({List<CellEntity>? items, bool? isRow}) {
     return CrosswordEntity(
-        items: items ?? this.items, isRow: isRow ?? this.isRow);
+        hints: hints, items: items ?? this.items, isRow: isRow ?? this.isRow);
   }
 
   CellEntity? getCell(int index) {
@@ -24,6 +27,7 @@ class CrosswordEntity extends Equatable {
   factory CrosswordEntity.parseMap(Map objectMap) {
     return CrosswordEntity(
       items: CellEntity.parseList(objectMap.getValueSafely("items")),
+      hints: HintEntity.parseList(objectMap.getValueSafely("hints")),
     );
   }
 
@@ -32,6 +36,15 @@ class CrosswordEntity extends Equatable {
       if (items[i].index == index) return i;
     }
     return -1;
+  }
+
+  HintEntity get getHint {
+    for (final HintEntity hint in hints) {
+      if (hint.isRow == isRow && hint.indexes.contains(getCursive)) {
+        return hint;
+      }
+    }
+    return const HintEntity(indexes: [], hint: "", isRow: false);
   }
 
   CrosswordEntity modifyCell({
@@ -125,24 +138,34 @@ class CrosswordEntity extends Equatable {
     return result;
   }
 
-  CrosswordEntity currentSequence(int index) {
+  CrosswordEntity currentSequence(int index, {bool? newIsRow}) {
     CrosswordEntity crossword = turnOff();
     final List<int> rawSequence = activeRow(index);
     final List<int> columnSequence = activeColumn(index);
     List<int> sequence = rawSequence;
     bool curentIsRow = isRow;
-    if (rawSequence.length == 1 && columnSequence.length > 1) {
-      sequence = columnSequence;
-      curentIsRow = false;
-    } else if (columnSequence.length == 1 && rawSequence.length > 1) {
-      sequence = rawSequence;
-      curentIsRow = true;
-    } else if (curentIsRow) {
-      sequence = columnSequence;
-      curentIsRow = false;
+    if (newIsRow != null) {
+      if (newIsRow) {
+        sequence = rawSequence;
+        curentIsRow = true;
+      } else {
+        sequence = columnSequence;
+        curentIsRow = false;
+      }
     } else {
-      sequence = rawSequence;
-      curentIsRow = true;
+      if (rawSequence.length == 1 && columnSequence.length > 1) {
+        sequence = columnSequence;
+        curentIsRow = false;
+      } else if (columnSequence.length == 1 && rawSequence.length > 1) {
+        sequence = rawSequence;
+        curentIsRow = true;
+      } else if (curentIsRow) {
+        sequence = columnSequence;
+        curentIsRow = false;
+      } else {
+        sequence = rawSequence;
+        curentIsRow = true;
+      }
     }
 
     if (sequence.isNotEmpty) {
@@ -159,9 +182,14 @@ class CrosswordEntity extends Equatable {
     return this;
   }
 
-  CrosswordEntity setLetter(String letter) {
+  bool get isValidToEdit {
     final int realIndex = getCellIndex(getCursive);
-    if (realIndex > -1) {
+    final CellEntity? cursiveCell = getCell(getCursive);
+    return realIndex > -1 && cursiveCell != null && !cursiveCell.isValid;
+  }
+
+  CrosswordEntity setLetter(String letter) {
+    if (isValidToEdit) {
       final List<int> sequence = getActiveSequence;
       if (sequence.contains(getCursive)) {
         int newCursive = getCursive;
@@ -180,6 +208,65 @@ class CrosswordEntity extends Equatable {
       }
     }
     return this;
+  }
+
+  CrosswordEntity deleteLetter() {
+    if (isValidToEdit) {
+      final List<int> sequence = getActiveSequence;
+      if (sequence.contains(getCursive)) {
+        int newCursive = getCursive;
+        final int sequenceCursiveIndex =
+            sequence.indexWhere((e) => e == getCursive);
+        if (0 < sequenceCursiveIndex) {
+          newCursive = sequence[sequenceCursiveIndex - 1];
+        }
+        return modifyCell(
+                modify: (CellEntity cell) =>
+                    cell.copyWith(currentValue: "", isCursive: false),
+                index: getCursive)
+            .modifyCell(
+                modify: (CellEntity cell) => cell.copyWith(isCursive: true),
+                index: newCursive);
+      }
+    }
+    return this;
+  }
+
+  CrosswordEntity checkIsItCorrect() {
+    final List<int> sequence = getActiveSequence;
+    bool wordIsCorrect = true;
+    for (final int index in sequence) {
+      final CellEntity? cell = getCell(index);
+      if (cell == null || !cell.isCorrect) {
+        wordIsCorrect = false;
+        break;
+      }
+    }
+    if (wordIsCorrect) {
+      CrosswordEntity crossword = copyWith();
+      for (final int i in sequence) {
+        crossword = crossword.modifyCell(
+          modify: (CellEntity cell) => cell.copyWith(isValid: true),
+          index: i,
+        );
+      }
+      return crossword;
+    }
+    return this;
+  }
+
+  CrosswordEntity nextPrev() {
+    final HintEntity currentHint = getHint;
+    int index = hints.indexOf(currentHint);
+    print(hints);
+    if (index == hints.length - 1) {
+      return copyWith(isRow: hints.first.isRow)
+          .currentSequence(hints.first.indexes.first);
+    } else {
+      index += 1;
+      return currentSequence(hints[index].indexes.first,
+          newIsRow: hints[index].isRow);
+    }
   }
 
   @override

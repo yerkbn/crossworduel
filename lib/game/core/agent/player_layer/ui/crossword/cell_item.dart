@@ -1,8 +1,8 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
-import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/player_event.dart';
 import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +27,10 @@ class CellItem extends StatelessWidget {
       backgroundColor = const Color(0xFFC1E1FF);
       borderColor = const Color(0xFF1F93FD);
     }
+    if (cell.isValid) {
+      backgroundColor = const Color(0xFF6FCF97);
+      borderColor = const Color(0xFF219653);
+    }
     return CustomContainer(
       width: Sizer().getWidth(28),
       height: Sizer().getWidth(28),
@@ -39,7 +43,7 @@ class CellItem extends StatelessWidget {
       color: backgroundColor,
       borderColor: borderColor,
       paddingSize: 0,
-      child: Text(cell.currentValue.toUpperCase(),
+      child: Text(cell.value.toUpperCase(),
           style: theme.headline2.copyWith(
             color: Colors.black,
             fontSize: Sizer().getSp(14),

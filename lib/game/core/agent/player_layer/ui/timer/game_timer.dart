@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GameTimer extends StatefulWidget {
   const GameTimer({required Key key}) : super(key: key);

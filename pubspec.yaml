@@ -62,6 +62,8 @@ flutter:
     - assets/icons/
     # IMAGE
     - assets/image/
+    # DICT
+    - assets/dict/
 
   fonts:
     # --- opensans--

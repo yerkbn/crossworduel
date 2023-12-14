@@ -1,6 +1,6 @@
-import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/cell_item.dart';
 import 'package:crossworduel/game/core/agent/player_layer/ui/crossword/static_grid.dart';
+import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:flutter/material.dart';
