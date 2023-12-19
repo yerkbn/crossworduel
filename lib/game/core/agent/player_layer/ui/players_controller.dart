@@ -84,7 +84,8 @@ class PlayersControllerState extends State<PlayersController>
                 children: _buildPlayers,
               )),
           if (_crossword != null) CrosswordWidget(crossword: _crossword!),
-          if (_crossword != null) HintWidget(hint: _crossword!.getHint.hint),
+          if (_crossword != null && _crossword!.getActiveSpan != null)
+            HintWidget(span: _crossword!.getActiveSpan!),
           if (_crossword != null) const KeyboardWidget(),
         ],
       ),

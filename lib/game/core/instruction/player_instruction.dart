@@ -51,16 +51,16 @@ class RunningInsD extends InstructionData {
 
 class CrosswordTapInsD extends InstructionData {
   static const String insStatus = 'CROSSWORD_TAP';
-  final int index;
+  final PointEntity point;
 
   CrosswordTapInsD({
-    required this.index,
+    required this.point,
     required Map objectMap,
   }) : super(insStatus, objectMap);
 
   factory CrosswordTapInsD.parseMap(Map objectMap) {
     return CrosswordTapInsD(
-      index: objectMap.getValueSafely('index'),
+      point: objectMap.getValueSafely('point'),
       objectMap: objectMap,
     );
   }

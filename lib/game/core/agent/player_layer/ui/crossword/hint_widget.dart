@@ -1,6 +1,7 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/game/core/agent/player_layer/player_event.dart';
+import 'package:crossworduel/game/core/crossword/entity/span_entity.dart';
 import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HintWidget extends StatelessWidget {
-  final String hint;
-  const HintWidget({super.key, required this.hint});
+  final SpanEntity span;
+  const HintWidget({super.key, required this.span});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class HintWidget extends StatelessWidget {
             ),
             SizedBox(
               width: Sizer().getWidth(250),
-              child: Text(hint,
+              child: Text(span.clue,
                   textAlign: TextAlign.center,
                   style: theme.headline3.copyWith(fontSize: Sizer().getSp(12))),
             ),

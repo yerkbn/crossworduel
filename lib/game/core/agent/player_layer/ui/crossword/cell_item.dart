@@ -19,10 +19,10 @@ class CellItem extends StatelessWidget {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     Color backgroundColor = theme.backgroundColor3;
     Color borderColor = theme.backgroundColor2;
-    if (cell.isCurrent) {
-      backgroundColor = const Color(0xFFFFFBD7);
-      borderColor = const Color(0xFFF9E63E);
-    }
+    // if (cell.isCurrent) {
+    //   backgroundColor = const Color(0xFFFFFBD7);
+    //   borderColor = const Color(0xFFF9E63E);
+    // }
     if (cell.isCursive) {
       backgroundColor = const Color(0xFFC1E1FF);
       borderColor = const Color(0xFF1F93FD);
@@ -37,13 +37,13 @@ class CellItem extends StatelessWidget {
       topMargin: 0,
       onPressed: () {
         BlocProvider.of<GameBloc>(context)
-            .add(CrosswordTapGameEvent(index: cell.index));
+            .add(CrosswordTapGameEvent(point: cell.point));
       },
       borderRadius: Sizer().getWidth(4),
       color: backgroundColor,
       borderColor: borderColor,
       paddingSize: 0,
-      child: Text(cell.value.toUpperCase(),
+      child: Text(cell.currentValue.toUpperCase(),
           style: theme.headline2.copyWith(
             color: Colors.black,
             fontSize: Sizer().getSp(14),

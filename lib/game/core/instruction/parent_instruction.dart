@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crossworduel/core/exception/config_exception.dart';
 import 'package:crossworduel/core/exception/parent_exception.dart';
 import 'package:crossworduel/core/extension/map_error_extension.dart';
+import 'package:crossworduel/game/core/crossword/entity/point_entity.dart';
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 part 'player_instruction.dart';

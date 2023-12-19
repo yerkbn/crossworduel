@@ -1,20 +1,21 @@
+import 'package:crossworduel/game/core/crossword/entity/point_entity.dart';
 import 'package:crossworduel/game/core/game/bloc/game_bloc.dart';
 import 'package:crossworduel/game/core/instruction/parent_instruction.dart';
 
 class CrosswordTapGameEvent extends LocalGameEvent {
   final String status = 'CROSSWORD_TAP';
-  final int index;
+  final PointEntity point;
 
   const CrosswordTapGameEvent({
-    required this.index,
+    required this.point,
   });
 
   @override
-  List<Object> get props => [index];
+  List<Object> get props => [point];
 
   @override
   InstructionData get generateInstruction =>
-      CrosswordTapInsD(index: index, objectMap: {});
+      CrosswordTapInsD(point: point, objectMap: {});
 
   @override
   Map get generateServerMap => {};

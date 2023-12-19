@@ -37,7 +37,8 @@ class GameAgent extends ParentAgent {
         element.instructionToAction(instruction);
       }
     } catch (err) {
-      print(':::: (game_agent) execution error -> $err');
+      rethrow;
+      // print(':::: (game_agent) execution error -> $err');
     }
   }
 

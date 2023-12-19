@@ -32,7 +32,8 @@ class _CrosswordWidgetState extends State<CrosswordWidget> {
   }
 
   Widget _buildCell({required CrosswordEntity crossword, required int index}) {
-    final CellEntity? cell = crossword.getCell(index);
+    final CellEntity? cell =
+        crossword.grid.getCell(crossword.indexToPoint(index));
     return cell == null ? const EmptyCellItem() : CellItem(cell: cell);
   }
 }

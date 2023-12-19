@@ -1,4 +1,3 @@
-import 'package:crossworduel/game/core/crossword/crossword_generator.dart';
 import 'package:crossworduel/game/core/mock/mock.dart';
 
 class MockGame extends MockParent {
@@ -62,7 +61,7 @@ class MockGame extends MockParent {
   Future<void> running({
     required int duration,
   }) async {
-    await CrosswordGenerator.crosswordGenerate();
+    // await CrosswordGenerator.crosswordGenerate();
     return execute(duration: duration, input: {
       "status": "RUNING_INST",
       "data": {
