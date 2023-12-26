@@ -7,6 +7,7 @@ class CellEntity extends Equatable {
   final String value;
   final bool isValid; // if word is correct all cell's of word become valid
   final bool isCursive; // currently editing letter
+  final bool isCurrent; // selected span cells
   final String currentValue;
 
   const CellEntity({
@@ -14,6 +15,7 @@ class CellEntity extends Equatable {
     required this.value,
     this.isValid = false,
     this.isCursive = false,
+    this.isCurrent = false,
     this.currentValue = "",
   });
 
@@ -29,6 +31,7 @@ class CellEntity extends Equatable {
       currentValue: currentValue ?? this.currentValue,
       isValid: isValid ?? this.isValid,
       isCursive: isCursive ?? this.isCursive,
+      isCurrent: isCurrent ?? this.isCurrent,
     );
   }
 
@@ -52,5 +55,5 @@ class CellEntity extends Equatable {
   bool get isCorrect => currentValue.toUpperCase() == value.toUpperCase();
 
   @override
-  List<Object?> get props => [point, value, isValid];
+  List<Object?> get props => [point, value, isValid, currentValue];
 }

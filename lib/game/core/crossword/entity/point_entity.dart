@@ -15,6 +15,8 @@ class PointEntity {
     );
   }
 
+  Map<String, dynamic> get toJson => {"x": x, "y": y};
+
   PointEntity operator +(PointEntity other) {
     return PointEntity(x: x + other.x, y: y + other.y);
   }

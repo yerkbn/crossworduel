@@ -12,11 +12,17 @@ import 'package:flutter/widgets.dart';
 class $AssetsDictGen {
   const $AssetsDictGen();
 
+  /// File path: assets/dict/crosswords.json
+  String get crosswords => 'assets/dict/crosswords.json';
+
+  /// File path: assets/dict/patterns.json
+  String get patterns => 'assets/dict/patterns.json';
+
   /// File path: assets/dict/words.json
   String get words => 'assets/dict/words.json';
 
   /// List of all assets
-  List<String> get values => [words];
+  List<String> get values => [crosswords, patterns, words];
 }
 
 class $AssetsIconsGen {

@@ -15,28 +15,24 @@ class GridEntity {
     fillSpans(vert: true);
   }
 
-  void fillSpans({required bool vert}) {
-    final PointEntity point = PointEntity(x: 0, y: 0);
-    while (inBounds(point)) {
-      while (inBounds(point) && isBloc(point)) {
-        next(vert: vert, point: point);
+  /// GETTERS
+  String getSpanString({required SpanEntity span, AttrEntity? intitialAttr}) {
+    final AttrEntity attr = intitialAttr ?? AttrEntity();
+    String result = "";
+    for (int i = 0; i < span.length; i++) {
+      final String value = box(span.getPoint(i));
+      if (value == WordEntity.empty) {
+        attr.hasBlanks = true;
+      } else if (value != WordEntity.block && value != WordEntity.empty) {
+        attr.hasLetters = true;
       }
-      if (!inBounds(point)) return;
-      final PointEntity startPoint = point.copy();
-      int len = 0;
-      bool keepGoing = false;
-      do {
-        keepGoing = nextStopAtWrap(vert: vert, point: point);
-        len++;
-      } while (keepGoing && !isBloc(point));
-      spans.add(SpanEntity(point: startPoint, length: len, vert: vert));
+      result += value;
     }
+    return result;
   }
 
-  GridEntity copy() {
-    return GridEntity(matrix: [
-      ...matrix.map<List<String>>((List<String> col) => List.from(col))
-    ], spans: List.from(spans));
+  List<Map<String, dynamic>> get getSpansJSON {
+    return spans.map((SpanEntity span) => span.toJson).toList();
   }
 
   int get getMaxSpanLength {
@@ -51,6 +47,50 @@ class GridEntity {
 
   bool inBounds(PointEntity point) {
     return (point.y >= 0 && point.y < size) && (point.x >= 0 && point.x < size);
+  }
+
+  int countSimilarWords(GridEntity grid) {
+    final Set<String> uniqueSet =
+        spans.map((SpanEntity span) => getSpanString(span: span)).toSet();
+    for (final SpanEntity span in grid.spans) {
+      uniqueSet.add(grid.getSpanString(span: span));
+    }
+    return (grid.spans.length + spans.length) - uniqueSet.length;
+  }
+
+  bool isBloc(PointEntity point) {
+    if (inBounds(point)) {
+      return matrix[point.y][point.x] == WordEntity.block;
+    }
+    return false;
+  }
+
+  /// SETTERS
+
+  void fillSpans({required bool vert}) {
+    final PointEntity point = PointEntity(x: 0, y: 0);
+    while (inBounds(point)) {
+      while (inBounds(point) && isBloc(point)) {
+        next(vert: vert, point: point);
+      }
+      if (!inBounds(point)) return;
+      final PointEntity startPoint = point.copy();
+      int len = 0;
+      bool keepGoing = false;
+      do {
+        keepGoing = nextStopAtWrap(vert: vert, point: point);
+        len++;
+      } while (keepGoing && !isBloc(point));
+      if (len > 1) {
+        spans.add(SpanEntity(point: startPoint, length: len, vert: vert));
+      }
+    }
+  }
+
+  GridEntity copy() {
+    return GridEntity(matrix: [
+      ...matrix.map<List<String>>((List<String> col) => List.from(col))
+    ], spans: List.from(spans));
   }
 
   bool next({required bool vert, required PointEntity point}) {
@@ -90,13 +130,6 @@ class GridEntity {
     return !wrap;
   }
 
-  bool isBloc(PointEntity point) {
-    if (inBounds(point)) {
-      return matrix[point.y][point.x] == WordEntity.block;
-    }
-    return false;
-  }
-
   String box(PointEntity point) {
     return matrix[point.y][point.x];
   }
@@ -106,26 +139,13 @@ class GridEntity {
     matrix[point.y][point.x] = letter;
   }
 
-  String getSpanString({required SpanEntity span, AttrEntity? intitialAttr}) {
-    final AttrEntity attr = intitialAttr ?? AttrEntity();
-    String result = "";
-    for (int i = 0; i < span.length; i++) {
-      final String value = box(span.getPoint(i));
-      if (value == WordEntity.empty) {
-        attr.hasBlanks = true;
-      } else if (value != WordEntity.block && value != WordEntity.empty) {
-        attr.hasLetters = true;
-      }
-      result += value;
-    }
-    return result;
-  }
-
   void setSpanString({required SpanEntity span, required WordEntity word}) {
     assert(span.length == word.length);
     for (int i = 0; i < word.length; i++) {
       writeBox(
-          point: span.getPoint(i), letter: word.answer.substring(i, i + 1));
+        point: span.getPoint(i),
+        letter: word.answer.substring(i, i + 1),
+      );
     }
   }
 

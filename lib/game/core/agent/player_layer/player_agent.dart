@@ -32,8 +32,10 @@ class PlayerAgent extends ParentAgent {
     if (instruction is RunningInsD) {
       _state.setLeftSec(instruction.leftSec);
       _crossword = instruction.crossword;
-      _crossword =
-          _crossword.setActiveCell(point: _crossword.spans.first.point);
+      if (_crossword.spans.isNotEmpty) {
+        _crossword =
+            _crossword.setActiveCell(point: _crossword.spans.first.point);
+      }
       _state.setCrossword(_crossword);
     }
     if (instruction is CrosswordTapInsD) {

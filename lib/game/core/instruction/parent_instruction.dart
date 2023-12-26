@@ -97,7 +97,8 @@ class InstructionMapper {
         if (err is ExceptionData) {
           rethrow;
         }
-        throw 'Instrustion parsing error $err';
+        rethrow;
+        // throw 'Instrustion parsing error $err';
       }
     }
   }

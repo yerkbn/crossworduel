@@ -19,10 +19,10 @@ class CellItem extends StatelessWidget {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     Color backgroundColor = theme.backgroundColor3;
     Color borderColor = theme.backgroundColor2;
-    // if (cell.isCurrent) {
-    //   backgroundColor = const Color(0xFFFFFBD7);
-    //   borderColor = const Color(0xFFF9E63E);
-    // }
+    if (cell.isCurrent) {
+      backgroundColor = const Color(0xFFFFFBD7);
+      borderColor = const Color(0xFFF9E63E);
+    }
     if (cell.isCursive) {
       backgroundColor = const Color(0xFFC1E1FF);
       borderColor = const Color(0xFF1F93FD);

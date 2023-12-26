@@ -28,6 +28,24 @@ class SpanEntity {
     }
   }
 
+  bool isSpanCorrect(List<CellEntity> cells) {
+    for (final CellEntity cell in cells) {
+      if (!cell.isCorrect && isPointBelong(cell.point)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  List<CellEntity> getValitCells(List<CellEntity> cells) {
+    for (int i = 0; i < cells.length; i++) {
+      if (cells[i].isCorrect && isPointBelong(cells[i].point)) {
+        cells[i] = cells[i].copyWith(isValid: true);
+      }
+    }
+    return cells;
+  }
+
   PointEntity getNextPoint(PointEntity point) {
     for (int i = 0; i < length; i++) {
       if (point == getPoint(i)) {
@@ -73,44 +91,15 @@ class SpanEntity {
 
   /// SETTERS
 
-  SpanEntity copyWith({List<CellEntity>? cells}) {
+  SpanEntity copyWith({String? answer, String? clue}) {
     return SpanEntity(
       point: point,
       length: length,
       vert: vert,
-      answer: answer,
-      clue: clue,
+      answer: answer ?? this.answer,
+      clue: clue ?? this.clue,
     );
   }
-
-  // int cellIndexByPoint({
-  //   required PointEntity point,
-  //   required List<CellEntity> cells,
-  // }) {
-  //   for (int i = 0; i < cells.length; i++) {
-  //     if (cells[i].point == point) {
-  //       return i;
-  //     }
-  //   }
-  //   return -1;
-  // }
-
-  // int getNextIndex({
-  //   required PointEntity point,
-  //   required List<CellEntity> cells,
-  // }) {
-  //   for (int i = 0; i < length; i++) {
-  //     final PointEntity nextPoint = getPoint(i);
-  //     if (point == nextPoint) {
-  //       if (i == length - 1) {
-  //         return cellIndexByPoint(cells: cells, point: point);
-  //       } else {
-  //         return cellIndexByPoint(cells: cells, point: getPoint(i + 1));
-  //       }
-  //     }
-  //   }
-  //   return -1;
-  // }
 
   factory SpanEntity.parseMap(Map objectMap) {
     return SpanEntity(
@@ -121,6 +110,14 @@ class SpanEntity {
       clue: objectMap.getValueSafely("clue"),
     );
   }
+
+  Map<String, dynamic> get toJson => {
+        "point": point.toJson,
+        "length": length,
+        "vert": vert,
+        "answer": answer,
+        "clue": clue,
+      };
 
   static List<SpanEntity> parseList(List items) {
     final List<SpanEntity> result = [];

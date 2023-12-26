@@ -1,0 +1,488 @@
+[
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ETO",
+      "clue": "War zone, in brief"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NAT",
+      "clue": "\"Ah, Wilderness!\" character ___ Miller"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ATA",
+      "clue": "Words before distance or discount"
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MOT",
+      "clue": "Bon ___"
+    }
+  ],
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ERE",
+      "clue": "It may come before long"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NEW",
+      "clue": "Unused"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ARE",
+      "clue": "\"What ___ our chances?\""
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MEW",
+      "clue": "Copy cats?"
+    }
+  ],
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ELS",
+      "clue": "Chicago trains"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NET",
+      "clue": "Like some prices"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ALE",
+      "clue": "A pint, maybe"
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MST",
+      "clue": "Colo. clock setting"
+    }
+  ],
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ESS",
+      "clue": "Non-P.C. suffix"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NAG",
+      "clue": "Hound"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ASA",
+      "clue": "Al Jolson's real first name"
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MSG",
+      "clue": "Food additive"
+    }
+  ],
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ENE",
+      "clue": "Ethyl ending"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NOG",
+      "clue": "Chilled drink"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ANO",
+      "clue": "2000, e.g., in Spain"
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MEG",
+      "clue": "Filmdom's Ryan"
+    }
+  ],
+  [
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 1, "y": 2 },
+      "length": 3,
+      "vert": false,
+      "answer": "ERR",
+      "clue": "Go astray"
+    },
+    {
+      "point": { "x": 1, "y": 3 },
+      "length": 3,
+      "vert": false,
+      "answer": "NAS",
+      "clue": "Mil. center for pilots"
+    },
+    {
+      "point": { "x": 1, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "RENAL",
+      "clue": "___ calculus (kidney stone)"
+    },
+    {
+      "point": { "x": 2, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "ARA",
+      "clue": "Longtime Met basso Berberian"
+    },
+    {
+      "point": { "x": 3, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "MRS",
+      "clue": "Title acquired in church, maybe"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "ALL",
+      "clue": "Set or wet preceder"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "AND",
+      "clue": "Furthermore"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "METAL",
+      "clue": "It may be forged"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "SPR",
+      "clue": "Abbr. in a resort's name"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "SES",
+      "clue": "His, in France"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "METER",
+      "clue": "Olympics length"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "IMS",
+      "clue": "Private on-line chats, for short"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "ISH",
+      "clue": "Suffix akin to -esque"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "MENDS",
+      "clue": "Darns"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "YDS",
+      "clue": "QB's gains"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "YOM",
+      "clue": "Day in Jerusalem"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "MANES",
+      "clue": "Lions' locks"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "SPY",
+      "clue": "Plant, perhaps"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "SIR",
+      "clue": "What Marcie called 52-Down"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "MONEY",
+      "clue": "Dollars and Deutsche marks"
+    }
+  ],
+  [
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 5,
+      "vert": false,
+      "answer": "RAMEN",
+      "clue": "Noodle-and-vegetable soup"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": false,
+      "answer": "ERE",
+      "clue": "It may come before long"
+    },
+    {
+      "point": { "x": 4, "y": 1 },
+      "length": 3,
+      "vert": true,
+      "answer": "REY",
+      "clue": "Foreign leader"
+    },
+    {
+      "point": { "x": 4, "y": 5 },
+      "length": 3,
+      "vert": true,
+      "answer": "ETO",
+      "clue": "War zone, in brief"
+    },
+    {
+      "point": { "x": 6, "y": 1 },
+      "length": 5,
+      "vert": true,
+      "answer": "MARNE",
+      "clue": "Area in W.W. I news"
+    }
+  ]
+]

@@ -8,12 +8,12 @@ class CrosswordGenerator {
       {int leftSec = 300}) async {
     final PatternsManager patterns = PatternsManager();
     final GridEntity grid =
-        GridEntity(matrix: patterns.size10Bloc44(), spans: []);
+        GridEntity(matrix: await patterns.getPattern, spans: []);
     grid.init();
     final LibraryManager lib = LibraryManager();
     await lib.init(size: grid.getMaxSpanLength);
     final CrosswordSolver solver = CrosswordSolver(grid: grid, lib: lib);
-    solver.solve();
-    return {};
+
+    return {"leftSec": 300, "spans": solver.solve()};
   }
 }

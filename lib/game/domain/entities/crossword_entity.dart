@@ -88,14 +88,19 @@ class CrosswordEntity extends Equatable {
 
   CrosswordEntity setCursive(
       {required PointEntity point, required SpanEntity span}) {
-    return copyWith(grid: grid.setCursive(point: point), vert: span.vert);
+    return copyWith(
+        grid: grid.setCursive(point: point, span: span), vert: span.vert);
   }
 
   CrosswordEntity setLetter(String letter) {
     final SpanEntity? activeSpan = getActiveSpan;
     if (activeSpan != null) {
       return copyWith(
-          grid: grid.setLetter(letter: letter, activeSpan: activeSpan));
+          grid: grid.setLetter(
+        letter: letter,
+        activeSpan: activeSpan,
+        spans: spans,
+      ));
     }
     return this;
   }
@@ -109,6 +114,21 @@ class CrosswordEntity extends Equatable {
   }
 
   CrosswordEntity nextPrev() {
+    if (spans.isNotEmpty) {
+      SpanEntity activeSpan = getActiveSpan ?? spans.first;
+      for (int i = 0; i < spans.length; i++) {
+        if (activeSpan.point == spans[i].point) {
+          if (i == spans.length - 1) {
+            activeSpan = spans.first;
+          } else {
+            activeSpan = spans[i + 1];
+          }
+          break;
+        }
+      }
+      return setActiveCell(
+          point: activeSpan.point, opVertParam: !activeSpan.vert);
+    }
     return this;
   }
 

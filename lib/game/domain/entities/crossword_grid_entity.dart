@@ -49,31 +49,46 @@ class CrosswordGridEntity extends Equatable {
   CrosswordGridEntity turnOff() {
     return copyWith(
         cells: cells
-            .map((CellEntity cell) => cell.copyWith(isCursive: false))
+            .map((CellEntity cell) =>
+                cell.copyWith(isCursive: false, isCurrent: false))
             .toList());
   }
 
-  CrosswordGridEntity setCursive({required PointEntity point, bool? vert}) {
-    final CrosswordGridEntity grid = turnOff();
-    for (int i = 0; i < cells.length; i++) {
-      if (cells[i].point == point) {
-        cells[i] = cells[i].copyWith(isCursive: true);
+  CrosswordGridEntity setCursive(
+      {required PointEntity point, required SpanEntity span}) {
+    final List<CellEntity> spanCells = span.getCells;
+    CrosswordGridEntity crossword = turnOff();
+    for (final CellEntity item in spanCells) {
+      if (item.point != point) {
+        crossword = crossword.modifyCell(
+            modify: (CellEntity cell) => cell.copyWith(isCurrent: true),
+            point: item.point);
       }
     }
-    return grid.copyWith(cells: cells);
+    return crossword.modifyCell(
+        modify: (CellEntity cell) => cell.copyWith(isCursive: true),
+        point: point);
   }
 
   CrosswordGridEntity setLetter(
-      {required String letter, required SpanEntity activeSpan}) {
+      {required String letter,
+      required SpanEntity activeSpan,
+      required List<SpanEntity> spans}) {
     final CellEntity? cursive = getCursive;
-    if (isValidToEdit && cursive != null) {
-      CrosswordGridEntity grid = turnOff();
-      grid = grid.modifyCell(
-          modify: (CellEntity cell) => cell.copyWith(currentValue: letter),
-          point: cursive.point);
-      return grid.modifyCell(
-          modify: (CellEntity cell) => cell.copyWith(isCursive: true),
-          point: activeSpan.getNextPoint(cursive.point));
+    if (cursive != null) {
+      if (isValidToEdit) {
+        return turnOff()
+            .modifyCell(
+                modify: (CellEntity cell) =>
+                    cell.copyWith(currentValue: letter),
+                point: cursive.point)
+            .setCursive(
+                point: activeSpan.getNextPoint(cursive.point), span: activeSpan)
+            .setCorrectSpans(spans: spans);
+      } else {
+        return turnOff().setCursive(
+            point: activeSpan.getNextPoint(cursive.point), span: activeSpan);
+      }
     }
     return this;
   }
@@ -81,26 +96,36 @@ class CrosswordGridEntity extends Equatable {
   CrosswordGridEntity deleteLetter({required SpanEntity activeSpan}) {
     final CellEntity? cursive = getCursive;
     if (isValidToEdit && cursive != null) {
-      CrosswordGridEntity grid = turnOff();
-      grid = grid.modifyCell(
-          modify: (CellEntity cell) => cell.copyWith(currentValue: ""),
-          point: cursive.point);
-      return grid.modifyCell(
-          modify: (CellEntity cell) => cell.copyWith(isCursive: true),
-          point: activeSpan.getPrevPoint(cursive.point));
+      if (cursive.currentValue == "") {
+        return turnOff()
+            .modifyCell(
+                modify: (CellEntity cell) => cell.copyWith(currentValue: ""),
+                point: activeSpan.getPrevPoint(cursive.point))
+            .setCursive(
+                point: activeSpan.getPrevPoint(cursive.point),
+                span: activeSpan);
+      } else {
+        return turnOff()
+            .modifyCell(
+                modify: (CellEntity cell) => cell.copyWith(currentValue: ""),
+                point: cursive.point)
+            .setCursive(
+                point: activeSpan.getPrevPoint(cursive.point),
+                span: activeSpan);
+      }
     }
     return this;
   }
 
   //checkIsItCorrect
-  CrosswordGridEntity setCorrectSpans() {
-    for (int i = 0; i < cells.length; i++) {
-      if (spans[i].isActive) {
-        spans[i] = spans[i].setCorrect();
-        return copyWith();
+  CrosswordGridEntity setCorrectSpans({required List<SpanEntity> spans}) {
+    List<CellEntity> newCells = List<CellEntity>.from(cells);
+    for (int i = 0; i < spans.length; i++) {
+      if (spans[i].isSpanCorrect(cells)) {
+        newCells = spans[i].getValitCells(newCells);
       }
     }
-    return this;
+    return copyWith(cells: newCells);
   }
 
   CrosswordGridEntity copyWith({List<CellEntity>? cells}) {
