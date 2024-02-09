@@ -1,7 +1,11 @@
-import 'package:crossworduel/core/design-system/button/custom_button.dart';
+import 'package:crossworduel/config/ui/custom_theme_extension.dart';
+import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/profile/presentation/widgets/statistics/statistics_widget.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:crossworduel/game/game-core/agent/player_layer/ui/player/player_item.dart';
+import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:crossworduel/game/domain/entities/room_entity.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +30,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Scaffold(
+      backgroundColor: theme.backgroundColor1,
       body: BlocBuilder<AuthBloc, AuthState>(
         bloc: globalSL<AuthBloc>(),
         builder: (context, state) {
@@ -35,35 +41,65 @@ class _ProfilePageState extends State<ProfilePage> {
               header: const WaterDropHeader(),
               onRefresh: _onRefresh,
               controller: _refreshController,
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    562.ph,
-                    CustomButton.h2(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  82.ph,
+                  SizedBox(
+                      width: 316.w,
+                      height: 44.h,
+                      child: PlayerItem(
+                        isLeft: true,
+                        player: PlayerEntity.fromMe(state.me),
+                        // rightWidget: CustomContainer(
+                        //   width: 36.w,
+                        //   height: 36.w,
+                        //   paddingSize: 0,
+                        //   topMargin: 0,
+                        //   borderRadius: 4.r,
+                        //   borderColor: theme.backgroundColor2,
+                        //   color: theme.backgroundColor3,
+                        //   onPressed: () {},
+                        //   child: Icon(Icons.settings_suggest,
+                        //       color: theme.textColor1, size: 20.r),
+                        // ),
+                      )),
+                  24.ph,
+                  const StatisticsWidget(),
+                  24.ph,
+                  Expanded(
+                    child: 0.ph,
+                  ),
+                  CustomContainer(
                       width: 184.w,
-                      title: "Play",
-                      color: Colors.black,
-                      textColor: Colors.white,
+                      height: 36.h,
+                      paddingSize: 0,
+                      topMargin: 0,
+                      borderRadius: 4.sp,
+                      color: theme.backgroundColor3,
+                      borderColor: theme.backgroundColor2,
+                      child: Text("PLAY", style: theme.headline3),
                       onPressed: () {
                         globalSL<AuthNavigation>().globalRouter.push(
                             AuthNavigation.play,
                             extra: RoomEntity(
                                 createRoom: RoomCreateEntity(subjectId: "1")));
-                      },
-                    ),
-                    16.ph,
-                    CustomButton.h2(
+                      }),
+                  16.ph,
+                  CustomContainer(
                       width: 184.w,
-                      title: "Leave",
-                      color: Colors.black,
-                      textColor: Colors.white,
+                      height: 36.h,
+                      paddingSize: 0,
+                      topMargin: 0,
+                      borderRadius: 4.sp,
+                      color: theme.backgroundColor3,
+                      borderColor: theme.backgroundColor2,
+                      child: Text("LEAVE", style: theme.headline3),
                       onPressed: () {
                         globalSL<AuthBloc>().add(LogOutAuthEvent());
-                      },
-                    )
-                  ],
-                ),
+                      }),
+                  82.ph
+                ],
               ),
             );
           }

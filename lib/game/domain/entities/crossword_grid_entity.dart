@@ -1,6 +1,6 @@
-import 'package:crossworduel/game/core/crossword/entity/point_entity.dart';
-import 'package:crossworduel/game/core/crossword/entity/span_entity.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/point_entity.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/span_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:collection/collection.dart';
 
@@ -126,6 +126,16 @@ class CrosswordGridEntity extends Equatable {
       }
     }
     return copyWith(cells: newCells);
+  }
+
+  int correctSpanCnt(List<SpanEntity> spans) {
+    int correctSpn = 0;
+    for (int i = 0; i < spans.length; i++) {
+      if (spans[i].isSpanCorrect(cells)) {
+        correctSpn++;
+      }
+    }
+    return correctSpn;
   }
 
   CrosswordGridEntity copyWith({List<CellEntity>? cells}) {

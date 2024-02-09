@@ -1,5 +1,5 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
-import 'package:crossworduel/game/core/crossword/entity/point_entity.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/point_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class CellEntity extends Equatable {

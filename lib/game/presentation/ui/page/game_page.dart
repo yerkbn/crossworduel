@@ -1,10 +1,9 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/game/core/sizer/sizer.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
-import 'package:crossworduel/game/core/bridge/game_bridge.dart';
-import 'package:crossworduel/game/core/mock/mock.dart';
-import 'package:crossworduel/game/core/mock/mock_game.dart';
+import 'package:crossworduel/game/game-core/bridge/game_bridge.dart';
+import 'package:crossworduel/game/game-core/mock/mock.dart';
+import 'package:crossworduel/game/game-core/mock/mock_game/mock_game.dart';
 import 'package:crossworduel/game/domain/entities/room_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +30,6 @@ class _GamePageState extends State<GamePage> with RouteAware {
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
-    Sizer().init(context: context);
     return Scaffold(
       backgroundColor: theme.backgroundColor1,
       body: ColoredBox(

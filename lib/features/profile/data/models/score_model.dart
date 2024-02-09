@@ -12,10 +12,7 @@ class ScoreModel extends ScoreEntity {
 
   factory ScoreModel.fromEntity(ScoreEntity entity) {
     return ScoreModel(
-      heart: entity.heart,
-      strike: entity.strike,
-      point: entity.point,
-    );
+        heart: entity.heart, strike: entity.strike, point: entity.point);
   }
 
   factory ScoreModel.fromJson(Map<String, dynamic> json) =>

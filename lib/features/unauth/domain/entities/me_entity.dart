@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:crossworduel/features/profile/domain/entities/score_entity.dart';
+import 'package:equatable/equatable.dart';
 
 class MeEntity extends Equatable {
   final String id;

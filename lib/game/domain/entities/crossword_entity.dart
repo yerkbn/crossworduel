@@ -1,7 +1,7 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
-import 'package:crossworduel/game/core/crossword/entity/point_entity.dart';
-import 'package:crossworduel/game/core/crossword/entity/span_entity.dart';
 import 'package:crossworduel/game/domain/entities/cell_entity.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/point_entity.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/span_entity.dart';
 import 'package:crossworduel/game/domain/entities/crossword_grid_entity.dart';
 import 'package:equatable/equatable.dart';
 
@@ -42,6 +42,18 @@ class CrosswordEntity extends Equatable {
   }
 
   /// GETTER
+
+  void printSpans() {
+    print("\n");
+    print("SPANS START:");
+    final int size = spans.length;
+    for (int i = 0; i < size; i++) {
+      print("${spans[i].vert} - ${spans[i].answer} - ${spans[i].clue}");
+    }
+    print("\n");
+  }
+
+  int get getCorrectSpnCnt => grid.correctSpanCnt(spans);
 
   List<SpanEntity> getSpansByPoint(PointEntity point) {
     final List<SpanEntity> result = [];
@@ -97,10 +109,7 @@ class CrosswordEntity extends Equatable {
     if (activeSpan != null) {
       return copyWith(
           grid: grid.setLetter(
-        letter: letter,
-        activeSpan: activeSpan,
-        spans: spans,
-      ));
+              letter: letter, activeSpan: activeSpan, spans: spans));
     }
     return this;
   }
@@ -113,16 +122,26 @@ class CrosswordEntity extends Equatable {
     return this;
   }
 
-  CrosswordEntity nextPrev() {
+  CrosswordEntity nextPrev({required bool isNext}) {
     if (spans.isNotEmpty) {
       SpanEntity activeSpan = getActiveSpan ?? spans.first;
       for (int i = 0; i < spans.length; i++) {
-        if (activeSpan.point == spans[i].point) {
-          if (i == spans.length - 1) {
-            activeSpan = spans.first;
+        if (activeSpan.point == spans[i].point &&
+            activeSpan.vert == spans[i].vert) {
+          if (isNext) {
+            if (i == spans.length - 1) {
+              activeSpan = spans.first;
+            } else {
+              activeSpan = spans[i + 1];
+            }
           } else {
-            activeSpan = spans[i + 1];
+            if (i == 0) {
+              activeSpan = spans.last;
+            } else {
+              activeSpan = spans[i - 1];
+            }
           }
+
           break;
         }
       }

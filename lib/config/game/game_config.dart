@@ -1,6 +1,6 @@
 import 'package:crossworduel/features/profile/domain/entities/user_entity.dart';
-import 'package:crossworduel/game/core/agent/agent.dart';
-import 'package:crossworduel/game/core/mock/mock.dart';
+import 'package:crossworduel/game/game-core/agent/agent.dart';
+import 'package:crossworduel/game/game-core/mock/mock.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 
 typedef PlayerStateCreator = PlayerEntity Function({required UserEntity me});
