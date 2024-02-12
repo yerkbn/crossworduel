@@ -1,9 +1,15 @@
+import 'dart:async';
+
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:crossworduel/game/game-core/crossword/crossoword_picker_manager.dart';
 import 'package:crossworduel/game/game-core/mock/mock.dart';
 import 'package:crossworduel/game/game-core/mock/mock_game/mock_instruction.dart';
 
 class MockGame extends MockParent {
+  static const int GAME_TIME = 300;
+  static const int MAX_POINT = 50;
+  late Timer _timer;
+  int _start = GAME_TIME;
   final MockCore core;
   final MockInstructionMapper _instrtructionMapper = MockInstructionMapper();
   // local state
@@ -19,11 +25,59 @@ class MockGame extends MockParent {
 
   MockGame(super.config) : core = MockCore(config);
 
+  void _startTimer() {
+    const sec = Duration(seconds: 1);
+    _timer = Timer.periodic(
+      sec,
+      (Timer timer) {
+        if (_start == 0) {
+          finalIns(duration: 0, meDelta: getMeDelta());
+          timer.cancel();
+        } else {
+          _start--;
+        }
+      },
+    );
+  }
+
+  int getDeltaMagnitude(delta) {
+    if (delta != 0) {
+      /// delta will be in range 0 - 300;
+      /// magnitude will be in range 0 - 5
+      if (delta < 50) return 1;
+      if (delta < 100) return 2;
+      if (delta < 150) return 3;
+      if (delta < 200) return 4;
+      return 5;
+    }
+    return 0;
+  }
+
+  int getMeDelta() {
+    int progressDelta = me.progressPoint - opponent.progressPoint;
+    int deltaMagnitude = getDeltaMagnitude(progressDelta.abs());
+    return (progressDelta > 0) ? deltaMagnitude : deltaMagnitude * -1;
+  }
+
+  int getPointForCorrect() {
+    return (MAX_POINT * (_start / GAME_TIME)).round() + 1;
+  }
+
   @override
   void runTest() {
     super.runTest();
-    finalIns(duration: 2000, meDelta: 5);
     _init();
+  }
+
+  Future<void> _init() async {
+    roomCreated(duration: 0, me: me.toJson());
+    _picker = await CrosswordPickerManager.create();
+    await Future.delayed(const Duration(milliseconds: 100));
+    playerFound(duration: 0, opponent: opponent.toJson(), me: me.toJson());
+    await Future.delayed(const Duration(milliseconds: 200));
+    _currentCrossword = _picker.pick();
+    _startTimer();
+    running(duration: 0, result: _currentCrossword);
   }
 
   @override
@@ -31,26 +85,21 @@ class MockGame extends MockParent {
     final MockInstructionData instruction = _instrtructionMapper.parse(message);
     if (instruction is MoveMockInsD) {
       if (_currentCrossword.length == instruction.correctCnt) {
+        me =
+            me.copyWith(progressPoint: me.progressPoint + getPointForCorrect());
+        moveIns(duration: 0, player: me.toJson());
+
+        /// wait some time
+
         meCorrectCnt = instruction.correctCnt;
-        me = me.copyWith(
-            progressPoint: me.progressPoint + 50, point: me.point + 5);
-        finalIns(duration: 0, meDelta: 5);
+        finalIns(duration: 1000, meDelta: getMeDelta());
       } else if (instruction.correctCnt > meCorrectCnt) {
         meCorrectCnt = instruction.correctCnt;
-        me = me.copyWith(progressPoint: me.progressPoint + 50);
+        me =
+            me.copyWith(progressPoint: me.progressPoint + getPointForCorrect());
         moveIns(duration: 0, player: me.toJson());
       }
     }
-  }
-
-  Future<void> _init() async {
-    roomCreated(duration: 0, me: me.toJson());
-    _picker = await CrosswordPickerManager.create();
-    Future.delayed(const Duration(milliseconds: 100));
-    playerFound(duration: 0, opponent: opponent.toJson(), me: me.toJson());
-    Future.delayed(const Duration(milliseconds: 200));
-    _currentCrossword = _picker.pick();
-    running(duration: 0, result: _currentCrossword);
   }
 
   /// --- instructions ---
@@ -76,7 +125,7 @@ class MockGame extends MockParent {
       required List<Map<String, dynamic>> result}) async {
     return execute(duration: duration, input: {
       "status": "RUNING_INST",
-      "data": {"leftSec": 300, "spans": result}
+      "data": {"leftSec": _start, "spans": result}
     });
   }
 

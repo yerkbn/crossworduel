@@ -98,6 +98,9 @@ class PlayerEntity with Normalizer {
       "https://pbs.twimg.com/media/E4LlwA9X0AMFGun.png",
       "https://pics.craiyon.com/2023-10-09/f078bab0940b4f6cb7998f16a7e9dcc3.webp",
       "https://www.ikangai.com/wp-content/uploads/2022/02/byac_1_wide.jpg",
+      "https://watcher.guru/news/wp-content/uploads/2021/08/unnamed-2-1.png.webp",
+      "https://www.cryptotimes.io/wp-content/uploads/2022/03/8585.jpg",
+      "https://watcher.guru/news/wp-content/uploads/2021/08/unnamed-2-1.png.webp"
     ];
     Random rd = Random();
     return PlayerEntity(

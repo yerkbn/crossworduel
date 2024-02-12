@@ -28,8 +28,10 @@ class _FinalResultWidgetState extends State<FinalResultWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.historyEntity.meDelta.toString(),
-                style: theme.headline3.copyWith(fontSize: Sizer().getSp(54))),
+            Text(widget.historyEntity.getMeDelta,
+                style: theme.headline3.copyWith(
+                    fontSize: Sizer().getSp(54),
+                    color: widget.historyEntity.meColor)),
             Text("Game over!",
                 style: theme.headline3.copyWith(fontSize: Sizer().getSp(42))),
             SizedBox(height: Sizer().getHeight(42)),
