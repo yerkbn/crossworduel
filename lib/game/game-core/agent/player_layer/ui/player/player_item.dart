@@ -10,11 +10,14 @@ class PlayerItem extends StatefulWidget {
   final bool isLeft;
   final PlayerEntity player;
   final Widget? rightWidget;
-  const PlayerItem(
-      {super.key,
-      required this.player,
-      required this.isLeft,
-      this.rightWidget});
+  final bool isGame;
+  const PlayerItem({
+    super.key,
+    required this.player,
+    required this.isLeft,
+    this.rightWidget,
+    this.isGame = true,
+  });
 
   @override
   State<PlayerItem> createState() => PlayerItemState();
@@ -91,7 +94,10 @@ class PlayerItemState extends State<PlayerItem>
       children: [
         Text(widget.player.username,
             style: theme.headline4.copyWith(fontSize: Sizer().getHeight(12))),
-        Text(widget.player.getProgressPoint,
+        Text(
+            widget.isGame
+                ? widget.player.getProgressPoint
+                : widget.player.getPoint,
             style: theme.headline1.copyWith(fontSize: Sizer().getHeight(18))),
       ],
     );

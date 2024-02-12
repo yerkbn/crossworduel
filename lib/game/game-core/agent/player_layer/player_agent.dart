@@ -1,5 +1,6 @@
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/profile/domain/usecases/add_history_usecase.dart';
+import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:crossworduel/game/game-core/agent/agent.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/players_controller.dart';
@@ -68,6 +69,12 @@ class PlayerAgent extends ParentAgent {
     if (instruction is FinalInsD) {
       globalSL<AddHistoryUsecase>()
           .call(HistoryParams(instruction.historyEntity));
+
+      globalSL<AuthBloc>().add(EditAuthEvent((old) {
+        return old.copyWith(
+            score: old.score.copyWith(
+                point: old.score.point + instruction.historyEntity.meDelta));
+      }));
       _state.setFinal(instruction.historyEntity);
     }
   }

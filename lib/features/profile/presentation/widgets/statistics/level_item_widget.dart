@@ -5,7 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LevelItemWidget extends StatefulWidget {
-  const LevelItemWidget({super.key});
+  final String levelName;
+  final int level;
+  final int wins;
+  const LevelItemWidget({
+    super.key,
+    required this.level,
+    required this.levelName,
+    required this.wins,
+  });
 
   @override
   State<LevelItemWidget> createState() => _LevelItemWidgetState();
@@ -20,7 +28,7 @@ class _LevelItemWidgetState extends State<LevelItemWidget> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        _width = 324.h * .4;
+        _width = 324.h * (widget.wins / 100);
       });
     });
   }
@@ -42,7 +50,7 @@ class _LevelItemWidgetState extends State<LevelItemWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "LEVEL: BABY",
+                "LEVEL: ${widget.levelName}",
                 style: theme.headline3.copyWith(
                   color: theme.textColor1,
                   fontSize: 16.h,
@@ -51,7 +59,7 @@ class _LevelItemWidgetState extends State<LevelItemWidget> {
               Padding(
                 padding: EdgeInsets.only(right: 6.w),
                 child: Text(
-                  'WINS 54/100',
+                  'WINS ${widget.wins}/100',
                   style: theme.headline4.copyWith(color: theme.textColor2),
                 ),
               ),
@@ -90,12 +98,12 @@ class _LevelItemWidgetState extends State<LevelItemWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "1",
+                          "${widget.level}",
                           style: theme.headline3
                               .copyWith(color: Colors.white, fontSize: 16.h),
                         ),
                         Text(
-                          "2",
+                          "${widget.level + 1}",
                           style: theme.headline3
                               .copyWith(color: Colors.white, fontSize: 16.h),
                         )

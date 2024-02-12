@@ -15,6 +15,7 @@ import 'package:crossworduel/features/profile/domain/usecases/get_notification_u
 import 'package:crossworduel/features/profile/domain/usecases/profile_edit_usecase.dart';
 import 'package:crossworduel/features/profile/domain/usecases/refresh_me_usecase.dart';
 import 'package:crossworduel/features/profile/presentation/bloc/profile_settings/profile_settings_bloc.dart';
+import 'package:crossworduel/features/profile/presentation/bloc/refresh/refresh_bloc.dart';
 import 'package:crossworduel/features/profile/presentation/bloc/username_checker_bloc/username_checker_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,6 +29,7 @@ class ProfileServiceLocator extends ServiceLocator {
         updateProfileSettingsUsecase: sl(), deleteUserUsecase: sl()));
 
     sl.registerFactory(() => UsernameCheckerBloc(checkUsernameUsecase: sl()));
+    sl.registerLazySingleton(() => RefreshBloc());
 
     // use cases
     sl.registerLazySingleton(() => GetHeartTimeUsecase(sl()));

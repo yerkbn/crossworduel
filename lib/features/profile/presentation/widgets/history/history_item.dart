@@ -19,7 +19,7 @@ class HistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
-        onPressed: () {},
+        // onPressed: () {},
         color: isSquare ? theme.backgroundColor2 : theme.backgroundColor3,
         topMargin: isSquare ? 0 : 8.h,
         paddingSize: 0,

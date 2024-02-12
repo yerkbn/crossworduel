@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:crossworduel/core/normalizer/normalizer.dart';
 import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
@@ -22,6 +24,9 @@ class PlayerEntity with Normalizer {
     required this.progressPoint,
   });
 
+  String get getProgressPoint => progressPoint.toString();
+  String get getPoint => point.toString();
+
   factory PlayerEntity.parseMap(Map objectMap) {
     return PlayerEntity(
       id: objectMap.getValueSafely("id"),
@@ -30,6 +35,77 @@ class PlayerEntity with Normalizer {
       point: objectMap.getValueSafely("point"),
       progressPoint: objectMap.getValueSafely("progressPoint"),
     );
+  }
+
+  factory PlayerEntity.random(MeEntity me) {
+    final int offset = (me.score.point * .1).round();
+    List<String> names = [
+      "@JohnDoe",
+      "@EmilySmith",
+      "@TechWizard",
+      "@LunaExplorer",
+      "@CodeMaster",
+      "@StarGazer",
+      "@SwiftNerd",
+      "@QuantumCoder",
+      "@ZenMinds",
+      "@LunaDreamer",
+      "@ByteNinj4",
+      "@SolarEnthusiast",
+      "@PixelGeek",
+      "@CodeWalker",
+      "@SkyPilot",
+      "@ByteWizard",
+      "@LunaByte",
+      "@StarDust",
+      "@ZenCoder",
+      "@EchoByte",
+      "@NeoPixelX",
+      "@SolarGazeX",
+      "@SonicFoxX",
+      "@DreamSkyX",
+      "@ZeroCoolX",
+      "@ByteWizX",
+      "@SwiftByteX",
+      "@BlazeTechX",
+      "@TechByteX",
+      "@StarFuryX",
+      "@LunaStarX",
+      "@QuantumZX",
+      "@ZenSwiftX",
+      "@DreamNerdX",
+      "@NovaByteX",
+      "@SkyHawkX",
+      "@PixelZenX",
+      "@EchoByteX",
+      "@CodeStarX",
+      "@NeoNerdX",
+      "@QuantumLXX",
+      "@ByteHeroX",
+      "@TechNovaX",
+      "@StarByteX",
+      "@SonicSkyX",
+      "@LunaNautX",
+      "@ZenZeroX",
+      "@BlazeStarX",
+      "@ByteGlowX",
+      "@SolarZenX"
+    ];
+    List<String> avatars = [
+      "https://pics.craiyon.com/2023-08-02/4ab731023cd74a3ab9060c691256aa4a.webp",
+      "https://forkast.news/wp-content/uploads/2022/03/NFT-Avatar.png",
+      "https://dl.memuplay.com/new_market/img/com.dressup.vlinder.ape.creator.avatar.maker.icon.2022-12-25-10-12-47.png",
+      "https://pbs.twimg.com/media/E4LlwA9X0AMFGun.png",
+      "https://pics.craiyon.com/2023-10-09/f078bab0940b4f6cb7998f16a7e9dcc3.webp",
+      "https://www.ikangai.com/wp-content/uploads/2022/02/byac_1_wide.jpg",
+    ];
+    Random rd = Random();
+    return PlayerEntity(
+        id: "2",
+        avatar: avatars[rd.nextInt(avatars.length)],
+        username: names[rd.nextInt(names.length)],
+        point: me.score.point + rd.nextInt(offset),
+        progressPoint: 0);
   }
 
   PlayerEntity copyWith({int? point, int? progressPoint}) {
@@ -50,17 +126,24 @@ class PlayerEntity with Normalizer {
         "progressPoint": progressPoint
       };
 
+  Map<String, dynamic> toUser() => {
+        "id": id,
+        "username": username,
+        "avatar": avatar,
+        "email": "",
+        "status": "strangerStatus",
+        "score": {"heart": 0, "strike": 0, "point": point}
+      };
+
   factory PlayerEntity.fromMe(MeEntity me) {
     return PlayerEntity(
       id: me.id,
       username: me.username,
       avatar: me.avatar,
-      point: 0,
+      point: me.score.point,
       progressPoint: 0,
     );
   }
-
-  String get getProgressPoint => progressPoint.toString();
 
   static List<PlayerEntity> parseList(List items) {
     final List<PlayerEntity> result = [];

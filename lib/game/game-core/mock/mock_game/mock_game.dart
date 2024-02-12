@@ -10,18 +10,9 @@ class MockGame extends MockParent {
   late CrosswordPickerManager _picker;
   late List<Map<String, dynamic>> _currentCrossword;
 
-  late PlayerEntity me = PlayerEntity(
-      id: cpId,
-      avatar: "https://shoq.ai:4002/studimage/default/small/8.jpg",
-      username: "yerkebulan",
-      point: 1244,
-      progressPoint: 0);
-  late PlayerEntity opponent = PlayerEntity(
-      id: "2",
-      avatar: "https://shoq.ai:4002/studimage/default/small/1.jpg",
-      username: "elonmusk",
-      point: 1244,
-      progressPoint: 0);
+  late PlayerEntity me = PlayerEntity.fromMe(config.me);
+
+  late PlayerEntity opponent = PlayerEntity.random(config.me);
 
   int meCorrectCnt = 0;
   int opponentCorrectCnt = 0;
@@ -31,6 +22,7 @@ class MockGame extends MockParent {
   @override
   void runTest() {
     super.runTest();
+    finalIns(duration: 2000, meDelta: 5);
     _init();
   }
 
@@ -42,7 +34,7 @@ class MockGame extends MockParent {
         meCorrectCnt = instruction.correctCnt;
         me = me.copyWith(
             progressPoint: me.progressPoint + 50, point: me.point + 5);
-        finalIns(duration: 0, winnerId: me.id, delta: 5);
+        finalIns(duration: 0, meDelta: 5);
       } else if (instruction.correctCnt > meCorrectCnt) {
         meCorrectCnt = instruction.correctCnt;
         me = me.copyWith(progressPoint: me.progressPoint + 50);
@@ -103,19 +95,16 @@ class MockGame extends MockParent {
     });
   }
 
-  Future<void> finalIns(
-      {required int duration,
-      required String winnerId,
-      required int delta}) async {
+  Future<void> finalIns({required int duration, required int meDelta}) async {
     return execute(duration: duration, input: {
       "status": "FINAL_INS",
-      "data": (
-        id: "1",
-        leading: "LVL1",
-        meDelta: me.toJson(),
-        opponent: opponent.toJson(),
-        opponentDelta: 3,
-      )
+      "data": {
+        "id": "1",
+        "leading": "LV1",
+        "meDelta": meDelta,
+        "opponent": opponent.toUser(),
+        "opponentDelta": meDelta * -1,
+      }
     });
   }
 }

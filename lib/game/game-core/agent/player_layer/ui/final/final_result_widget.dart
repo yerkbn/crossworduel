@@ -2,6 +2,7 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/profile/domain/entities/history_entity.dart';
+import 'package:crossworduel/features/profile/presentation/bloc/refresh/refresh_bloc.dart';
 import 'package:crossworduel/game/game-core/sizer/sizer.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,7 @@ class _FinalResultWidgetState extends State<FinalResultWidget> {
                 borderColor: theme.backgroundColor2,
                 child: Text("LEAVE", style: theme.headline3),
                 onPressed: () {
+                  globalSL<RefreshBloc>().refresh();
                   globalSL<AuthNavigation>().globalRouter.pop();
                 }),
           ],

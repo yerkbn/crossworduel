@@ -50,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 44.h,
                       child: PlayerItem(
                         isLeft: true,
+                        isGame: false,
                         player: PlayerEntity.fromMe(state.me),
                         // rightWidget: CustomContainer(
                         //   width: 36.w,

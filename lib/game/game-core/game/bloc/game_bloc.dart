@@ -69,8 +69,8 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
 
   void _initConnect(RoomEntity parameter, GameMockCreator gameMockCreator) {
     if (_isTesting) {
-      _mock = gameMockCreator(
-          MockConfig(currentPlayer: _currentUser.id, onMessage: _onMessage));
+      _mock =
+          gameMockCreator(MockConfig(me: _currentUser, onMessage: _onMessage));
       _mock.runTest();
     } else {
       if (parameter.roomId != null) {

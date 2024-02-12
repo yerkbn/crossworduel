@@ -3,6 +3,7 @@ import 'package:crossworduel/features/unauth/data/datasources/unauth_remote_data
 import 'package:crossworduel/features/unauth/data/repositories/unauth_repository_impl.dart';
 import 'package:crossworduel/features/unauth/domain/repositories/unauth_repository_contract.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/apple_signin_usecase.dart';
+import 'package:crossworduel/features/unauth/domain/usecases/cach_me_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/get_me_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/google_signin_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/logout_usecase.dart';
@@ -25,6 +26,7 @@ class UnauthServiceLocator extends ServiceLocator {
         getMe: sl(),
         logout: sl(),
         refreshMe: sl(),
+        cacheMe: sl(),
       ),
     );
     sl.registerFactory<SigninBloc>(() => SigninBloc(
@@ -35,6 +37,7 @@ class UnauthServiceLocator extends ServiceLocator {
     sl.registerLazySingleton(() => GoogleSigninUsecase(sl()));
     sl.registerLazySingleton(() => AppleSigninUsecase(sl()));
     sl.registerLazySingleton(() => GetMeUsecase(sl()));
+    sl.registerLazySingleton(() => CacheMeUsecase(sl()));
     sl.registerLazySingleton(() => LogoutUsecase(sl()));
     // repositories
     sl.registerLazySingleton<UnauthRepositoryContract>(

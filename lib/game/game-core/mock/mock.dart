@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
+
 class MockConfig {
   final void Function(String input) onMessage; // It is called from socket
-  final String currentPlayer;
+  final MeEntity me;
 
-  MockConfig({required this.onMessage, required this.currentPlayer});
+  MockConfig({required this.onMessage, required this.me});
 }
 
 /// All mocks have to extend it
@@ -12,7 +14,7 @@ abstract class MockParent {
   final MockConfig config;
 
   void Function(String input) get onMessage => config.onMessage;
-  String get cpId => config.currentPlayer; // current player id
+  String get cpId => config.me.id; // current player id
 
   MockParent(this.config); // current player id
 

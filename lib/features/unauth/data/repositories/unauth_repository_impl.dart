@@ -1,4 +1,5 @@
 import 'package:crossworduel/features/profile/data/models/score_model.dart';
+import 'package:crossworduel/features/unauth/domain/usecases/cach_me_usecase.dart';
 import 'package:dartz/dartz.dart';
 import 'package:crossworduel/core/exception/exception2either.dart';
 import 'package:crossworduel/core/exception/parent_exception.dart';
@@ -77,6 +78,15 @@ class UnauthRepositoryImpl implements UnauthRepositoryContract {
   Future<Either<ExceptionData, void>> clear() async {
     return exception2either(function: () async {
       await localDateSoursce.clear();
+    });
+  }
+
+  @override
+  Future<Either<ExceptionData, MeEntity>> cacheMe(CacheMeParams params) async {
+    return exception2either(function: () async {
+      MeModel meModel = MeModel.fromEntity(params.me);
+      await localDateSoursce.cacheMe(meModel);
+      return meModel;
     });
   }
 }
