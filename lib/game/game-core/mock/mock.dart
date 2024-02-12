@@ -22,6 +22,8 @@ abstract class MockParent {
   /// build own customized test
   void runTest() {}
 
+  void close() {}
+
   /// This will be send from user
   void add(String message) {}
 

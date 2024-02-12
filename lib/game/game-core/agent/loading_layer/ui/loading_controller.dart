@@ -200,7 +200,8 @@ class LoadingControllerState extends State<LoadingController>
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Assets.icons.apple.image(width: 14.h),
               8.pw,
-              Text("1998", style: theme.headline2.copyWith(color: Colors.white))
+              Text(player.getPoint,
+                  style: theme.headline2.copyWith(color: Colors.white))
             ])
           ],
         ),

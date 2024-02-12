@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:crossworduel/game/game-core/crossword/crossoword_picker_manager.dart';
@@ -24,6 +25,21 @@ class MockGame extends MockParent {
   int opponentCorrectCnt = 0;
 
   MockGame(super.config) : core = MockCore(config);
+
+  void close() {
+    _timer.cancel();
+  }
+
+  void opponentMove({required bool isMust}) {
+    Random rd = Random();
+    if (_start > 20 && meCorrectCnt < 5 && (isMust || rd.nextBool())) {
+      Future.delayed(Duration(seconds: rd.nextInt(10)), () {
+        opponent = opponent.copyWith(
+            progressPoint: opponent.progressPoint + getPointForCorrect());
+        moveIns(duration: 0, player: opponent.toJson());
+      });
+    }
+  }
 
   void _startTimer() {
     const sec = Duration(seconds: 1);
@@ -66,6 +82,7 @@ class MockGame extends MockParent {
   @override
   void runTest() {
     super.runTest();
+    opponentMove(isMust: false);
     _init();
   }
 
@@ -94,6 +111,7 @@ class MockGame extends MockParent {
         meCorrectCnt = instruction.correctCnt;
         finalIns(duration: 1000, meDelta: getMeDelta());
       } else if (instruction.correctCnt > meCorrectCnt) {
+        opponentMove(isMust: false);
         meCorrectCnt = instruction.correctCnt;
         me =
             me.copyWith(progressPoint: me.progressPoint + getPointForCorrect());

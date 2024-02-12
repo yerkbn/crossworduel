@@ -212,6 +212,7 @@ class GameBloc extends Bloc<GameEvent, GameState> with Normalizer {
       // closing channel
       _shutDownConnection();
     }
+    _mock.close();
     return super.close();
   }
 
