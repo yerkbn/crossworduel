@@ -114,16 +114,16 @@ class NextPrevInsD extends InstructionData {
 
 class FinalInsD extends InstructionData {
   static const String insStatus = 'FINAL_INS';
-  final FinalEntity finalEntity;
+  final HistoryEntity historyEntity;
 
   FinalInsD({
-    required Map objectMap,
-    required this.finalEntity,
+    required Map<String, dynamic> objectMap,
+    required this.historyEntity,
   }) : super(insStatus, objectMap);
 
-  factory FinalInsD.parseMap(Map objectMap) {
+  factory FinalInsD.parseMap(Map<String, dynamic> objectMap) {
     return FinalInsD(
-        objectMap: objectMap, finalEntity: FinalEntity.parseMap(objectMap));
+        objectMap: objectMap, historyEntity: HistoryModel.fromJson(objectMap));
   }
 }
 

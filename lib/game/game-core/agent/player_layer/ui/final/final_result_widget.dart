@@ -1,14 +1,14 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/game/domain/entities/final_entity.dart';
+import 'package:crossworduel/features/profile/domain/entities/history_entity.dart';
 import 'package:crossworduel/game/game-core/sizer/sizer.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 
 class FinalResultWidget extends StatefulWidget {
-  final FinalEntity finalEntity;
-  const FinalResultWidget({super.key, required this.finalEntity});
+  final HistoryEntity historyEntity;
+  const FinalResultWidget({super.key, required this.historyEntity});
 
   @override
   State<FinalResultWidget> createState() => _FinalResultWidgetState();
@@ -27,7 +27,7 @@ class _FinalResultWidgetState extends State<FinalResultWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(widget.finalEntity.getDelta,
+            Text(widget.historyEntity.meDelta.toString(),
                 style: theme.headline3.copyWith(fontSize: Sizer().getSp(54))),
             Text("Game over!",
                 style: theme.headline3.copyWith(fontSize: Sizer().getSp(42))),

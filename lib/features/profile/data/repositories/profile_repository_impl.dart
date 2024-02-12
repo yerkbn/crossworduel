@@ -39,7 +39,7 @@ class ProfileRepositoryImpl implements ProfileRepositoryContract {
   @override
   Future<Either<ExceptionData, MeEntity>> refreshMe() {
     return exception2either(function: () async {
-      MeModel me = await remoteDataSource.refreshMe();
+      final MeModel me = await remoteDataSource.refreshMe();
       await localDateSoursce.cacheMe(me);
       return me;
     });

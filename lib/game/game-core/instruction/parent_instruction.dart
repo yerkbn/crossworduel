@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:crossworduel/core/exception/config_exception.dart';
 import 'package:crossworduel/core/exception/parent_exception.dart';
 import 'package:crossworduel/core/extension/map_error_extension.dart';
-import 'package:crossworduel/game/domain/entities/final_entity.dart';
+import 'package:crossworduel/features/profile/data/models/history_model.dart';
+import 'package:crossworduel/features/profile/domain/entities/history_entity.dart';
 import 'package:crossworduel/game/game-core/crossword/entity/point_entity.dart';
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
@@ -53,10 +54,11 @@ class InstructionMapper {
 
   /// Instruction List which will be availible after merging
   /// default instructions with provided instructions
-  final Map<String, InstructionData Function(Map objectMap)> _instructions;
+  final Map<String, InstructionData Function(Map<String, dynamic> objectMap)>
+      _instructions;
 
   InstructionMapper(
-      {Map<String, InstructionData Function(Map objectMap)>
+      {Map<String, InstructionData Function(Map<String, dynamic> objectMap)>
           additionalInstructions = const {}})
       : _instructions = {..._generalInstructions, ...additionalInstructions};
 
@@ -80,7 +82,7 @@ class InstructionMapper {
           objectMap: {'NOT identified instr': objectMap});
     } else {
       try {
-        Map inputRow;
+        Map<String, dynamic> inputRow;
 
         /// All [InstructionData] as parsing object except only [Map]
         /// if our data is [List] we will modify it to fit into the [InstructionData]

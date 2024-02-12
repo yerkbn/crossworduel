@@ -109,11 +109,13 @@ class MockGame extends MockParent {
       required int delta}) async {
     return execute(duration: duration, input: {
       "status": "FINAL_INS",
-      "data": {
-        "winnerId": winnerId,
-        "delta": delta,
-        "score": {"heart": 1, "strike": 1, "point": 1}
-      }
+      "data": (
+        id: "1",
+        leading: "LVL1",
+        meDelta: me.toJson(),
+        opponent: opponent.toJson(),
+        opponentDelta: 3,
+      )
     });
   }
 }

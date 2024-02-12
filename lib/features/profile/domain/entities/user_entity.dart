@@ -45,7 +45,7 @@ class UserEntity extends Equatable with Normalizer {
       );
 
   String getUsername({int length = 9}) => normalizeString(
-        "@$username",
+        "$username",
         maxLength: length,
         withDots: true,
       );

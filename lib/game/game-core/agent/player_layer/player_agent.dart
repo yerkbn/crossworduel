@@ -1,3 +1,5 @@
+import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/profile/domain/usecases/add_history_usecase.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
 import 'package:crossworduel/game/game-core/agent/agent.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/players_controller.dart';
@@ -64,21 +66,24 @@ class PlayerAgent extends ParentAgent {
       });
     }
     if (instruction is FinalInsD) {
-      _state.setFinal(instruction.finalEntity);
+      globalSL<AddHistoryUsecase>()
+          .call(HistoryParams(instruction.historyEntity));
+      _state.setFinal(instruction.historyEntity);
     }
   }
 
   @override
-  Map<String, InstructionData Function(Map objectMap)> get instructions => {
-        // PLAYERS
-        PlayerLeaveInsD.insStatus: PlayerLeaveInsD.parseMap,
-        PlayerFoundInsD.insStatus: PlayerFoundInsD.parseMap,
-        RunningInsD.insStatus: RunningInsD.parseMap,
-        CrosswordTapInsD.insStatus: CrosswordTapInsD.parseMap,
-        KeyboardTapInsD.insStatus: KeyboardTapInsD.parseMap,
-        DeleteTapInsD.insStatus: DeleteTapInsD.parseMap,
-        NextPrevInsD.insStatus: NextPrevInsD.parseMap,
-        FinalInsD.insStatus: FinalInsD.parseMap,
-        MoveInsD.insStatus: MoveInsD.parseMap,
-      };
+  Map<String, InstructionData Function(Map<String, dynamic> objectMap)>
+      get instructions => {
+            // PLAYERS
+            PlayerLeaveInsD.insStatus: PlayerLeaveInsD.parseMap,
+            PlayerFoundInsD.insStatus: PlayerFoundInsD.parseMap,
+            RunningInsD.insStatus: RunningInsD.parseMap,
+            CrosswordTapInsD.insStatus: CrosswordTapInsD.parseMap,
+            KeyboardTapInsD.insStatus: KeyboardTapInsD.parseMap,
+            DeleteTapInsD.insStatus: DeleteTapInsD.parseMap,
+            NextPrevInsD.insStatus: NextPrevInsD.parseMap,
+            FinalInsD.insStatus: FinalInsD.parseMap,
+            MoveInsD.insStatus: MoveInsD.parseMap,
+          };
 }

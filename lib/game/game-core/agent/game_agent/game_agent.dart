@@ -57,7 +57,8 @@ class GameAgent extends ParentAgent {
   }
 
   @override
-  Map<String, InstructionData Function(Map objectMap)> get instructions => {
-        for (final ParentAgent element in _agents) ...element.instructions,
-      };
+  Map<String, InstructionData Function(Map<String, dynamic> objectMap)>
+      get instructions => {
+            for (final ParentAgent element in _agents) ...element.instructions,
+          };
 }

@@ -19,7 +19,8 @@ abstract class ParentAgent {
   Widget build();
   void instructionToAction(InstructionData instruction);
 
-  Map<String, InstructionData Function(Map objectMap)> get instructions;
+  Map<String, InstructionData Function(Map<String, dynamic> objectMap)>
+      get instructions;
 
   /// This function will be used to generate Agents
   /// and will automatically ignore some requested items

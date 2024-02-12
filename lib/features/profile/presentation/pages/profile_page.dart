@@ -2,6 +2,7 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/profile/presentation/widgets/history/history_widget.dart';
 import 'package:crossworduel/features/profile/presentation/widgets/statistics/statistics_widget.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/player/player_item.dart';
@@ -42,7 +43,6 @@ class _ProfilePageState extends State<ProfilePage> {
               onRefresh: _onRefresh,
               controller: _refreshController,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   82.ph,
                   SizedBox(
@@ -66,10 +66,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       )),
                   24.ph,
                   const StatisticsWidget(),
-                  24.ph,
+                  6.ph,
                   Expanded(
-                    child: 0.ph,
+                    child: SizedBox(
+                      width: 316.w,
+                      height: 100.h,
+                      child: const HistoryWidget(),
+                    ),
                   ),
+                  12.ph,
                   CustomContainer(
                       width: 184.w,
                       height: 36.h,
@@ -85,20 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             extra: RoomEntity(
                                 createRoom: RoomCreateEntity(subjectId: "1")));
                       }),
-                  16.ph,
-                  CustomContainer(
-                      width: 184.w,
-                      height: 36.h,
-                      paddingSize: 0,
-                      topMargin: 0,
-                      borderRadius: 4.sp,
-                      color: theme.backgroundColor3,
-                      borderColor: theme.backgroundColor2,
-                      child: Text("LEAVE", style: theme.headline3),
-                      onPressed: () {
-                        globalSL<AuthBloc>().add(LogOutAuthEvent());
-                      }),
-                  82.ph
+                  64.ph
                 ],
               ),
             );

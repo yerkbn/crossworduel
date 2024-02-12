@@ -1,4 +1,4 @@
-import 'package:crossworduel/game/domain/entities/final_entity.dart';
+import 'package:crossworduel/features/profile/domain/entities/history_entity.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/crossword/crossword_widget.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/crossword/hint_widget.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/final/final_result_widget.dart';
@@ -34,7 +34,7 @@ class PlayersControllerState extends State<PlayersController>
 
   CrosswordEntity? _crossword;
 
-  FinalEntity? _finalEntity;
+  HistoryEntity? _historyEntity;
 
   @override
   void initState() {
@@ -48,9 +48,9 @@ class PlayersControllerState extends State<PlayersController>
     });
   }
 
-  void setFinal(FinalEntity value) {
+  void setFinal(HistoryEntity value) {
     setState(() {
-      _finalEntity = value;
+      _historyEntity = value;
     });
   }
 
@@ -105,8 +105,8 @@ class PlayersControllerState extends State<PlayersController>
           if (_crossword != null && _crossword!.getActiveSpan != null)
             HintWidget(span: _crossword!.getActiveSpan!),
           if (_crossword != null) KeyboardWidget(crossword: _crossword!),
-          if (_finalEntity != null)
-            FinalResultWidget(finalEntity: _finalEntity!)
+          if (_historyEntity != null)
+            FinalResultWidget(historyEntity: _historyEntity!)
         ],
       ),
     );
