@@ -35,3 +35,12 @@ class RefreshAuthEvent extends AuthEvent {
   @override
   List<Object> get props => [];
 }
+
+class EditAuthEvent extends AuthEvent {
+  final MeEntity Function(MeEntity old) edit;
+
+  EditAuthEvent(this.edit);
+
+  @override
+  List<Object> get props => [];
+}

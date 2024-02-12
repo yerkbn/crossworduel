@@ -14,6 +14,18 @@ class ScoreEntity extends Equatable {
   factory ScoreEntity.empty() =>
       const ScoreEntity(heart: 0, strike: 0, point: 0);
 
+  ScoreEntity copyWith({
+    int? heart,
+    int? strike,
+    int? point,
+  }) {
+    return ScoreEntity(
+      heart: heart ?? this.heart,
+      strike: strike ?? this.strike,
+      point: point ?? this.point,
+    );
+  }
+
   String get getPoint => "$point";
   String get getHeart => "$heart";
   String get getStrike => "$strike";

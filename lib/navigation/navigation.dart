@@ -3,6 +3,7 @@ import 'package:crossworduel/config/ui/ui_config.dart';
 import 'package:crossworduel/core/design-system/states/loading/loading_page.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:crossworduel/game/game-core/sizer/sizer.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:crossworduel/navigation/unauth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,7 @@ class _MainNavigation extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
+    Sizer().init(context: context);
     return ScreenUtilInit(
       designSize: const Size(UiConfig.globalWidth, UiConfig.globalHeight),
       builder: (_, __) => BlocConsumer<AuthBloc, AuthState>(

@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:crossworduel/features/profile/domain/entities/score_entity.dart';
+import 'package:equatable/equatable.dart';
 
 class MeEntity extends Equatable {
   final String id;
@@ -17,6 +17,17 @@ class MeEntity extends Equatable {
     required this.avatar,
     required this.score,
   });
+
+  factory MeEntity.init() {
+    return MeEntity(
+        id: "0",
+        token: "",
+        username: "@itsme",
+        email: "itsme@gmail.com",
+        avatar:
+            "https://pics.craiyon.com/2023-08-02/7a951cac85bd4aa2b0e70dbaabb8404e.webp",
+        score: ScoreEntity(heart: 0, strike: 0, point: 1000));
+  }
 
   MeEntity copyWith({
     String? username,

@@ -1,5 +1,5 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
-import 'package:crossworduel/game/core/agent/agent.dart';
+import 'package:crossworduel/game/game-core/agent/agent.dart';
 import 'package:flutter/material.dart';
 
 class GameTable extends StatefulWidget {

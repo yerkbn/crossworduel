@@ -1,20 +1,21 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
+import 'package:crossworduel/game/game-core/crossword/entity/point_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class CellEntity extends Equatable {
-  final int index;
+  final PointEntity point;
   final String value;
-  final bool isValid;
-  final bool isCurrent;
-  final bool isCursive;
+  final bool isValid; // if word is correct all cell's of word become valid
+  final bool isCursive; // currently editing letter
+  final bool isCurrent; // selected span cells
   final String currentValue;
 
   const CellEntity({
-    required this.index,
+    required this.point,
     required this.value,
     this.isValid = false,
-    this.isCurrent = false,
     this.isCursive = false,
+    this.isCurrent = false,
     this.currentValue = "",
   });
 
@@ -25,18 +26,20 @@ class CellEntity extends Equatable {
     String? currentValue,
   }) {
     return CellEntity(
-      index: index,
+      point: point,
       value: value,
       currentValue: currentValue ?? this.currentValue,
       isValid: isValid ?? this.isValid,
-      isCurrent: isCurrent ?? this.isCurrent,
       isCursive: isCursive ?? this.isCursive,
+      isCurrent: isCurrent ?? this.isCurrent,
     );
   }
 
+  int get getIndex => point.y * 10 + point.x;
+
   factory CellEntity.parseMap(Map objectMap) {
     return CellEntity(
-      index: objectMap.getValueSafely("index"),
+      point: PointEntity.parseMap(objectMap.getValueSafely("point")),
       value: objectMap.getValueSafely("value"),
     );
   }
@@ -52,5 +55,5 @@ class CellEntity extends Equatable {
   bool get isCorrect => currentValue.toUpperCase() == value.toUpperCase();
 
   @override
-  List<Object?> get props => [index, value, isValid, isCurrent];
+  List<Object?> get props => [point, value, isValid, currentValue];
 }
