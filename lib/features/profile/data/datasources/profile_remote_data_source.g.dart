@@ -20,7 +20,7 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<MeModel> edit(Map<String, dynamic> body) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -48,10 +48,10 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<ScoreModel> myScore() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ScoreModel>(Options(
       method: 'POST',
@@ -75,10 +75,10 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<MeModel> refreshMe() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<MeModel>(Options(
       method: 'GET',
@@ -102,10 +102,10 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<List<NotificationModel>> getNotification() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<NotificationModel>>(Options(
       method: 'GET',
@@ -132,7 +132,7 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<void> checkUsername(Map<String, dynamic> body) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -157,10 +157,10 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<void> deleteUser() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
@@ -181,10 +181,10 @@ class _ProfileRemoteDataSourceImpl implements ProfileRemoteDataSourceImpl {
 
   @override
   Future<HeartTimeModel> getHeartTime() async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<HeartTimeModel>(Options(
       method: 'GET',
