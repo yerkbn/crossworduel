@@ -58,8 +58,8 @@ class HistoryItem extends StatelessWidget {
             CustomImageWidget(
               url: historyEntity.opponent.avatar,
               borderRadius: 52.h,
-              width: 52.w,
-              height: 52.w,
+              width: 48.h,
+              height: 48.h,
             ),
             16.pw,
             Column(

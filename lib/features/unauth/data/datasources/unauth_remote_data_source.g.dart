@@ -20,7 +20,7 @@ class _UnauthRemoteDataSourceImpl implements UnauthRemoteDataSourceImpl {
 
   @override
   Future<MeModel> signin(Map<String, dynamic> body) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -48,7 +48,7 @@ class _UnauthRemoteDataSourceImpl implements UnauthRemoteDataSourceImpl {
 
   @override
   Future<MeModel> signinWithGoogle(Map<String, dynamic> body) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -76,7 +76,7 @@ class _UnauthRemoteDataSourceImpl implements UnauthRemoteDataSourceImpl {
 
   @override
   Future<MeModel> signinWithApple(Map<String, dynamic> body) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};

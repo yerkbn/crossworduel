@@ -7,7 +7,7 @@ import 'package:crossworduel/game/game-core/mock/mock.dart';
 import 'package:crossworduel/game/game-core/mock/mock_game/mock_instruction.dart';
 
 class MockGame extends MockParent {
-  static const int GAME_TIME = 300;
+  static const int GAME_TIME = 100;
   static const int MAX_POINT = 50;
   late Timer _timer;
   int _start = GAME_TIME;
