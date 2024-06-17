@@ -13,10 +13,18 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   final Color textColor1; // most active text color
   final Color textColor2; // disabled color
 
-  // Colors in game
-  final Color gameBackgroundColor;
-  final Color gameFocusColor;
-  final Color gameButtonColor;
+  // Colors highlight
+  final Color greenHardColor;
+  final Color greenLightColor;
+
+  final Color yellowHardColor;
+  final Color yellowLightColor;
+
+  final Color blueHardColor;
+  final Color blueLightColor;
+
+  final Color redHardColor;
+  final Color redLightColor;
 
   CustomThemeExtension({
     required this.primaryColor,
@@ -27,9 +35,14 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     required this.backgroundColor4,
     required this.textColor1,
     required this.textColor2,
-    required this.gameBackgroundColor,
-    required this.gameFocusColor,
-    required this.gameButtonColor,
+    required this.greenHardColor,
+    required this.greenLightColor,
+    required this.yellowHardColor,
+    required this.yellowLightColor,
+    required this.blueHardColor,
+    required this.blueLightColor,
+    required this.redHardColor,
+    required this.redLightColor,
   });
 
   factory CustomThemeExtension.of(BuildContext context) {
@@ -38,31 +51,41 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   }
 
   factory CustomThemeExtension.light() => CustomThemeExtension(
-        primaryColor: const Color(0xFF6FCF97),
-        secondaryColor: const Color(0xFFDDDDDD),
-        backgroundColor1: const Color(0xFFF6F6F6),
-        backgroundColor2: const Color(0xFFDDDDDD),
-        backgroundColor3: const Color(0xFFFFFFFF),
-        backgroundColor4: const Color(0xFFFFFFFF),
-        textColor1: const Color(0xFF525260),
-        textColor2: const Color(0xFF8E8E93),
-        gameBackgroundColor: const Color(0xFF332D31),
-        gameFocusColor: const Color(0xFF8E8E93),
-        gameButtonColor: const Color(0xFF2C2628),
-      );
-
-  factory CustomThemeExtension.dark() => CustomThemeExtension(
-        primaryColor: const Color(0xFFFBC539),
-        secondaryColor: const Color(0xFF98EB57),
+        primaryColor: const Color(0xFF76AD8D),
+        secondaryColor: const Color(0xFF219653),
         backgroundColor1: const Color(0xFF000000),
         backgroundColor2: const Color(0xFF161616),
         backgroundColor3: const Color(0xFF1F1F1F),
         backgroundColor4: const Color(0xFF29292D),
-        textColor1: const Color(0xFFFDFFFF),
+        textColor1: const Color(0xFFFFFFFF),
         textColor2: const Color(0xFF8E8E93),
-        gameBackgroundColor: const Color(0xFF332D31),
-        gameFocusColor: const Color(0xFF8E8E93),
-        gameButtonColor: const Color(0xFF2C2628),
+        greenHardColor: const Color(0xFF219653),
+        greenLightColor: const Color(0xFF76AD8D),
+        yellowHardColor: const Color(0xFFDBD38D),
+        yellowLightColor: const Color(0xFFFFFBD7),
+        blueHardColor: const Color(0xFF1F93FD),
+        blueLightColor: const Color(0xFFC1E1FF),
+        redHardColor: const Color(0xFFD27C7C),
+        redLightColor: const Color(0xFFFFAFAF),
+      );
+
+  factory CustomThemeExtension.dark() => CustomThemeExtension(
+        primaryColor: const Color(0xFF76AD8D),
+        secondaryColor: const Color(0xFF219653),
+        backgroundColor1: const Color(0xFF000000),
+        backgroundColor2: const Color(0xFF161616),
+        backgroundColor3: const Color(0xFF1F1F1F),
+        backgroundColor4: const Color(0xFF29292D),
+        textColor1: const Color(0xFFFFFFFF),
+        textColor2: const Color(0xFF8E8E93),
+        greenHardColor: const Color(0xFF219653),
+        greenLightColor: const Color(0xFF76AD8D),
+        yellowHardColor: const Color(0xFFDBD38D),
+        yellowLightColor: const Color(0xFFFFFBD7),
+        blueHardColor: const Color(0xFF1F93FD),
+        blueLightColor: const Color(0xFFC1E1FF),
+        redHardColor: const Color(0xFFD27C7C),
+        redLightColor: const Color(0xFFFFAFAF),
       );
 
   static ThemeData get darkThemeData =>
@@ -73,7 +96,6 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
 
   static ThemeData getThemeData({required CustomThemeExtension extension}) {
     return ThemeData(
-      backgroundColor: extension.backgroundColor1,
       inputDecorationTheme: const InputDecorationTheme(
         floatingLabelStyle: TextStyle(color: Colors.black),
       ),
@@ -91,7 +113,7 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
   TextStyle get headline1 => TextStyle(
         // 700
         color: textColor1,
-        fontSize: 20.h,
+        fontSize: 18.h,
         fontWeight: FontWeight.w700,
         fontFamily: "sf_heavy",
       );
@@ -130,9 +152,14 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
     Color? backgroundColor4,
     Color? textColor1,
     Color? textColor2,
-    Color? gameBackgroundColor,
-    Color? gameFocusColor,
-    Color? gameButtonColor,
+    Color? greenHardColor,
+    Color? greenLightColor,
+    Color? yellowHardColor,
+    Color? yellowLightColor,
+    Color? redHardColor,
+    Color? redLightColor,
+    Color? blueHardColor,
+    Color? blueLightColor,
   }) {
     return CustomThemeExtension(
       primaryColor: primaryColor ?? this.primaryColor,
@@ -143,9 +170,14 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
       backgroundColor4: backgroundColor4 ?? this.backgroundColor4,
       textColor1: textColor1 ?? this.textColor1,
       textColor2: textColor2 ?? this.textColor2,
-      gameBackgroundColor: gameBackgroundColor ?? this.gameBackgroundColor,
-      gameFocusColor: gameFocusColor ?? this.gameFocusColor,
-      gameButtonColor: gameButtonColor ?? this.gameButtonColor,
+      greenHardColor: greenHardColor ?? this.greenHardColor,
+      greenLightColor: greenLightColor ?? this.greenLightColor,
+      yellowHardColor: yellowHardColor ?? this.yellowHardColor,
+      yellowLightColor: yellowLightColor ?? this.yellowLightColor,
+      redHardColor: redHardColor ?? this.redHardColor,
+      redLightColor: redLightColor ?? this.redLightColor,
+      blueHardColor: blueHardColor ?? this.blueHardColor,
+      blueLightColor: blueLightColor ?? this.blueLightColor,
     );
   }
 
@@ -170,10 +202,15 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
           Color.lerp(backgroundColor4, other.backgroundColor4, t)!,
       textColor1: Color.lerp(textColor1, other.textColor1, t)!,
       textColor2: Color.lerp(textColor2, other.textColor2, t)!,
-      gameBackgroundColor:
-          Color.lerp(gameBackgroundColor, other.gameBackgroundColor, t)!,
-      gameFocusColor: Color.lerp(gameFocusColor, other.gameFocusColor, t)!,
-      gameButtonColor: Color.lerp(gameButtonColor, other.gameButtonColor, t)!,
+      greenHardColor: Color.lerp(greenHardColor, other.greenHardColor, t)!,
+      greenLightColor: Color.lerp(greenLightColor, other.greenLightColor, t)!,
+      yellowHardColor: Color.lerp(yellowHardColor, other.yellowHardColor, t)!,
+      yellowLightColor:
+          Color.lerp(yellowLightColor, other.yellowLightColor, t)!,
+      redHardColor: Color.lerp(redHardColor, other.redHardColor, t)!,
+      redLightColor: Color.lerp(redLightColor, other.redLightColor, t)!,
+      blueHardColor: Color.lerp(blueHardColor, other.blueHardColor, t)!,
+      blueLightColor: Color.lerp(blueLightColor, other.blueLightColor, t)!,
     );
   }
 }

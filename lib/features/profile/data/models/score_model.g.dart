@@ -7,9 +7,9 @@ part of 'score_model.dart';
 // **************************************************************************
 
 ScoreModel _$ScoreModelFromJson(Map<String, dynamic> json) => ScoreModel(
-      heart: json['heart'] as int,
-      strike: json['strike'] as int,
-      point: json['point'] as int,
+      heart: (json['heart'] as num).toInt(),
+      strike: (json['strike'] as num).toInt(),
+      point: (json['point'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ScoreModelToJson(ScoreModel instance) =>

@@ -7,8 +7,6 @@ import 'package:crossworduel/features/profile/presentation/widgets/statistics/st
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/player/player_item.dart';
 import 'package:crossworduel/game/domain/entities/player_entity.dart';
-import 'package:crossworduel/game/domain/entities/room_entity.dart';
-import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,12 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: theme.backgroundColor3,
                       borderColor: theme.backgroundColor2,
                       child: Text("PLAY", style: theme.headline3),
-                      onPressed: () {
-                        globalSL<AuthNavigation>().globalRouter.push(
-                            AuthNavigation.play,
-                            extra: RoomEntity(
-                                createRoom: RoomCreateEntity(subjectId: "1")));
-                      }),
+                      onPressed: () {}),
                   64.ph
                 ],
               ),

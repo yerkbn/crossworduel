@@ -28,14 +28,69 @@ class $AssetsDictGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/SUPPORT.png
+  AssetGenImage get support => const AssetGenImage('assets/icons/SUPPORT.png');
+
   /// File path: assets/icons/apple.png
   AssetGenImage get apple => const AssetGenImage('assets/icons/apple.png');
+
+  /// File path: assets/icons/en.png
+  AssetGenImage get en => const AssetGenImage('assets/icons/en.png');
+
+  /// File path: assets/icons/fire.png
+  AssetGenImage get fire => const AssetGenImage('assets/icons/fire.png');
+
+  /// File path: assets/icons/folder.png
+  AssetGenImage get folder => const AssetGenImage('assets/icons/folder.png');
 
   /// File path: assets/icons/google.png
   AssetGenImage get google => const AssetGenImage('assets/icons/google.png');
 
+  /// File path: assets/icons/heart.png
+  AssetGenImage get heart => const AssetGenImage('assets/icons/heart.png');
+
+  /// File path: assets/icons/kz.png
+  AssetGenImage get kz => const AssetGenImage('assets/icons/kz.png');
+
+  /// File path: assets/icons/light.png
+  AssetGenImage get light => const AssetGenImage('assets/icons/light.png');
+
+  /// File path: assets/icons/order.png
+  AssetGenImage get order => const AssetGenImage('assets/icons/order.png');
+
+  /// File path: assets/icons/pen.png
+  AssetGenImage get pen => const AssetGenImage('assets/icons/pen.png');
+
+  /// File path: assets/icons/people.png
+  AssetGenImage get people => const AssetGenImage('assets/icons/people.png');
+
+  /// File path: assets/icons/star.png
+  AssetGenImage get star => const AssetGenImage('assets/icons/star.png');
+
+  /// File path: assets/icons/timer.png
+  AssetGenImage get timer => const AssetGenImage('assets/icons/timer.png');
+
+  /// File path: assets/icons/world.png
+  AssetGenImage get world => const AssetGenImage('assets/icons/world.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [apple, google];
+  List<AssetGenImage> get values => [
+        support,
+        apple,
+        en,
+        fire,
+        folder,
+        google,
+        heart,
+        kz,
+        light,
+        order,
+        pen,
+        people,
+        star,
+        timer,
+        world
+      ];
 }
 
 class $AssetsImageGen {
@@ -73,9 +128,11 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
+
+  final Size? size;
 
   Image image({
     Key? key,

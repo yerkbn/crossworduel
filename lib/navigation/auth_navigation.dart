@@ -1,18 +1,17 @@
 import 'package:crossworduel/core/service-locator/service_locator.dart';
-import 'package:crossworduel/features/profile/presentation/pages/profile_page.dart';
-import 'package:crossworduel/game/domain/entities/room_entity.dart';
-import 'package:crossworduel/game/presentation/ui/page/game_page.dart';
+import 'package:crossworduel/features/crossword/presentation/pages/crossword_detail_page.dart';
+import 'package:crossworduel/features/crossword/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 class AuthNavigation implements ServiceLocator {
   static const String main = '/';
-  static const String play = '/play';
+  static const String detail = '/detail';
 
   final RouteObserver<ModalRoute> routeObserver;
-  static final RouteObserver<PageRoute> _routeObserver =
-      RouteObserver<PageRoute>();
+  // static final RouteObserver<PageRoute> _routeObserver =
+  //     RouteObserver<PageRoute>();
 
   final GoRouter globalRouter;
   final GoRouter mainRoutes;
@@ -28,14 +27,13 @@ class AuthNavigation implements ServiceLocator {
         GoRoute(
           path: main,
           builder: (BuildContext context, GoRouterState state) {
-            return const ProfilePage();
+            return const MainPage();
           },
         ),
         GoRoute(
-          path: play,
+          path: detail,
           builder: (BuildContext context, GoRouterState state) {
-            final RoomEntity arg = state.extra! as RoomEntity;
-            return GamePage(routeObserver: _routeObserver, arg: arg);
+            return const CrosswordDetailPage();
           },
         ),
       ],
@@ -47,7 +45,14 @@ class AuthNavigation implements ServiceLocator {
       GoRoute(
         path: main,
         builder: (BuildContext context, GoRouterState state) {
-          return const ProfilePage();
+          return const MainPage();
+        },
+      ),
+      GoRoute(
+        path: detail,
+        builder: (BuildContext context, GoRouterState state) {
+          // final CrosswordEntity arg = state.extra as CrosswordEntity;
+          return const CrosswordDetailPage();
         },
       ),
     ]);

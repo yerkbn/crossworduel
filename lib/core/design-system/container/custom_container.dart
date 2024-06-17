@@ -57,7 +57,7 @@ class CustomContainer extends StatelessWidget {
       );
     }
     return Container(
-      width: width ?? double.infinity,
+      width: width,
       height: height,
       constraints: constraints ?? BoxConstraints(minHeight: minHeight.h),
       margin: EdgeInsets.only(
@@ -67,7 +67,7 @@ class CustomContainer extends StatelessWidget {
         color: color ?? theme.backgroundColor2,
         border: borderColor == null
             ? null
-            : Border.all(color: borderColor!, width: .3),
+            : Border.all(color: borderColor!, width: 2),
       ),
       child: resultChild,
     );

@@ -35,9 +35,9 @@ class CustomButton extends StatelessWidget {
     this.isTextButton = false,
     this.isWidthOff = false,
     this.progresHeight = 24,
-    this.fontSize = 17,
-    this.textColor = Colors.black,
-    this.borderRadius = 16,
+    this.fontSize = 20,
+    this.textColor = Colors.white,
+    this.borderRadius = 8,
     this.fullBorderRadius,
     this.child,
   });
@@ -49,9 +49,9 @@ class CustomButton extends StatelessWidget {
       bool isDisabled = false,
       double width = 327,
       double height = 34,
-      double fontSize = 17,
+      double fontSize = 18,
       Color? color,
-      Color? textColor = Colors.black,
+      Color? textColor = Colors.white,
       Widget? child}) {
     return CustomButton(
       title: title,
@@ -72,11 +72,11 @@ class CustomButton extends StatelessWidget {
     required String title,
     required void Function() onPressed,
     double width = 327,
-    double height = 56,
+    double height = 42,
     bool isLoading = false,
     bool isDisabled = false,
     bool isWidthOff = false,
-    Color? textColor = Colors.black,
+    Color? textColor = Colors.white,
     Color? color,
     Widget? child,
     double? borderRadius,
@@ -88,7 +88,7 @@ class CustomButton extends StatelessWidget {
       isDisabled: isDisabled,
       isWidthOff: isWidthOff,
       onPressed: onPressed,
-      borderRadius: borderRadius ?? 12,
+      borderRadius: borderRadius ?? 8,
       width: width,
       height: height,
       color: color,
@@ -102,12 +102,12 @@ class CustomButton extends StatelessWidget {
       {required String title,
       required void Function() onPressed,
       double width = 327,
-      double height = 42,
+      double height = 32,
       double fontSize = 16,
       bool isLoading = false,
       bool isDisabled = false,
       bool isWidthOff = false,
-      Color? textColor = Colors.black,
+      Color? textColor = Colors.white,
       Color? color,
       Widget? child}) {
     return CustomButton(
@@ -118,7 +118,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       width: width,
       height: height,
-      borderRadius: 12,
+      borderRadius: 6,
       fontSize: fontSize,
       color: color,
       textColor: textColor,
@@ -135,7 +135,7 @@ class CustomButton extends StatelessWidget {
     bool isLoading = false,
     bool isDisabled = false,
     bool isWidthOff = false,
-    Color? textColor = Colors.black,
+    Color? textColor = Colors.white,
     Color? color,
     Widget? child,
   }) {
@@ -163,15 +163,14 @@ class CustomButton extends StatelessWidget {
     final Widget elevatedBtn = ElevatedButton(
         onPressed: isDisabled ? null : onPressed,
         style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(Colors.black12),
-          padding: MaterialStateProperty.all(EdgeInsets.zero),
-          backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-            if (states.contains(MaterialState.disabled)) {
+          padding: WidgetStateProperty.all(EdgeInsets.zero),
+          backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+            if (states.contains(WidgetState.disabled)) {
               return color ?? theme.backgroundColor4;
             }
             return color ?? theme.primaryColor;
           }),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius:
                   fullBorderRadius ?? BorderRadius.circular(borderRadius.h),

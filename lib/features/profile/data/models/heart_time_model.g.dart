@@ -9,7 +9,7 @@ part of 'heart_time_model.dart';
 HeartTimeModel _$HeartTimeModelFromJson(Map<String, dynamic> json) =>
     HeartTimeModel(
       fullAt: json['fullAt'] as String,
-      secondsTillFull: json['secondsTillFull'] as int,
+      secondsTillFull: (json['secondsTillFull'] as num).toInt(),
     );
 
 Map<String, dynamic> _$HeartTimeModelToJson(HeartTimeModel instance) =>
