@@ -29,8 +29,8 @@ class CellItem extends StatelessWidget {
       borderColor = const Color(0xFF219653);
     }
     return CustomContainer(
-      width: 30.w,
-      height: 30.w,
+      width: 28.w,
+      height: 28.w,
       topMargin: 0,
       onPressed: () {
         // globalSL<GameBloc>().add(CrosswordTapGameEvent(point: cell.point));
@@ -55,8 +55,8 @@ class EmptyCellItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Container(
-      width: 30.w,
-      height: 30.w,
+      width: 28.w,
+      height: 28.w,
       decoration: BoxDecoration(
           color: theme.backgroundColor1,
           border: Border.all(color: theme.backgroundColor3),

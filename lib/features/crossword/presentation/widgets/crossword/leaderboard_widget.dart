@@ -23,6 +23,7 @@ class LeaderboardWidget extends StatelessWidget {
         ),
         for (int i = 0; i < 5; i++)
           CustomContainer(
+              topMargin: 8.h,
               color: (i % 2 == 0)
                   ? theme.backgroundColor3
                   : theme.backgroundColor2,

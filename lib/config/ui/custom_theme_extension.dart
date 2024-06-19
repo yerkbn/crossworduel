@@ -63,10 +63,10 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
         greenLightColor: const Color(0xFF76AD8D),
         yellowHardColor: const Color(0xFFDBD38D),
         yellowLightColor: const Color(0xFFFFFBD7),
-        blueHardColor: const Color(0xFF1F93FD),
-        blueLightColor: const Color(0xFFC1E1FF),
-        redHardColor: const Color(0xFFD27C7C),
-        redLightColor: const Color(0xFFFFAFAF),
+        blueHardColor: const Color(0xFF1679AB),
+        blueLightColor: const Color(0xFF80C4E9),
+        redHardColor: const Color(0xFFEE4E4E),
+        redLightColor: const Color(0xFFFF6969),
       );
 
   factory CustomThemeExtension.dark() => CustomThemeExtension(
@@ -83,9 +83,9 @@ class CustomThemeExtension extends ThemeExtension<CustomThemeExtension> {
         yellowHardColor: const Color(0xFFDBD38D),
         yellowLightColor: const Color(0xFFFFFBD7),
         blueHardColor: const Color(0xFF1F93FD),
-        blueLightColor: const Color(0xFFC1E1FF),
+        blueLightColor: const Color(0xFF80C4E9),
         redHardColor: const Color(0xFFD27C7C),
-        redLightColor: const Color(0xFFFFAFAF),
+        redLightColor: const Color(0xFFFFB1B1),
       );
 
   static ThemeData get darkThemeData =>

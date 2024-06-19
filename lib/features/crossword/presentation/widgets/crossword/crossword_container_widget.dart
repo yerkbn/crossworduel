@@ -12,12 +12,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CrosswordContainerWidget extends StatelessWidget with Normalizer {
   final bool isDetail;
-  const CrosswordContainerWidget({super.key, this.isDetail = false});
+  final int id;
+  const CrosswordContainerWidget(
+      {super.key, this.isDetail = false, required this.id});
 
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
+        topMargin: 8.h,
         borderRadius: 8.r,
         color: theme.backgroundColor3,
         onPressed: isDetail

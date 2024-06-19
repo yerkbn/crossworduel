@@ -1,5 +1,7 @@
 import 'package:crossworduel/core/service-locator/service_locator.dart';
+import 'package:crossworduel/features/crossword/presentation/pages/crossword_create_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_detail_page.dart';
+import 'package:crossworduel/features/crossword/presentation/pages/crossword_run_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -8,7 +10,10 @@ import 'package:go_router/go_router.dart';
 class AuthNavigation implements ServiceLocator {
   static const String main = '/';
   static const String detail = '/detail';
+  static const String run = '/run';
+  static const String create = '/create';
 
+  static const Duration navigationDuration = Duration(milliseconds: 150);
   final RouteObserver<ModalRoute> routeObserver;
   // static final RouteObserver<PageRoute> _routeObserver =
   //     RouteObserver<PageRoute>();
@@ -31,9 +36,43 @@ class AuthNavigation implements ServiceLocator {
           },
         ),
         GoRoute(
+          name: detail,
           path: detail,
-          builder: (BuildContext context, GoRouterState state) {
-            return const CrosswordDetailPage();
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const CrosswordDetailPage(),
+              transitionDuration: navigationDuration,
+              reverseTransitionDuration: navigationDuration,
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
+            );
+          },
+        ),
+        GoRoute(
+          name: run,
+          path: run,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const CrosswordRunPage(),
+              transitionDuration: navigationDuration,
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
+            );
+          },
+        ),
+        GoRoute(
+          name: create,
+          path: create,
+          pageBuilder: (context, state) {
+            return CustomTransitionPage(
+              key: state.pageKey,
+              child: const CrosswordCreatePage(),
+              transitionDuration: navigationDuration,
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
+            );
           },
         ),
       ],
@@ -49,10 +88,42 @@ class AuthNavigation implements ServiceLocator {
         },
       ),
       GoRoute(
+        name: detail,
         path: detail,
-        builder: (BuildContext context, GoRouterState state) {
-          // final CrosswordEntity arg = state.extra as CrosswordEntity;
-          return const CrosswordDetailPage();
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const CrosswordDetailPage(),
+            transitionDuration: navigationDuration,
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          );
+        },
+      ),
+      GoRoute(
+        name: run,
+        path: run,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const CrosswordRunPage(),
+            transitionDuration: navigationDuration,
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          );
+        },
+      ),
+      GoRoute(
+        name: create,
+        path: create,
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const CrosswordCreatePage(),
+            transitionDuration: navigationDuration,
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          );
         },
       ),
     ]);

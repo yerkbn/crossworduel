@@ -3,6 +3,7 @@ import 'package:crossworduel/core/design-system/appbar/main_app_bar.dart';
 import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
+import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/crossword_container_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/leaderboard_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/rating_widget.dart';
@@ -10,6 +11,7 @@ import 'package:crossworduel/features/crossword/presentation/widgets/crossword_n
 import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/game-core/crossword/crossoword_picker_manager.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
+import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -50,7 +52,7 @@ class _CrosswordDetailPageState extends State<CrosswordDetailPage> {
             paddingVertical: 0,
             child: Column(
               children: [
-                CrosswordContainerWidget(isDetail: true),
+                CrosswordContainerWidget(isDetail: true, id: 0),
                 16.ph,
                 if (_crossword != null) CrosswordWidget(crossword: _crossword!),
                 16.ph,
@@ -77,7 +79,9 @@ class _CrosswordDetailPageState extends State<CrosswordDetailPage> {
               child: Assets.icons.pen.image(height: 20.h),
             ),
             width: 216.w,
-            onPressed: () {}),
+            onPressed: () {
+              globalSL<AuthNavigation>().globalRouter.push(AuthNavigation.run);
+            }),
         6.pw,
         CustomContainer(
           color: theme.backgroundColor3,

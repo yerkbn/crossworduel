@@ -29,7 +29,7 @@ class CustomContainer extends StatelessWidget {
     this.width,
     this.height,
     this.minHeight = 0,
-    this.topMargin = 8,
+    this.topMargin = 0,
     this.leftMargin = 0,
     this.rightMargin = 0,
     this.paddingHorizantal,
@@ -57,11 +57,11 @@ class CustomContainer extends StatelessWidget {
       );
     }
     return Container(
-      width: width,
-      height: height,
+      width: width?.w,
+      height: height?.h,
       constraints: constraints ?? BoxConstraints(minHeight: minHeight.h),
       margin: EdgeInsets.only(
-          top: topMargin.h, left: leftMargin, right: rightMargin),
+          top: topMargin.h, left: leftMargin.w, right: rightMargin.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(borderRadius.h),
         color: color ?? theme.backgroundColor2,

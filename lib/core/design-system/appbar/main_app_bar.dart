@@ -36,7 +36,7 @@ class _MainAppBarBody extends State<MainAppBarBody> {
           decoration: BoxDecoration(
               color: theme.backgroundColor2,
               border:
-                  Border(bottom: BorderSide(color: theme.backgroundColor2))),
+                  Border(bottom: BorderSide(color: theme.backgroundColor3))),
           width: double.infinity,
           padding: EdgeInsets.only(right: ScreenUtil().setHeight(16)),
           child: Center(

@@ -1,5 +1,6 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/appbar/main_app_bar.dart';
+import 'package:crossworduel/core/design-system/bottom-sheet/custom_modal_bottom_sheet.dart';
 import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/design-system/page_switcher/custom_page_switcher.dart';
@@ -10,7 +11,11 @@ import 'package:crossworduel/features/crossword/presentation/bloc/category/categ
 import 'package:crossworduel/features/crossword/presentation/data/main_switch_data.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/crosswords_container_widget.dart';
 import 'package:crossworduel/core/design-system/label/label_widget.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/difficulty_bottom_sheet.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/language_bottom_sheet.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/support_bottom_sheet.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
+import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -73,14 +78,19 @@ class _MainPageState extends State<MainPage> {
                   height: 28,
                   paddingFactor: 1.2,
                   imagePath: Assets.icons.kz.path,
-                  onPressed: () {},
+                  onPressed: () {
+                    showCustomModalBottomSheet(context, LanguageBottomSheet());
+                  },
                 ),
                 6.pw,
                 LabelWidget(
                   text: "MEDIUM",
                   height: 28,
                   paddingFactor: 1.2,
-                  onPressed: () {},
+                  onPressed: () {
+                    showCustomModalBottomSheet(
+                        context, DifficultyBottomSheet());
+                  },
                   color: theme.greenLightColor,
                   borderColor: theme.greenHardColor,
                 ),
@@ -98,7 +108,9 @@ class _MainPageState extends State<MainPage> {
         CustomButton.h2(
           title: "SUPPORT",
           width: 132.w,
-          onPressed: () {},
+          onPressed: () {
+            showCustomModalBottomSheet(context, SupportBottomSheet());
+          },
           child: Padding(
             padding: EdgeInsets.only(right: 8.w),
             child: Assets.icons.support.image(height: 24.h),
@@ -107,7 +119,9 @@ class _MainPageState extends State<MainPage> {
         CustomButton.h2(
           title: "CREATE",
           width: 132.w,
-          onPressed: () {},
+          onPressed: () {
+            globalSL<AuthNavigation>().globalRouter.push(AuthNavigation.create);
+          },
           child: Padding(
             padding: EdgeInsets.only(right: 8.w),
             child: Assets.icons.pen.image(height: 22.h),

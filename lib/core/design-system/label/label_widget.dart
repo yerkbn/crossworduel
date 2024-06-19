@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class LabelWidget extends StatelessWidget {
   final String text;
   final double height;
+  final double? width;
   final String? imagePath;
   final void Function()? onPressed;
   final Color? color;
@@ -18,10 +19,11 @@ class LabelWidget extends StatelessWidget {
     required this.text,
     this.imagePath,
     this.height = 20,
+    this.paddingFactor = 1,
+    this.width,
     this.onPressed,
     this.color,
     this.borderColor,
-    this.paddingFactor = 1,
   });
 
   @override
@@ -29,6 +31,7 @@ class LabelWidget extends StatelessWidget {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
       height: height.h,
+      width: width,
       borderRadius: 6.r,
       color: color ?? theme.backgroundColor4,
       borderColor: borderColor ?? theme.backgroundColor4,

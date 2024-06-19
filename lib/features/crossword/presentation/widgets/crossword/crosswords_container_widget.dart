@@ -35,12 +35,7 @@ class CrosswordsContainerWidget extends StatelessWidget with Normalizer {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
+                for (int i = 0; i < 10; i++) CrosswordContainerWidget(id: i),
                 32.ph,
               ],
             ),
@@ -53,12 +48,7 @@ class CrosswordsContainerWidget extends StatelessWidget with Normalizer {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
+                for (int j = 10; j < 20; j++) CrosswordContainerWidget(id: j),
                 32.ph,
               ],
             ),
@@ -71,12 +61,7 @@ class CrosswordsContainerWidget extends StatelessWidget with Normalizer {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
-                CrosswordContainerWidget(),
+                for (int k = 20; k < 30; k++) CrosswordContainerWidget(id: k),
                 32.ph,
               ],
             ),

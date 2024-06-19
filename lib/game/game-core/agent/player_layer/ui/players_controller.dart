@@ -2,7 +2,6 @@ import 'package:crossworduel/features/profile/domain/entities/history_entity.dar
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/crossword/crossword_widget.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/crossword/hint_widget.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/final/final_result_widget.dart';
-import 'package:crossworduel/game/game-core/agent/player_layer/ui/keyboard/keyboard_widget.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/player/player_item.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/timer/game_timer.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/ui/top-control/top_control_widget.dart';
@@ -104,7 +103,7 @@ class PlayersControllerState extends State<PlayersController>
           if (_crossword != null) CrosswordWidget(crossword: _crossword!),
           if (_crossword != null && _crossword!.getActiveSpan != null)
             HintWidget(span: _crossword!.getActiveSpan!),
-          if (_crossword != null) KeyboardWidget(crossword: _crossword!),
+          // if (_crossword != null) KeyboardWidget(crossword: _crossword!),
           if (_historyEntity != null)
             FinalResultWidget(historyEntity: _historyEntity!)
         ],

@@ -2,22 +2,19 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/game/game-core/agent/player_layer/player_event.dart';
 import 'package:crossworduel/game/game-core/game/bloc/game_bloc.dart';
-import 'package:crossworduel/game/game-core/sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyboardWidget extends StatelessWidget {
-  final CrosswordEntity crossword;
-  const KeyboardWidget({super.key, required this.crossword});
+  const KeyboardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: Sizer().getHeight(582)),
-        width: Sizer().getWidth(375),
-        height: Sizer().getHeight(200),
+        width: 345.w,
+        height: 200.h,
         child: Column(
           children: [
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -66,24 +63,24 @@ class KeyboardWidget extends StatelessWidget {
       {Function()? onTap}) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
-      width: Sizer().getWidth(33),
-      height: Sizer().getHeight(54),
+      width: 30,
+      height: 54,
       topMargin: 0,
-      leftMargin: Sizer().getWidth(2),
-      rightMargin: Sizer().getWidth(2),
+      leftMargin: 2,
+      rightMargin: 2,
       onPressed: onTap ??
           () {
-            globalSL<GameBloc>().add(
-                KeyboardTapGameEvent(letter: letter, crossword: crossword));
+            // globalSL<GameBloc>().add(
+            //     KeyboardTapGameEvent(letter: letter, crossword: crossword));
           },
-      borderRadius: Sizer().getWidth(4),
+      borderRadius: 6.w,
       color: theme.backgroundColor3,
-      borderColor: theme.backgroundColor2,
+      // borderColor: theme.backgroundColor4,`
       paddingSize: 0,
       child: Text(letter.toUpperCase(),
           style: theme.headline2.copyWith(
-            color: Colors.black,
-            fontSize: Sizer().getSp(14),
+            color: theme.textColor1,
+            fontSize: 14.sp,
           )),
     );
   }

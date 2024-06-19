@@ -49,6 +49,17 @@ class $AssetsIconsGen {
   /// File path: assets/icons/heart.png
   AssetGenImage get heart => const AssetGenImage('assets/icons/heart.png');
 
+  /// File path: assets/icons/hearts-bag.png
+  AssetGenImage get heartsBag =>
+      const AssetGenImage('assets/icons/hearts-bag.png');
+
+  /// File path: assets/icons/hearts-chest.png
+  AssetGenImage get heartsChest =>
+      const AssetGenImage('assets/icons/hearts-chest.png');
+
+  /// File path: assets/icons/hearts.png
+  AssetGenImage get hearts => const AssetGenImage('assets/icons/hearts.png');
+
   /// File path: assets/icons/kz.png
   AssetGenImage get kz => const AssetGenImage('assets/icons/kz.png');
 
@@ -82,6 +93,9 @@ class $AssetsIconsGen {
         folder,
         google,
         heart,
+        heartsBag,
+        heartsChest,
+        hearts,
         kz,
         light,
         order,
