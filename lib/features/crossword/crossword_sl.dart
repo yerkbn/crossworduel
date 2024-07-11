@@ -1,4 +1,6 @@
 import 'package:crossworduel/core/service-locator/service_locator.dart';
+import 'package:crossworduel/features/crossword/domain/repositories/crossword_repository_contract.dart';
+import 'package:crossworduel/features/crossword/domain/usecases/get_crosswords_usecase.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/category/category_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -11,7 +13,9 @@ class CrosswordServiceLocator extends ServiceLocator {
     // block
     sl.registerLazySingleton<CategoryBloc>(() => CategoryBloc());
     // use cases
+    sl.registerLazySingleton(() => GetCrosswordUsecase(sl()));
     // repositories
-    // data sources
+    sl.registerLazySingleton<CrosswordRepositoryContract>(
+        () => CrosswordRepositoryImpl(supabaseClient: sl()));
   }
 }

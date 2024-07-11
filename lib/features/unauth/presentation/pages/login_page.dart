@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/snack-bar/show_custom_snack_bar.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/signin/signin_bloc.dart';
@@ -30,53 +31,67 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage(Assets.image.background.path),
-              fit: BoxFit.cover,
-              colorFilter:
-                  const ColorFilter.mode(Colors.black54, BlendMode.darken)),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              BlocListener<SigninBloc, SigninState>(
-                bloc: _signinBloc,
-                listener: (BuildContext _, state) {
-                  if (state is FailureSigninState) {
-                    showCustomSnackBar(
-                        context: context,
-                        type: CustomSnackBarType.failure,
-                        title: state.message);
-                  }
-                },
-                child: Column(
-                  children: [
-                    // DevUrlWidget(),
-                    12.ph,
-                    GoogleButton(signinBloc: _signinBloc),
-                    10.ph,
-                    if (Platform.isAndroid)
-                      0.ph
-                    else
-                      AppleButton(signinBloc: _signinBloc),
-                  ],
-                ),
+      backgroundColor: theme.textColor1,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          36.ph,
+          Container(
+            width: double.infinity,
+            height: 450.h,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(Assets.image.background.path),
+                fit: BoxFit.cover,
               ),
-              12.ph,
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child: TermsPrivacyText(),
-              ),
-              64.ph,
-            ],
+            ),
           ),
-        ),
+          Expanded(child: 0.ph),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.w),
+            child: BlocListener<SigninBloc, SigninState>(
+              bloc: _signinBloc,
+              listener: (BuildContext _, state) {
+                if (state is FailureSigninState) {
+                  showCustomSnackBar(
+                      context: context,
+                      type: CustomSnackBarType.failure,
+                      title: state.message);
+                }
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Crossword Duel",
+                    style: theme.headline1.copyWith(
+                        color: theme.backgroundColor1, fontSize: 36.sp),
+                  ),
+                  Text(
+                    "Solve Crosswords, Create Your Own, Share the Fun, and Race to Victory",
+                    style:
+                        theme.headline3.copyWith(color: theme.backgroundColor1),
+                  ),
+                  24.ph,
+                  GoogleButton(signinBloc: _signinBloc),
+                  10.ph,
+                  if (Platform.isAndroid)
+                    0.ph
+                  else
+                    AppleButton(signinBloc: _signinBloc),
+                  12.ph,
+                  const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: TermsPrivacyText(),
+                  ),
+                  36.ph,
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

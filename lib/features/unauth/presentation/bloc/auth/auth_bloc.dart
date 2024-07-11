@@ -1,5 +1,4 @@
 import 'package:crossworduel/core/usecases/no_params.dart';
-import 'package:crossworduel/features/profile/domain/usecases/refresh_me_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/cach_me_usecase.dart';
 import 'package:crossworduel/features/unauth/domain/usecases/get_me_usecase.dart';
@@ -14,16 +13,11 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final GetMeUsecase getMe;
   final LogoutUsecase logout;
-  final RefreshMeUsecase refreshMe;
   final CacheMeUsecase cacheMe;
 
   MeEntity? currentUser;
 
-  AuthBloc(
-      {required this.getMe,
-      required this.logout,
-      required this.refreshMe,
-      required this.cacheMe})
+  AuthBloc({required this.getMe, required this.logout, required this.cacheMe})
       : super(LoadingAuthState()) {
     on<AuthEvent>((event, emit) async {
       // App first loaded
@@ -32,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final result = await getMe(const NoParams());
         emit(result.fold(
           (failure) {
-            add(LogInAuthEvent(me: MeEntity.init()));
+            // add(LogInAuthEvent(me: MeEntity.init()));
             return UnauthenticatedAuthState();
           },
           (meEntity) {
@@ -63,14 +57,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
 
       if (event is RefreshAuthEvent) {
-        final result = await refreshMe(const NoParams());
-        emit(result.fold(
-          (failure) => state,
-          (meEntity) {
-            currentUser = meEntity;
-            return AuthenticatedAuthState(me: meEntity);
-          },
-        ));
+        // final result = await refreshMe(const NoParams());
+        // emit(result.fold(
+        //   (failure) => state,
+        //   (meEntity) {
+        //     currentUser = meEntity;
+        //     return AuthenticatedAuthState(me: meEntity);
+        //   },
+        // ));
       }
 
       if (event is EditAuthEvent) {

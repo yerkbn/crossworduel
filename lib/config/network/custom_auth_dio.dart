@@ -1,7 +1,7 @@
 part of 'custom_dio.dart';
 
 class CustomAuthDio extends CustomDio {
-  String get token => globalSL<AuthBloc>().currentUser!.token;
+  String get token => "EMPTY";
   Map<String, String> get getHeader => {"Authorization": token};
 
   CustomAuthDio({

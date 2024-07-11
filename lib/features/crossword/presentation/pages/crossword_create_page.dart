@@ -2,11 +2,10 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
+import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword_net/crossword_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/crossword_app_bar.dart';
-import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/game/game-core/agent/player_layer/ui/keyboard/keyboard_widget.dart';
-import 'package:crossworduel/game/game-core/crossword/crossoword_picker_manager.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/keyboard/keyboard_widget.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,7 +18,6 @@ class CrosswordCreatePage extends StatefulWidget {
 }
 
 class _CrosswordCreatePageState extends State<CrosswordCreatePage> {
-  late CrosswordPickerManager _picker;
   CrosswordEntity? _crossword;
 
   @override
@@ -29,10 +27,9 @@ class _CrosswordCreatePageState extends State<CrosswordCreatePage> {
   }
 
   void _load() async {
-    _picker = await CrosswordPickerManager.create();
-    setState(() {
-      _crossword = CrosswordEntity.parseMap({"spans": _picker.pick()});
-    });
+    // setState(() {
+    //   _crossword = CrosswordEntity.parseMap({"spans": _picker.pick()});
+    // });
   }
 
   @override

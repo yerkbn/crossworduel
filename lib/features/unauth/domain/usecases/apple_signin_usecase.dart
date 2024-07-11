@@ -8,7 +8,6 @@ import 'package:crossworduel/core/usecases/usecase.dart';
 import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
 import 'package:crossworduel/features/unauth/domain/repositories/unauth_repository_contract.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 class AppleSigninUsecase implements UseCase<MeEntity, NoParams> {
   final UnauthRepositoryContract _repositoryContract;
@@ -41,18 +40,7 @@ class AppleSigninUsecase implements UseCase<MeEntity, NoParams> {
   }
 
   Future<String> getToken() async {
-    final settings = await FirebaseMessaging.instance.requestPermission();
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    } else if (settings.authorizationStatus ==
-        AuthorizationStatus.provisional) {
-    } else {
-      return '';
-    }
-
-    FirebaseMessaging messaging = FirebaseMessaging.instance;
-    String? token = await messaging.getToken();
-    print("TOKEN IS $token");
-    return token ?? '';
+    return "";
   }
 }
 

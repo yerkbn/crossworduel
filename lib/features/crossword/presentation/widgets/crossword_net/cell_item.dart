@@ -1,6 +1,6 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
-import 'package:crossworduel/game/domain/entities/cell_entity.dart';
+import 'package:crossworduel/features/crossword/domain/entities/cell_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

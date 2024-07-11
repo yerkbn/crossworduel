@@ -2,8 +2,6 @@ import 'package:crossworduel/core/exception/exception_mapper.dart';
 import 'package:crossworduel/core/exception/network_exception.dart';
 import 'package:crossworduel/core/normalizer/normalizer.dart';
 import 'package:crossworduel/core/service-locator/service_locator.dart';
-import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 

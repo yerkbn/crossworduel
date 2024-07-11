@@ -5,6 +5,7 @@ import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/normalizer/normalizer.dart';
 import 'package:crossworduel/core/design-system/label/label_widget.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CrosswordContainerWidget extends StatelessWidget with Normalizer {
   final bool isDetail;
-  final int id;
+  final CrosswordEntity crosswordEntity;
   const CrosswordContainerWidget(
-      {super.key, this.isDetail = false, required this.id});
+      {super.key, this.isDetail = false, required this.crosswordEntity});
 
   @override
   Widget build(BuildContext context) {
@@ -35,16 +36,15 @@ class CrosswordContainerWidget extends StatelessWidget with Normalizer {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "The Kingdom",
+              crosswordEntity.title,
               style: theme.headline1,
             ),
             Text(
-              normalizeString(
-                  "The person who rule the some kingdom, and wife is Queen bergen standard dummy text ever since the 1500s",
-                  maxLength: isDetail ? 200 : 84,
-                  withDots: true),
+              normalizeString(crosswordEntity.description,
+                  maxLength: isDetail ? 200 : 84, withDots: true),
               style: theme.headline4,
             ),
+            6.ph,
             Row(
               children: [
                 CustomProfileWidget(

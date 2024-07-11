@@ -3,6 +3,7 @@ import 'package:crossworduel/features/crossword/presentation/pages/crossword_cre
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_detail_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_run_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/main_page.dart';
+import 'package:crossworduel/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,7 @@ class AuthNavigation implements ServiceLocator {
   static const String detail = '/detail';
   static const String run = '/run';
   static const String create = '/create';
+  static const String profile = '/profile';
 
   static const Duration navigationDuration = Duration(milliseconds: 150);
   final RouteObserver<ModalRoute> routeObserver;
@@ -73,6 +75,13 @@ class AuthNavigation implements ServiceLocator {
               transitionsBuilder: (_, a, __, c) =>
                   FadeTransition(opacity: a, child: c),
             );
+          },
+        ),
+        GoRoute(
+          name: profile,
+          path: profile,
+          builder: (context, state) {
+            return ProfilePage();
           },
         ),
       ],

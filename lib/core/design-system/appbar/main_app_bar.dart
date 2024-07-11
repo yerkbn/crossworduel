@@ -10,15 +10,27 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainAppBar extends PreferredSize {
   final bool withBack;
-  MainAppBar({super.key, this.withBack = true})
-      : super(
+  final bool isProfileNavigationEnabled;
+  MainAppBar({
+    super.key,
+    this.withBack = true,
+    this.isProfileNavigationEnabled = true,
+  }) : super(
             preferredSize: Size(double.infinity, 54.h),
-            child: MainAppBarBody(withBack: withBack));
+            child: MainAppBarBody(
+              withBack: withBack,
+              isProfileNavigationEnabled: isProfileNavigationEnabled,
+            ));
 }
 
 class MainAppBarBody extends StatefulWidget {
   final bool withBack;
-  const MainAppBarBody({super.key, required this.withBack});
+  final bool isProfileNavigationEnabled;
+  const MainAppBarBody({
+    super.key,
+    required this.withBack,
+    required this.isProfileNavigationEnabled,
+  });
 
   @override
   State<StatefulWidget> createState() => _MainAppBarBody();
@@ -72,6 +84,8 @@ class _MainAppBarBody extends State<MainAppBarBody> {
                       else
                         CustomProfileWidget(
                           color: theme.backgroundColor3,
+                          isProfileNavigationEnabled:
+                              widget.isProfileNavigationEnabled,
                           username: "@yerkbn",
                           imageURL:
                               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQty1HQ79GVs19TXZ8MakAGjMCCHhvXH8XbHy-8spFeJw&s",

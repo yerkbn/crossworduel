@@ -9,7 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GoogleButton extends StatefulWidget {
   final SigninBloc signinBloc;
-  const GoogleButton({required this.signinBloc, super.key});
+  final void Function()? onPressed;
+  const GoogleButton({required this.signinBloc, super.key, this.onPressed});
 
   @override
   State<GoogleButton> createState() => _GoogleButtonState();
@@ -34,19 +35,20 @@ class _GoogleButtonState extends State<GoogleButton> {
         builder: (_, SigninState state) {
           final bool isLoading =
               state is LoadingSigninState && state.from == "GOOGLE";
-          return CustomButton.h2(
+          return CustomButton.h1(
             title: "",
             isLoading: isLoading,
-            textColor: Colors.black,
+            textColor: theme.textColor1,
             isDisabled: false,
-            onPressed: () {
-              if (!isLoading) {
-                widget.signinBloc
-                    .add(const ActivateSigninEvent(from: "GOOGLE"));
-              }
-            },
+            onPressed: widget.onPressed ??
+                () {
+                  if (!isLoading) {
+                    widget.signinBloc
+                        .add(const ActivateSigninEvent(from: "GOOGLE"));
+                  }
+                },
             width: double.infinity,
-            color: Colors.white,
+            color: theme.backgroundColor3,
             child: Row(
               children: [
                 CustomLocalImageWidget(
@@ -59,7 +61,7 @@ class _GoogleButtonState extends State<GoogleButton> {
                   'Sign in with Google',
                   style: theme.headline2.copyWith(
                     fontSize: 14.sp,
-                    color: Colors.black,
+                    color: theme.textColor1,
                   ),
                 )
               ],

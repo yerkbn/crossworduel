@@ -1,52 +1,54 @@
-import 'package:crossworduel/features/profile/domain/entities/score_entity.dart';
+import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:equatable/equatable.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MeEntity extends Equatable {
   final String id;
-  final String token;
   final String email;
-  final String username;
+  final String fullname;
   final String avatar;
-  final ScoreEntity score;
 
   const MeEntity({
     required this.id,
-    required this.token,
-    required this.username,
+    required this.fullname,
     required this.email,
     required this.avatar,
-    required this.score,
   });
 
   factory MeEntity.init() {
     return MeEntity(
         id: "0",
-        token: "",
-        username: "@itsme",
+        fullname: "",
         email: "itsme@gmail.com",
         avatar:
-            "https://pics.craiyon.com/2023-08-02/7a951cac85bd4aa2b0e70dbaabb8404e.webp",
-        score: ScoreEntity(heart: 0, strike: 0, point: 1000));
+            "https://pics.craiyon.com/2023-08-02/7a951cac85bd4aa2b0e70dbaabb8404e.webp");
   }
 
-  MeEntity copyWith({
-    String? username,
-    String? telnumber,
-    String? avatar,
-    ScoreEntity? score,
-  }) {
-    return MeEntity(
-      id: id,
-      token: token,
-      email: email,
-      username: username ?? this.username,
-      avatar: avatar ?? this.avatar,
-      score: score ?? this.score,
-    );
+  MeEntity copyWith() {
+    return MeEntity(id: id, fullname: fullname, email: email, avatar: avatar);
   }
 
-  String get getToken => token;
+  factory MeEntity.fromUser(User user) => MeEntity(
+        id: user.id,
+        fullname: user.userMetadata!.getValueSafely("full_name"),
+        email: user.userMetadata!.getValueSafely("email"),
+        avatar: user.userMetadata!.getValueSafely("picture"),
+      );
+
+  factory MeEntity.fromJson(Map<String, dynamic> json) => MeEntity(
+        id: json.getValueSafely("id"),
+        fullname: json.getValueSafely("fullname"),
+        email: json.getValueSafely("email"),
+        avatar: json.getValueSafely("avatar"),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "fullname": fullname,
+        "email": email,
+        "avatar": avatar,
+      };
 
   @override
-  List<Object?> get props => [id, token, username, email, avatar, score];
+  List<Object?> get props => [id, fullname, email, avatar];
 }

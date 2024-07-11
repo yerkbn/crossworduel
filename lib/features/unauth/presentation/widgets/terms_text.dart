@@ -25,17 +25,18 @@ class TermsPrivacyText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: "By pressing Sign in, you agree to our ",
+            text:
+                "By signing in, you confirm that you have read and agree to our Privacy Policy  ",
             style: theme.headline3.copyWith(
-              color: Colors.white70,
-              fontSize: 14.sp,
+              color: theme.backgroundColor4,
+              fontSize: 12.sp,
             ),
           ),
           TextSpan(
-              text: ' Privacy terms',
+              text: 'Privacy terms',
               style: theme.headline1.copyWith(
-                color: Colors.white,
-                fontSize: 16.h,
+                color: theme.backgroundColor1,
+                fontSize: 14.h,
               ),
               recognizer: TapGestureRecognizer()
                 ..onTap = () {

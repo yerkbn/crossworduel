@@ -4,12 +4,10 @@ import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword/crossword_container_widget.dart';
+import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/leaderboard_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword/rating_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword_net/crossword_widget.dart';
-import 'package:crossworduel/game/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/game/game-core/crossword/crossoword_picker_manager.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +21,7 @@ class CrosswordDetailPage extends StatefulWidget {
 }
 
 class _CrosswordDetailPageState extends State<CrosswordDetailPage> {
-  late CrosswordPickerManager _picker;
+  // late CrosswordPickerManager _picker;
   CrosswordEntity? _crossword;
 
   @override
@@ -33,10 +31,10 @@ class _CrosswordDetailPageState extends State<CrosswordDetailPage> {
   }
 
   void _load() async {
-    _picker = await CrosswordPickerManager.create();
-    setState(() {
-      _crossword = CrosswordEntity.parseMap({"spans": _picker.pick()});
-    });
+    // _picker = await CrosswordPickerManager.create();
+    // setState(() {
+    //   _crossword = CrosswordEntity.parseMap({"spans": _picker.pick()});
+    // });
   }
 
   @override
@@ -52,7 +50,7 @@ class _CrosswordDetailPageState extends State<CrosswordDetailPage> {
             paddingVertical: 0,
             child: Column(
               children: [
-                CrosswordContainerWidget(isDetail: true, id: 0),
+                // CrosswordContainerWidget(isDetail: true, id: 0),
                 16.ph,
                 if (_crossword != null) CrosswordWidget(crossword: _crossword!),
                 16.ph,

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "125694937780",
+    "project_id": "crossworduel",
+    "storage_bucket": "crossworduel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125694937780:android:c57a958faee0a928dd65e1",
+        "android_client_info": {
+          "package_name": "boolan.soft.crossworduel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125694937780-i8db56ro34cbo1omu8u10poam4hon5rv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "boolan.soft.crossworduel",
+            "certificate_hash": "286527e8d754687b35d174461edd5b77b169ef24"
+          }
+        },
+        {
+          "client_id": "125694937780-e151ka55ofdrkcq059h3m2eq4ujcaubp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7zpnQQzHqTS1neRkNRuNuWAkbSL7RWyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125694937780-e151ka55ofdrkcq059h3m2eq4ujcaubp.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "125694937780-amu1nog0icc1b4tncg6epoke0t33bhhd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "boolan.soft.crossworduel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

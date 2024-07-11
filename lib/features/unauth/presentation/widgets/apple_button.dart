@@ -34,7 +34,7 @@ class _AppleButtonState extends State<AppleButton> {
         builder: (_, SigninState state) {
           final bool isLoading =
               state is LoadingSigninState && state.from == "APPLE";
-          return CustomButton.h2(
+          return CustomButton.h1(
             title: "",
             isLoading: isLoading,
             onPressed: () {
@@ -43,7 +43,7 @@ class _AppleButtonState extends State<AppleButton> {
               }
             },
             width: double.infinity,
-            color: Colors.black,
+            color: theme.backgroundColor3,
             child: Row(
               children: [
                 CustomLocalImageWidget(

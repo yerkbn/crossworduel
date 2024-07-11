@@ -1,6 +1,5 @@
 import 'package:crossworduel/core/normalizer/normalizer.dart';
 import 'package:crossworduel/features/profile/domain/entities/score_entity.dart';
-import 'package:crossworduel/features/unauth/domain/entities/me_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable with Normalizer {
@@ -24,15 +23,6 @@ class UserEntity extends Equatable with Normalizer {
     required this.score,
     required this.status,
   });
-
-  factory UserEntity.fromMe(MeEntity me) => UserEntity(
-        id: me.id,
-        avatar: me.avatar,
-        username: me.username,
-        email: me.email,
-        score: me.score,
-        status: strangerStatus,
-      );
 
   factory UserEntity.empty({String? status}) => UserEntity(
         id: "1111",
