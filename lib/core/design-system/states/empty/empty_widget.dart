@@ -16,23 +16,23 @@ class EmptyWidget extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 24.w),
+        padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 24.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
-              Icons.add,
-              color: Colors.white,
+              Icons.format_list_numbered_sharp,
+              color: theme.backgroundColor4,
               size: 42.h,
             ),
             SizedBox(
               height: 8.h,
             ),
             Text(
-              "Бірінші боп қос!",
+              "Be First!",
               textAlign: TextAlign.center,
-              style: theme.headline2,
+              style: theme.headline2.copyWith(color: theme.backgroundColor4),
             ),
             SizedBox(
               height: 8.h,

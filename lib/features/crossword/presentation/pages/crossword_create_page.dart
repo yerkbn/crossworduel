@@ -1,42 +1,24 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
+import 'package:crossworduel/core/design-system/appbar/main_app_bar.dart';
 import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_net/crossword_widget.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/crossword_app_bar.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/crossword_grid_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/keyboard/keyboard_widget.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CrosswordCreatePage extends StatefulWidget {
-  const CrosswordCreatePage({super.key});
-
-  @override
-  State<CrosswordCreatePage> createState() => _CrosswordCreatePageState();
-}
-
-class _CrosswordCreatePageState extends State<CrosswordCreatePage> {
-  CrosswordEntity? _crossword;
-
-  @override
-  void initState() {
-    super.initState();
-    _load();
-  }
-
-  void _load() async {
-    // setState(() {
-    //   _crossword = CrosswordEntity.parseMap({"spans": _picker.pick()});
-    // });
-  }
+class CrosswordCreatePage extends StatelessWidget {
+  final CrosswordEntity crosswordEntity;
+  const CrosswordCreatePage({super.key, required this.crosswordEntity});
 
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return Scaffold(
-      appBar: CrosswordAppBar(),
+      appBar: MainAppBar(withBack: true),
       backgroundColor: theme.backgroundColor2,
       body: CustomContainer(
         paddingVertical: 0,
@@ -44,7 +26,7 @@ class _CrosswordCreatePageState extends State<CrosswordCreatePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             16.ph,
-            if (_crossword != null) CrosswordWidget(crossword: _crossword!),
+            CrosswordGridWidget(crossword: crosswordEntity),
             16.ph,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

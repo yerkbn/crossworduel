@@ -7,7 +7,8 @@ part 'category_event.dart';
 part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
-  CategoryBloc() : super(ActiveCategoryState(category: MainSwitchData.my())) {
+  CategoryBloc()
+      : super(ActiveCategoryState(category: MainSwitchData.world())) {
     on<SwitchCategoryEvent>((event, emit) {
       emit(ActiveCategoryState(category: event.category));
     });

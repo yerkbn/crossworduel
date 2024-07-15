@@ -1,8 +1,10 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
+import 'package:crossworduel/core/normalizer/normalizer.dart';
+import 'package:crossworduel/features/profile/domain/entities/user_entity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class MeEntity extends Equatable {
+class MeEntity extends Equatable with Normalizer {
   final String id;
   final String email;
   final String fullname;
@@ -28,6 +30,14 @@ class MeEntity extends Equatable {
     return MeEntity(id: id, fullname: fullname, email: email, avatar: avatar);
   }
 
+  String getUsername({int length = 9}) {
+    int atIndex = email.indexOf('@');
+    if (atIndex == -1) {
+      return normalizeString(email, maxLength: length);
+    }
+    return normalizeString(email.substring(0, atIndex), maxLength: length);
+  }
+
   factory MeEntity.fromUser(User user) => MeEntity(
         id: user.id,
         fullname: user.userMetadata!.getValueSafely("full_name"),
@@ -41,6 +51,9 @@ class MeEntity extends Equatable {
         email: json.getValueSafely("email"),
         avatar: json.getValueSafely("avatar"),
       );
+
+  UserEntity get getUser =>
+      UserEntity(id: id, fullName: fullname, avatar: avatar, email: email);
 
   Map<String, dynamic> toJson() => {
         "id": id,

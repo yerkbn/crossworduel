@@ -9,11 +9,10 @@ import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/category/category_bloc.dart';
 import 'package:crossworduel/features/crossword/presentation/data/main_switch_data.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword/crosswords_container_widget.dart';
-import 'package:crossworduel/core/design-system/label/label_widget.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/difficulty_bottom_sheet.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/language_bottom_sheet.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_widgets/crosswords_container_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword_bottom_sheet/support_bottom_sheet.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_widgets/crosswords_filter_widget.dart';
+import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final PageController _pageController = PageController();
+  final PageController _pageController = PageController(initialPage: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +37,26 @@ class _MainPageState extends State<MainPage> {
         backgroundColor: theme.backgroundColor2,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: _getFloating,
-        body: Column(
-          children: [
-            _getHeader,
-            CrosswordsContainerWidget(pageController: _pageController),
-          ],
+        body: BlocBuilder<AuthBloc, AuthState>(
+          bloc: globalSL(),
+          builder: (context, state) {
+            if (state is AuthenticatedAuthState) {
+              return Column(
+                children: [
+                  _getHeader,
+                  CrosswordsContainerWidget(
+                    pageController: _pageController,
+                    userId: state.me.id,
+                  ),
+                ],
+              );
+            }
+            return 0.ph;
+          },
         ));
   }
 
   Widget get _getHeader {
-    final CustomThemeExtension theme = CustomThemeExtension.of(context);
     return CustomContainer(
         topMargin: 0,
         borderRadius: 0,
@@ -71,31 +80,7 @@ class _MainPageState extends State<MainPage> {
                   );
                 }),
             16.ph,
-            Row(
-              children: [
-                LabelWidget(
-                  text: "ENG",
-                  height: 28,
-                  paddingFactor: 1.2,
-                  imagePath: Assets.icons.kz.path,
-                  onPressed: () {
-                    showCustomModalBottomSheet(context, LanguageBottomSheet());
-                  },
-                ),
-                6.pw,
-                LabelWidget(
-                  text: "MEDIUM",
-                  height: 28,
-                  paddingFactor: 1.2,
-                  onPressed: () {
-                    showCustomModalBottomSheet(
-                        context, DifficultyBottomSheet());
-                  },
-                  color: theme.greenLightColor,
-                  borderColor: theme.greenHardColor,
-                ),
-              ],
-            ),
+            CrosswordsFilterWidget(),
             8.ph,
           ],
         ));

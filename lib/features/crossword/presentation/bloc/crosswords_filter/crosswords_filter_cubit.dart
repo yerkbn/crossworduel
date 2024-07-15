@@ -4,6 +4,10 @@ import 'package:crossworduel/features/crossword/domain/entities/crosswords_filte
 class CrosswordsFilterCubit extends Cubit<CrosswordsFilterEntity> {
   CrosswordsFilterCubit()
       : super(CrosswordsFilterEntity(
-            language: LanguageEnum.en.toString(),
-            difficulty: DifficultyEnum.medium.toString()));
+            language: LanguageEnum.en.name,
+            difficulty: DifficultyEnum.medium.name));
+
+  void changeLanguage(LanguageEnum ln) => emit(state.copyWith(ln: ln));
+  void changeDifficulty(DifficultyEnum df) => emit(state.copyWith(df: df));
+  void refresh() => emit(state.copyWith());
 }

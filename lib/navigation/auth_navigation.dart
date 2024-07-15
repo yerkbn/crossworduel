@@ -1,8 +1,10 @@
 import 'package:crossworduel/core/service-locator/service_locator.dart';
+import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_create_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_detail_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_run_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/main_page.dart';
+import 'package:crossworduel/features/profile/domain/entities/user_entity.dart';
 import 'package:crossworduel/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -41,9 +43,10 @@ class AuthNavigation implements ServiceLocator {
           name: detail,
           path: detail,
           pageBuilder: (context, state) {
+            final CrosswordEntity arg = state.extra as CrosswordEntity;
             return CustomTransitionPage(
               key: state.pageKey,
-              child: const CrosswordDetailPage(),
+              child: CrosswordDetailPage(crosswordEntity: arg),
               transitionDuration: navigationDuration,
               reverseTransitionDuration: navigationDuration,
               transitionsBuilder: (_, a, __, c) =>
@@ -55,9 +58,10 @@ class AuthNavigation implements ServiceLocator {
           name: run,
           path: run,
           pageBuilder: (context, state) {
+            final CrosswordEntity arg = state.extra as CrosswordEntity;
             return CustomTransitionPage(
               key: state.pageKey,
-              child: const CrosswordRunPage(),
+              child: CrosswordRunPage(crosswordEntity: arg),
               transitionDuration: navigationDuration,
               transitionsBuilder: (_, a, __, c) =>
                   FadeTransition(opacity: a, child: c),
@@ -68,9 +72,10 @@ class AuthNavigation implements ServiceLocator {
           name: create,
           path: create,
           pageBuilder: (context, state) {
+            final CrosswordEntity arg = state.extra as CrosswordEntity;
             return CustomTransitionPage(
               key: state.pageKey,
-              child: const CrosswordCreatePage(),
+              child: CrosswordCreatePage(crosswordEntity: arg),
               transitionDuration: navigationDuration,
               transitionsBuilder: (_, a, __, c) =>
                   FadeTransition(opacity: a, child: c),
@@ -81,7 +86,8 @@ class AuthNavigation implements ServiceLocator {
           name: profile,
           path: profile,
           builder: (context, state) {
-            return ProfilePage();
+            final UserEntity arg = state.extra as UserEntity;
+            return ProfilePage(userEntity: arg);
           },
         ),
       ],
@@ -100,9 +106,10 @@ class AuthNavigation implements ServiceLocator {
         name: detail,
         path: detail,
         pageBuilder: (context, state) {
+          final CrosswordEntity arg = state.extra as CrosswordEntity;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const CrosswordDetailPage(),
+            child: CrosswordDetailPage(crosswordEntity: arg),
             transitionDuration: navigationDuration,
             transitionsBuilder: (_, a, __, c) =>
                 FadeTransition(opacity: a, child: c),
@@ -113,9 +120,10 @@ class AuthNavigation implements ServiceLocator {
         name: run,
         path: run,
         pageBuilder: (context, state) {
+          final CrosswordEntity arg = state.extra as CrosswordEntity;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const CrosswordRunPage(),
+            child: CrosswordRunPage(crosswordEntity: arg),
             transitionDuration: navigationDuration,
             transitionsBuilder: (_, a, __, c) =>
                 FadeTransition(opacity: a, child: c),
@@ -126,9 +134,10 @@ class AuthNavigation implements ServiceLocator {
         name: create,
         path: create,
         pageBuilder: (context, state) {
+          final CrosswordEntity arg = state.extra as CrosswordEntity;
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const CrosswordCreatePage(),
+            child: CrosswordCreatePage(crosswordEntity: arg),
             transitionDuration: navigationDuration,
             transitionsBuilder: (_, a, __, c) =>
                 FadeTransition(opacity: a, child: c),

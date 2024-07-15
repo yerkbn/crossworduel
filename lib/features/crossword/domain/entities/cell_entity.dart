@@ -55,5 +55,6 @@ class CellEntity extends Equatable {
   bool get isCorrect => currentValue.toUpperCase() == value.toUpperCase();
 
   @override
-  List<Object?> get props => [point, value, isValid, currentValue];
+  List<Object?> get props =>
+      [point, value, isValid, currentValue, isCursive, isCorrect, isCurrent];
 }

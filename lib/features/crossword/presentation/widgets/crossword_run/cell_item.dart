@@ -1,6 +1,8 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
+import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/crossword/domain/entities/cell_entity.dart';
+import 'package:crossworduel/features/crossword/presentation/bloc/crossword_run/crossword_run_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -16,24 +18,27 @@ class CellItem extends StatelessWidget {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
     Color backgroundColor = theme.backgroundColor3;
     Color borderColor = theme.backgroundColor4;
+    Color textColor = Colors.white;
     if (cell.isCurrent) {
-      backgroundColor = const Color(0xFFFFFBD7);
-      borderColor = const Color(0xFFF9E63E);
+      backgroundColor = theme.yellowLightColor;
+      borderColor = theme.yellowHardColor;
+      textColor = Colors.black;
     }
     if (cell.isCursive) {
-      backgroundColor = const Color(0xFFC1E1FF);
-      borderColor = const Color(0xFF1F93FD);
+      backgroundColor = theme.blueLightColor;
+      borderColor = theme.blueHardColor;
     }
     if (cell.isValid) {
-      backgroundColor = const Color(0xFF6FCF97);
-      borderColor = const Color(0xFF219653);
+      backgroundColor = theme.greenLightColor;
+      borderColor = theme.greenHardColor;
+      ;
     }
     return CustomContainer(
       width: 28.w,
       height: 28.w,
       topMargin: 0,
       onPressed: () {
-        // globalSL<GameBloc>().add(CrosswordTapGameEvent(point: cell.point));
+        globalSL<CrosswordRunCubit>().onCellTap(cell.point);
       },
       borderRadius: 6.w,
       color: backgroundColor,
@@ -41,7 +46,7 @@ class CellItem extends StatelessWidget {
       paddingSize: 0,
       child: Text(cell.currentValue.toUpperCase(),
           style: theme.headline2.copyWith(
-            color: Colors.black,
+            color: textColor,
             fontSize: 14.sp,
           )),
     );

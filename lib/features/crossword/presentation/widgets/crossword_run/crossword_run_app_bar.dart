@@ -3,27 +3,29 @@ import 'package:crossworduel/core/design-system/container/custom_container.dart'
 import 'package:crossworduel/core/design-system/label/label_widget.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/crossword/presentation/bloc/timer/timer_cubit.dart';
 import 'package:crossworduel/features/unauth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:crossworduel/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CrosswordAppBar extends PreferredSize {
-  CrosswordAppBar({super.key})
+class CrosswordRunAppBar extends PreferredSize {
+  final TimerCubit timerCubit;
+  CrosswordRunAppBar({super.key, required this.timerCubit})
       : super(
             preferredSize: Size(double.infinity, 54.h),
-            child: CrosswordAppBarBody());
+            child: CrosswordRunAppBarBody(
+              timerCubit: timerCubit,
+            ));
 }
 
-class CrosswordAppBarBody extends StatefulWidget {
-  const CrosswordAppBarBody({super.key});
+class CrosswordRunAppBarBody extends StatelessWidget {
+  final TimerCubit timerCubit;
+  CrosswordRunAppBarBody({super.key, required this.timerCubit});
 
-  @override
-  State<StatefulWidget> createState() => _CrosswordAppBarBody();
-}
-
-class _CrosswordAppBarBody extends State<CrosswordAppBarBody> {
   final bool isNotAuthenticated = globalSL<AuthBloc>().currentUser == null;
+
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
@@ -44,14 +46,19 @@ class _CrosswordAppBarBody extends State<CrosswordAppBarBody> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  LabelWidget(
-                    text: "12 sec",
-                    imagePath: Assets.icons.timer.path,
-                    height: 32,
-                    paddingFactor: 1.2,
-                    onPressed: () {},
-                    color: theme.backgroundColor3,
-                    borderColor: theme.backgroundColor3,
+                  BlocBuilder<TimerCubit, int>(
+                    bloc: timerCubit,
+                    builder: (_, secondsElapsed) {
+                      return LabelWidget(
+                        text: "$secondsElapsed sec",
+                        imagePath: Assets.icons.timer.path,
+                        height: 32,
+                        paddingFactor: 1.2,
+                        onPressed: () {},
+                        color: theme.backgroundColor3,
+                        borderColor: theme.backgroundColor3,
+                      );
+                    },
                   ),
                   Expanded(child: 0.pw),
                   LabelWidget(
@@ -99,7 +106,7 @@ class _CrosswordAppBarBody extends State<CrosswordAppBarBody> {
                     topMargin: 0,
                     borderRadius: 8.h,
                     child: Icon(
-                      Icons.pause,
+                      Icons.close,
                       color: Colors.white,
                       size: 24.h,
                     ),

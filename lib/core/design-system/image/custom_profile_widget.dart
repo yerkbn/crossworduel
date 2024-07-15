@@ -4,13 +4,13 @@ import 'package:crossworduel/core/design-system/image/custom_image.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
 import 'package:crossworduel/core/normalizer/normalizer.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
+import 'package:crossworduel/features/profile/domain/entities/user_entity.dart';
 import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomProfileWidget extends StatelessWidget with Normalizer {
-  final String imageURL;
-  final String username;
+  final UserEntity user;
   final Color color;
   final double paddingHorizantal;
   final double height;
@@ -21,8 +21,7 @@ class CustomProfileWidget extends StatelessWidget with Normalizer {
 
   CustomProfileWidget({
     super.key,
-    required this.imageURL,
-    required this.username,
+    required this.user,
     required this.color,
     this.isProfileNavigationEnabled = true,
     this.imageSize = 24,
@@ -46,7 +45,7 @@ class CustomProfileWidget extends StatelessWidget with Normalizer {
             ? () {
                 globalSL<AuthNavigation>()
                     .globalRouter
-                    .push(AuthNavigation.profile);
+                    .push(AuthNavigation.profile, extra: user);
               }
             : null,
         child: Row(
@@ -54,12 +53,12 @@ class CustomProfileWidget extends StatelessWidget with Normalizer {
             CustomImageWidget(
               width: imageSize.h,
               height: imageSize.h,
-              url: imageURL,
+              url: user.avatar,
               borderRadius: 6.h,
             ),
-            4.pw,
+            6.pw,
             Text(
-              normalizeString(username, maxLength: maxLength),
+              normalizeString(user.getUsername(), maxLength: maxLength),
               style: textStyle ?? theme.headline2,
             ),
           ],

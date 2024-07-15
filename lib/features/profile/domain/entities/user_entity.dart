@@ -1,5 +1,5 @@
+import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:crossworduel/core/normalizer/normalizer.dart';
-import 'package:crossworduel/features/profile/domain/entities/score_entity.dart';
 import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable with Normalizer {
@@ -9,37 +9,38 @@ class UserEntity extends Equatable with Normalizer {
   static const String reqInStatus = 'reqInStatus';
 
   final String id;
-  final String username;
+  final String fullName;
   final String avatar;
   final String email;
-  final ScoreEntity score;
-  final String status; // friends status
 
   const UserEntity({
     required this.id,
-    required this.username,
+    required this.fullName,
     required this.avatar,
     required this.email,
-    required this.score,
-    required this.status,
   });
 
-  factory UserEntity.empty({String? status}) => UserEntity(
-        id: "1111",
-        avatar:
-            "https://sm.ign.com/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.jpg",
-        username: "@avatar",
-        email: "",
-        score: ScoreEntity.empty(),
-        status: status ?? strangerStatus,
-      );
+  String getUsername({int length = 9}) {
+    int atIndex = email.indexOf('@');
+    if (atIndex == -1) {
+      return normalizeString(email, maxLength: length);
+    }
+    return normalizeString(email.substring(0, atIndex), maxLength: length);
+  }
 
-  String getUsername({int length = 9}) => normalizeString(
-        "$username",
-        maxLength: length,
-        withDots: true,
-      );
+  factory UserEntity.empty() {
+    return UserEntity(id: "", fullName: "", avatar: "", email: "");
+  }
+
+  factory UserEntity.fromJson(Map<String, dynamic> json) {
+    return UserEntity(
+      id: json.getValueSafely("id"),
+      fullName: json.getValueSafely("full_name"),
+      avatar: json.getValueSafely("avatar_url"),
+      email: json.getValueSafely("email"),
+    );
+  }
 
   @override
-  List<Object?> get props => [id, username, avatar, email, score];
+  List<Object?> get props => [id, email, avatar, email];
 }

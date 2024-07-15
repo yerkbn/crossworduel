@@ -29,7 +29,7 @@ class CrosswordContainerWidget extends StatelessWidget with Normalizer {
             : () {
                 globalSL<AuthNavigation>()
                     .globalRouter
-                    .push(AuthNavigation.detail);
+                    .push(AuthNavigation.detail, extra: crosswordEntity);
               },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -48,18 +48,16 @@ class CrosswordContainerWidget extends StatelessWidget with Normalizer {
             Row(
               children: [
                 CustomProfileWidget(
-                    imageURL:
-                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ZQ5LAyl5s7REOUSWM96pzNWbj_QJ-cZ_6Q&s",
+                    user: crosswordEntity.user,
                     imageSize: 18,
                     height: 22,
-                    paddingHorizantal: 0,
+                    paddingHorizantal: 6,
                     textStyle: theme.headline3,
-                    username: "@thebanny",
-                    color: theme.backgroundColor3),
+                    color: theme.backgroundColor4),
                 Expanded(child: 0.pw),
                 LabelWidget(
                   text: "",
-                  imagePath: Assets.icons.kz.path,
+                  imagePath: "assets/icons/${crosswordEntity.language}.png",
                 ),
                 2.pw,
                 LabelWidget(
@@ -68,7 +66,7 @@ class CrosswordContainerWidget extends StatelessWidget with Normalizer {
                 ),
                 2.pw,
                 LabelWidget(
-                  text: "4.7",
+                  text: crosswordEntity.getRating,
                   imagePath: Assets.icons.star.path,
                 ),
                 2.pw,
