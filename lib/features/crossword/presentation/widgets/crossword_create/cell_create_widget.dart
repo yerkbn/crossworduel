@@ -2,16 +2,14 @@ import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/crossword/domain/entities/cell_entity.dart';
-import 'package:crossworduel/features/crossword/presentation/bloc/crossword_run/crossword_run_cubit.dart';
+import 'package:crossworduel/features/crossword/domain/entities/point_entity.dart';
+import 'package:crossworduel/features/crossword/presentation/bloc/crossword_create/crossword_create_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CellItem extends StatelessWidget {
+class CellCreateWidget extends StatelessWidget {
   final CellEntity cell;
-  const CellItem({
-    super.key,
-    required this.cell,
-  });
+  const CellCreateWidget({super.key, required this.cell});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +36,7 @@ class CellItem extends StatelessWidget {
       height: 28.w,
       topMargin: 0,
       onPressed: () {
-        globalSL<CrosswordRunCubit>().onCellTap(cell.point);
+        globalSL<CrosswordCreateCubit>().onCellTap(cell.point);
       },
       borderRadius: 6.w,
       color: backgroundColor,
@@ -53,19 +51,25 @@ class CellItem extends StatelessWidget {
   }
 }
 
-class EmptyCellItem extends StatelessWidget {
-  const EmptyCellItem({super.key});
+class EmptyCellCreateWidget extends StatelessWidget {
+  final PointEntity point;
+  const EmptyCellCreateWidget({super.key, required this.point});
 
   @override
   Widget build(BuildContext context) {
     final CustomThemeExtension theme = CustomThemeExtension.of(context);
-    return Container(
+    return CustomContainer(
       width: 28.w,
       height: 28.w,
-      decoration: BoxDecoration(
-          color: theme.backgroundColor1,
-          border: Border.all(color: theme.backgroundColor3),
-          borderRadius: BorderRadius.circular(6.w)),
+      topMargin: 0,
+      onPressed: () {
+        globalSL<CrosswordCreateCubit>().onCellTap(point);
+      },
+      borderRadius: 6.w,
+      color: theme.backgroundColor2,
+      borderColor: theme.backgroundColor3,
+      child: Text("", style: theme.headline2.copyWith(fontSize: 14.sp)),
+      paddingSize: 0,
     );
   }
 }

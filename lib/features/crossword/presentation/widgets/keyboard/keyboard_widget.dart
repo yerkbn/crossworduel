@@ -1,14 +1,18 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
-import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
-import 'package:crossworduel/features/crossword/presentation/bloc/crossword_run/crossword_run_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KeyboardWidget extends StatelessWidget {
-  const KeyboardWidget({super.key});
+  final void Function(String letter) onKeyboardTap;
+  final void Function() onDelete;
+  const KeyboardWidget({
+    super.key,
+    required this.onKeyboardTap,
+    required this.onDelete,
+  });
 
   void _triggerLightImpact() {
     HapticFeedback.lightImpact();
@@ -56,7 +60,8 @@ class KeyboardWidget extends StatelessWidget {
               _buildLetter(context, "N"),
               _buildLetter(context, "M"),
               _buildLetter(context, "<=", onTap: () {
-                globalSL<CrosswordRunCubit>().deleteLetter();
+                _triggerLightImpact();
+                onDelete();
               }),
             ]),
           ],
@@ -75,11 +80,10 @@ class KeyboardWidget extends StatelessWidget {
       onPressed: onTap ??
           () {
             _triggerLightImpact();
-            globalSL<CrosswordRunCubit>().onKeyboardTap(letter);
+            onKeyboardTap(letter);
           },
       borderRadius: 6.w,
       color: theme.backgroundColor3,
-      // borderColor: theme.backgroundColor4,`
       paddingSize: 0,
       child: Text(letter.toUpperCase(),
           style: theme.headline2.copyWith(

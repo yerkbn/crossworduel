@@ -15,6 +15,10 @@ class PointEntity {
     );
   }
 
+  PointEntity copyWith({int? x, int? y}) {
+    return PointEntity(x: x ?? this.x, y: y ?? this.y);
+  }
+
   Map<String, dynamic> get toJson => {"x": x, "y": y};
 
   PointEntity operator +(PointEntity other) {

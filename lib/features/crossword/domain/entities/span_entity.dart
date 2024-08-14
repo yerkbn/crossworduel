@@ -1,8 +1,9 @@
 import 'package:crossworduel/core/extension/map_error_extension.dart';
 import 'package:crossworduel/features/crossword/domain/entities/cell_entity.dart';
 import 'package:crossworduel/features/crossword/domain/entities/point_entity.dart';
+import 'package:equatable/equatable.dart';
 
-class SpanEntity {
+class SpanEntity extends Equatable {
   final PointEntity point;
   final int length;
   final bool vert;
@@ -79,15 +80,25 @@ class SpanEntity {
     return false;
   }
 
-  List<CellEntity> get getCells {
+  List<CellEntity> getCells({bool isCurrentValueFilled = false}) {
     final List<CellEntity> cells = [];
     for (int i = 0; i < length; i++) {
-      final CellEntity cell =
-          CellEntity(point: getPoint(i), value: answer.substring(i, i + 1));
+      String answerLetter = answer.substring(i, i + 1);
+      final CellEntity cell = CellEntity(
+          point: getPoint(i),
+          value: answerLetter,
+          currentValue: isCurrentValueFilled ? answerLetter : "");
       cells.add(cell);
     }
     return cells;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      other is SpanEntity &&
+      point == other.point &&
+      length == other.length &&
+      vert == other.vert;
 
   /// SETTERS
 
@@ -129,6 +140,9 @@ class SpanEntity {
 
   @override
   String toString() {
-    return "[$point len=$length vert=$vert]";
+    return "[$point len=$length vert=$vert, answer=$answer]";
   }
+
+  @override
+  List<Object?> get props => [point, length, vert, answer, clue];
 }

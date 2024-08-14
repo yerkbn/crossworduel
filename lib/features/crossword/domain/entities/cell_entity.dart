@@ -19,6 +19,14 @@ class CellEntity extends Equatable {
     this.currentValue = "",
   });
 
+  factory CellEntity.init(String value) {
+    return CellEntity(
+        point: PointEntity(x: 0, y: 0),
+        value: value,
+        currentValue: value,
+        isValid: true);
+  }
+
   CellEntity copyWith({
     bool? isValid,
     bool? isCurrent,
@@ -53,6 +61,11 @@ class CellEntity extends Equatable {
   }
 
   bool get isCorrect => currentValue.toUpperCase() == value.toUpperCase();
+
+  @override
+  String toString() {
+    return "$point";
+  }
 
   @override
   List<Object?> get props =>

@@ -144,7 +144,14 @@ class _CrosswordRunPageState extends State<CrosswordRunPage> {
             ),
             onPressed: () {}),
         16.ph,
-        KeyboardWidget(),
+        KeyboardWidget(
+          onDelete: () {
+            globalSL<CrosswordRunCubit>().deleteLetter();
+          },
+          onKeyboardTap: (String letter) {
+            globalSL<CrosswordRunCubit>().onKeyboardTap(letter);
+          },
+        ),
       ],
     );
   }

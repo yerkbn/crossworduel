@@ -1,6 +1,6 @@
 import 'package:crossworduel/features/crossword/domain/entities/cell_entity.dart';
 import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/cell_item.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/cell_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/static_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +18,7 @@ class _CrosswordGridWidgetState extends State<CrosswordGridWidget> {
   Widget build(BuildContext context) {
     return Container(
         width: 336.w,
-        height: 336.w,
+        height: 350.w,
         child: StaticGrid(
           gap: 4.w,
           columnCount: 10,
@@ -32,7 +32,10 @@ class _CrosswordGridWidgetState extends State<CrosswordGridWidget> {
   Widget _buildCell({required CrosswordEntity crossword, required int index}) {
     final CellEntity? cell =
         crossword.grid.getCell(crossword.indexToPoint(index));
-    return cell == null ? const EmptyCellItem() : CellItem(cell: cell);
-    // return EmptyCellItem();
+    return SizedBox(
+      width: 30.w,
+      height: 30.w,
+      child: cell == null ? const EmptyCellWidget() : CellWidget(cell: cell),
+    );
   }
 }

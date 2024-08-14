@@ -9,10 +9,12 @@ class CrosswordGridEntity extends Equatable {
 
   const CrosswordGridEntity({required this.cells});
 
-  factory CrosswordGridEntity.init(List<SpanEntity> spans) {
+  factory CrosswordGridEntity.init(List<SpanEntity> spans,
+      {bool isCurrentValueFilled = false}) {
     final Map<int, CellEntity> uniqueCell = {};
     for (final SpanEntity span in spans) {
-      final List<CellEntity> cells = span.getCells;
+      final List<CellEntity> cells =
+          span.getCells(isCurrentValueFilled: isCurrentValueFilled);
       for (int i = 0; i < cells.length; i++) {
         uniqueCell[cells[i].getIndex] = cells[i];
       }
@@ -46,17 +48,30 @@ class CrosswordGridEntity extends Equatable {
     }).toList());
   }
 
+  CrosswordGridEntity createSpan({required SpanEntity span}) {
+    final Map<int, CellEntity> uniqueCell = {};
+    final List<CellEntity> cells = span.getCells();
+    for (int i = 0; i < cells.length; i++)
+      uniqueCell[cells[i].getIndex] = cells[i];
+    return CrosswordGridEntity(
+        cells: [...this.cells, ...uniqueCell.values.toList()]);
+  }
+
   CrosswordGridEntity turnOff() {
     return copyWith(
         cells: cells
-            .map((CellEntity cell) =>
-                cell.copyWith(isCursive: false, isCurrent: false))
+            .map((CellEntity cell) => cell.copyWith(
+                  isCursive: false,
+                  isCurrent: false,
+                ))
             .toList());
   }
 
-  CrosswordGridEntity setCursive(
-      {required PointEntity point, required SpanEntity span}) {
-    final List<CellEntity> spanCells = span.getCells;
+  CrosswordGridEntity setCursive({
+    required PointEntity point,
+    required SpanEntity span,
+  }) {
+    final List<CellEntity> spanCells = span.getCells();
     CrosswordGridEntity crossword = turnOff();
     for (final CellEntity item in spanCells) {
       if (item.point != point) {
@@ -136,6 +151,17 @@ class CrosswordGridEntity extends Equatable {
       }
     }
     return correctSpn;
+  }
+
+  List<CellEntity> getCells(SpanEntity span) {
+    List<CellEntity> resultCells = [];
+    for (CellEntity emptyCell in span.getCells()) {
+      CellEntity? originalCell = getCell(emptyCell.point);
+      if (originalCell != null) {
+        resultCells.add(originalCell);
+      }
+    }
+    return resultCells;
   }
 
   CrosswordGridEntity copyWith({List<CellEntity>? cells}) {

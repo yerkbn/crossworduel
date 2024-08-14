@@ -6,6 +6,7 @@ import 'package:crossworduel/features/crossword/domain/usecases/get_crossword_us
 import 'package:crossworduel/features/crossword/domain/usecases/get_crosswords_usecase.dart';
 import 'package:crossworduel/features/crossword/domain/usecases/set_rating_usecase.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/category/category_bloc.dart';
+import 'package:crossworduel/features/crossword/presentation/bloc/crossword_generate/crossword_generate_cubit.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/crossword_run/crossword_run_cubit.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/crosswords_filter/crosswords_filter_cubit.dart';
 import 'package:crossworduel/features/crossword/presentation/bloc/timer/timer_cubit.dart';
@@ -20,6 +21,8 @@ class CrosswordServiceLocator extends ServiceLocator {
     // block
     sl.registerLazySingleton<CategoryBloc>(() => CategoryBloc());
     sl.registerLazySingleton<CrosswordRunCubit>(() => CrosswordRunCubit());
+    sl.registerLazySingleton<CrosswordGenerateCubit>(
+        () => CrosswordGenerateCubit());
     sl.registerFactory<TimerCubit>(() => TimerCubit());
     sl.registerLazySingleton<CrosswordsFilterCubit>(
         () => CrosswordsFilterCubit());

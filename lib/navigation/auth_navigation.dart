@@ -2,6 +2,7 @@ import 'package:crossworduel/core/service-locator/service_locator.dart';
 import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_create_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_detail_page.dart';
+import 'package:crossworduel/features/crossword/presentation/pages/crossword_generate_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/crossword_run_page.dart';
 import 'package:crossworduel/features/crossword/presentation/pages/main_page.dart';
 import 'package:crossworduel/features/profile/domain/entities/user_entity.dart';
@@ -16,6 +17,7 @@ class AuthNavigation implements ServiceLocator {
   static const String run = '/run';
   static const String create = '/create';
   static const String profile = '/profile';
+  static const String generator = '/generator';
 
   static const Duration navigationDuration = Duration(milliseconds: 150);
   final RouteObserver<ModalRoute> routeObserver;
@@ -69,13 +71,12 @@ class AuthNavigation implements ServiceLocator {
           },
         ),
         GoRoute(
-          name: create,
-          path: create,
+          name: generator,
+          path: generator,
           pageBuilder: (context, state) {
-            final CrosswordEntity arg = state.extra as CrosswordEntity;
             return CustomTransitionPage(
               key: state.pageKey,
-              child: CrosswordCreatePage(crosswordEntity: arg),
+              child: CrosswordGenerateWidget(),
               transitionDuration: navigationDuration,
               transitionsBuilder: (_, a, __, c) =>
                   FadeTransition(opacity: a, child: c),
@@ -134,7 +135,10 @@ class AuthNavigation implements ServiceLocator {
         name: create,
         path: create,
         pageBuilder: (context, state) {
-          final CrosswordEntity arg = state.extra as CrosswordEntity;
+          CrosswordEntity? arg = null;
+          if (state.extra != null) {
+            arg = state.extra as CrosswordEntity;
+          }
           return CustomTransitionPage(
             key: state.pageKey,
             child: CrosswordCreatePage(crosswordEntity: arg),

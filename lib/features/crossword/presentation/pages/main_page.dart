@@ -105,7 +105,9 @@ class _MainPageState extends State<MainPage> {
           title: "CREATE",
           width: 132.w,
           onPressed: () {
-            globalSL<AuthNavigation>().globalRouter.push(AuthNavigation.create);
+            globalSL<AuthNavigation>()
+                .globalRouter
+                .push(AuthNavigation.generator);
           },
           child: Padding(
             padding: EdgeInsets.only(right: 8.w),

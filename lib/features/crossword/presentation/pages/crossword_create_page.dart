@@ -1,18 +1,40 @@
 import 'package:crossworduel/config/ui/custom_theme_extension.dart';
 import 'package:crossworduel/core/design-system/appbar/main_app_bar.dart';
+import 'package:crossworduel/core/design-system/bottom-sheet/custom_full_bottom_sheet.dart';
 import 'package:crossworduel/core/design-system/button/custom_button.dart';
 import 'package:crossworduel/core/design-system/container/custom_container.dart';
 import 'package:crossworduel/core/extension/sizedbox_extension.dart';
+import 'package:crossworduel/core/service-locator/service_locator_manager.dart';
 import 'package:crossworduel/features/crossword/domain/entities/crossword_entity.dart';
-import 'package:crossworduel/features/crossword/presentation/widgets/crossword_run/crossword_grid_widget.dart';
+import 'package:crossworduel/features/crossword/presentation/bloc/crossword_create/crossword_create_cubit.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_create/crossword_grid_create_widget.dart';
+import 'package:crossworduel/features/crossword/presentation/widgets/crossword_create/crossword_span_clues_widget.dart';
 import 'package:crossworduel/features/crossword/presentation/widgets/keyboard/keyboard_widget.dart';
-import 'package:crossworduel/gen/assets.gen.dart';
+import 'package:crossworduel/navigation/auth_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CrosswordCreatePage extends StatelessWidget {
-  final CrosswordEntity crosswordEntity;
-  const CrosswordCreatePage({super.key, required this.crosswordEntity});
+class CrosswordCreatePage extends StatefulWidget {
+  final CrosswordEntity? crosswordEntity;
+  const CrosswordCreatePage({super.key, this.crosswordEntity});
+
+  @override
+  State<CrosswordCreatePage> createState() => _CrosswordCreatePageState();
+}
+
+class _CrosswordCreatePageState extends State<CrosswordCreatePage> {
+  late CrosswordEntity crossword;
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.crosswordEntity == null) {
+      crossword = CrosswordEntity.empty();
+    } else {
+      crossword = widget.crosswordEntity!;
+    }
+    globalSL<CrosswordCreateCubit>().init(crossword);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,64 +42,49 @@ class CrosswordCreatePage extends StatelessWidget {
     return Scaffold(
       appBar: MainAppBar(withBack: true),
       backgroundColor: theme.backgroundColor2,
-      body: CustomContainer(
-        paddingVertical: 0,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            16.ph,
-            CrosswordGridWidget(crossword: crosswordEntity),
-            16.ph,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: BlocBuilder<CrosswordCreateCubit, CrosswordCreateState>(
+        bloc: globalSL<CrosswordCreateCubit>(),
+        builder: (_, CrosswordCreateState state) {
+          return CustomContainer(
+            paddingVertical: 0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                CustomContainer(
-                  color: theme.backgroundColor3,
-                  borderColor: theme.backgroundColor4,
-                  paddingSize: 8,
-                  child: Icon(
-                    Icons.arrow_back_ios_rounded,
-                    color: theme.textColor1,
-                    size: 16.h,
-                  ),
-                  onPressed: () {},
+                16.ph,
+                CrosswordGridCreateWidget(crossword: state.crosswordEntity),
+                16.ph,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CustomButton.h2(
+                        color: theme.redLightColor,
+                        title: "CLUES 12",
+                        width: 154,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                              CustomFullBottomSheet.buildRoute(
+                                  child: CrosswordSpanCluesWidget(),
+                                  context: context,
+                                  isScrollable: false));
+                        }),
+                    CustomButton.h2(
+                        title: "SAVE",
+                        width: 154,
+                        onPressed: () {
+                          globalSL<AuthNavigation>().globalRouter.pop();
+                        }),
+                  ],
                 ),
-                CustomContainer(
-                    paddingSize: 8,
-                    color: theme.backgroundColor3,
-                    width: 254,
-                    child: Text(
-                      "Lorem Ipsum is simply dummy text of the printin Ipsum has been the industry's standard dummy text ever since the 1500s",
-                      textAlign: TextAlign.center,
-                      style: theme.headline4
-                          .copyWith(color: theme.textColor1, fontSize: 12.sp),
-                    )),
-                CustomContainer(
-                  color: theme.backgroundColor3,
-                  borderColor: theme.backgroundColor4,
-                  paddingSize: 8,
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: theme.textColor1,
-                    size: 16.h,
-                  ),
-                  onPressed: () {},
-                ),
+                16.ph,
+                KeyboardWidget(onKeyboardTap: (String letter) {
+                  globalSL<CrosswordCreateCubit>().onKeyboardTap(letter);
+                }, onDelete: () {
+                  globalSL<CrosswordCreateCubit>().deleteLetter();
+                }),
               ],
             ),
-            16.ph,
-            CustomButton.h2(
-                title: "EXTRA HINT",
-                width: 184.w,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 4.w),
-                  child: Assets.icons.heart.image(height: 22.h),
-                ),
-                onPressed: () {}),
-            16.ph,
-            KeyboardWidget(),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
